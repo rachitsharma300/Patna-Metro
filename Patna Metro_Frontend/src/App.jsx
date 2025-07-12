@@ -17,21 +17,15 @@
 
 
 // src/App.jsx
-import NavbarTest from './pages/NavbarTest';
-import Footer from './components/ui/Footer';
-// import Routes from './pages/Routes';
-import RoutePlanner from './pages/RoutePlanner';
-// import MetroMap from './components/metro/MetroMap';
+import Footer from './components/layout/Footer';
 
+import RoutePlanner from './pages/RoutePlanner';
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <NavbarTest />
       <main className="flex-grow">
-        {/* Your main content will go here later */}
-        {/* <Routes /> */}
         <RoutePlanner />
-        {/* <MetroMap /> */}
       </main>
       <Footer />
     </div>
