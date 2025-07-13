@@ -1,0 +1,70 @@
+# ====================
+# Java Spring Boot Backend
+# ====================
+
+# Compiled class files
+*.class
+
+# Jar, War, Ear
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# Maven
+backend/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IntelliJ IDEA
+backend/.idea/
+*.iml
+*.iws
+*.ipr
+backend/out/
+
+# Lombok delombok folder
+backend/delombok/
+
+# Environment files
+backend/.env
+
+# ====================
+# React Frontend
+# ====================
+
+# Dependencies
+frontend/node_modules
+
+# Production build
+frontend/build
+
+# Misc
+.DS_Store
+
+# Env files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+frontend/coverage/
+
+# IDE settings
+frontend/.idea/
+frontend/.vscode/
+
+# OS files
+Thumbs.db
