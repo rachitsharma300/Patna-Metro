@@ -4,5 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.bihar.patna_metro.model.Station;
 
 public interface StationRepository extends MongoRepository<Station, String> {
+    Station findByName(String name);
     // Custom queries can be added later
 }
