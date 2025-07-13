@@ -18,4 +18,5 @@ public class Station {
     private String line;
     private double latitude;
     private double longitude;
+    private int sequenceNumber;
 }
