@@ -30,7 +30,7 @@ Patna Metro Route Finder is a **Java Spring Boot** based backend application to:
 
 ## 🚀 **Tech Stack**
 
-- **Backend:** Java 17+, Spring Boot 3.5.3
+- **Backend:** Java 24, Spring Boot 3.5.3
 - **Database:** MongoDB Atlas or Local MongoDB
 - **Build Tool:** Maven
 
