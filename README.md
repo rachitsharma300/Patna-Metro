@@ -65,6 +65,6 @@ cd patna-metro
 
 ## **Configure MongoDB**
 
-# Update application.properties:
+### Update application.properties:
 
 spring.data.mongodb.uri=mongodb://localhost:27017/patnametro
