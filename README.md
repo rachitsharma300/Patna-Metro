@@ -51,3 +51,15 @@ patna-metro/
 │ │ └── application.properties
 └── pom.xml
 ```
+
+---
+
+## 🔧 **Setup & Run**
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/patna-metro.git
+cd patna-metro
+```
+
