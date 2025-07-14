@@ -88,4 +88,5 @@ DELETE	/stations/{id}	Delete a station
 
 Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
 ```
-
+## Future Enhancements
+ Graph-based route finding (Dijkstra/BFS)
