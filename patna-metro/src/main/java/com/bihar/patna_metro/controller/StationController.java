@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/stations")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*") // { Configure in single file }
 public class StationController {
 
     @Autowired
