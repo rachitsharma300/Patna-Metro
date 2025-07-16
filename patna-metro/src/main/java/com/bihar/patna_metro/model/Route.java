@@ -16,5 +16,5 @@ public class Route {
     @Id
     private String id;
     private String routeName;
-    private List<String> stations; // List of station IDs or names on this route
+    private List<String> stations; // List of station ID / names on this route { queue }
 }
