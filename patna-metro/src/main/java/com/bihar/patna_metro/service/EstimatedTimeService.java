@@ -14,13 +14,12 @@ public class EstimatedTimeService {
     private StationRepository stationRepository;
 
     /**
-     * Calculates estimated travel time between two stations
-     * @param sourceName - source station name
-     * @param destinationName - destination station name
+     * Calculates estimated travel time between two stations based on station count.
+     * Assumes average time per station = 2 mins + 5 mins buffer for interchange.
+     * Adjust buffer as per your project data.
      * @return estimated time in minutes
      */
-    public double calculateEstimatedTime(String sourceName, String destinationName) {
-
+    public int calculateEstimatedTime(String sourceName, String destinationName) {
         List<Station> sourceList = stationRepository.findByName(sourceName);
         List<Station> destinationList = stationRepository.findByName(destinationName);
 
@@ -31,33 +30,16 @@ public class EstimatedTimeService {
         Station source = sourceList.get(0);
         Station destination = destinationList.get(0);
 
-        // Calculate distance using Haversine formula { Change After Officially  announced by Bihar Govt }
-        double distance = calculateDistance(
-                source.getLatitude(), source.getLongitude(),
-                destination.getLatitude(), destination.getLongitude()
-        );
+        int stationCount = Math.abs(destination.getSequenceNumber() - source.getSequenceNumber()) + 1;
 
-        // Assuming average metro speed = 35 km/h { Same as DMRC ( Delhi metro ) }
-        double time = (distance / 35) * 60;
+        int averageTimePerStation = 2; // minutes
+        int bufferTime = 0;
 
-        return time;
-    }
+        // Optional: add buffer if lines are different (interchange)
+        if (!source.getLine().equals(destination.getLine())) {
+            bufferTime = 5; // interchange time
+        }
 
-    /**
-     * Haversine formula to calculate distance between two lat-long points in km
-     */
-    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        final int R = 6371; // Earth radius in km
-
-        double latDistance = Math.toRadians(lat2 - lat1);
-        double lonDistance = Math.toRadians(lon2 - lon1);
-
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c; // distance in km
+        return stationCount * averageTimePerStation + bufferTime;
     }
 }
