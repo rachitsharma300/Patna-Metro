@@ -25,7 +25,7 @@ public class Station {
         this.sequenceNumber = sequenceNumber;
     }
 
-    // Getters and Setters
+    // Getters and Setters { Not Need but Spring Auto Gen }
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
