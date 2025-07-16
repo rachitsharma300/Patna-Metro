@@ -1,49 +1,81 @@
-// Enhanced RouteFinder.jsx
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import StationCard from './StationCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaExchangeAlt, FaSearch, FaTrain } from 'react-icons/fa';
+import { FaExchangeAlt, FaSearch, FaTrain, FaClock, FaRupeeSign, FaMapMarkerAlt } from 'react-icons/fa';
+import StationCard from './StationCard';
 
 function RouteFinder() {
   const [stations, setStations] = useState([]);
   const [selected, setSelected] = useState({ source: '', destination: '' });
   const [route, setRoute] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [journeyDetails, setJourneyDetails] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    api.get('/stations')
-      .then(res => {
-        setStations(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
+    const fetchStations = async () => {
+      setLoading(true);
+      try {
+        const response = await api.get('/stations');
+        setStations(response.data);
+      } catch (err) {
+        setError('Failed to load stations. Please try again later.');
         console.error(err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchStations();
   }, []);
 
   const handleSelect = (field, value) => {
     setSelected(prev => ({ ...prev, [field]: value }));
+    setJourneyDetails(null);
+    setError(null);
   };
 
-  const getRoute = () => {
+  const fetchJourneyDetails = async () => {
+    try {
+      const [routeRes, timeRes, fareRes] = await Promise.all([
+        api.get(`/stations/route?source=${selected.source}&destination=${selected.destination}`),
+        api.get(`/estimated-time?source=${selected.source}&destination=${selected.destination}`),
+        api.get(`/fare?source=${selected.source}&destination=${selected.destination}`)
+      ]);
+
+      return {
+        route: routeRes.data,
+        time: Math.round(timeRes.data.estimated_time_minutes),
+        fare: fareRes.data,
+        stationsCount: routeRes.data.length
+      };
+    } catch (error) {
+      console.error("Error fetching journey details:", error);
+      throw error;
+    }
+  };
+
+  const getRoute = async () => {
     if (!selected.source || !selected.destination) {
-      alert('Please select both source and destination stations');
+      setError('Please select both source and destination stations');
       return;
     }
 
     setLoading(true);
-    api.get(`/stations/route?source=${selected.source}&destination=${selected.destination}`)
-      .then(res => {
-        setRoute(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        alert('Route not found or an error occurred.');
-        setLoading(false);
+    setError(null);
+    try {
+      const details = await fetchJourneyDetails();
+      setRoute(details.route);
+      setJourneyDetails({
+        time: details.time,
+        fare: details.fare,
+        stationsCount: details.stationsCount
       });
+    } catch (error) {
+      setError('Failed to get route details. Please try again.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const reverseRoute = () => {
@@ -52,6 +84,8 @@ function RouteFinder() {
       destination: prev.source
     }));
     setRoute([]);
+    setJourneyDetails(null);
+    setError(null);
   };
 
   return (
@@ -68,6 +102,12 @@ function RouteFinder() {
           Route Finder
         </h2>
       </div>
+
+      {error && (
+        <div className="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
+          {error}
+        </div>
+      )}
 
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-4">
@@ -128,6 +168,53 @@ function RouteFinder() {
         </div>
       </div>
 
+      {/* Journey Summary Section */}
+      <AnimatePresence>
+        {journeyDetails && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mt-8 bg-blue-50 rounded-xl p-6"
+          >
+            <h3 className="text-xl font-bold mb-4 text-gray-800">Journey Summary</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
+                <div className="p-2 bg-blue-100 rounded-full">
+                  <FaClock className="text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Estimated Time</p>
+                  <p className="font-semibold">{journeyDetails.time} minutes</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
+                <div className="p-2 bg-green-100 rounded-full">
+                  <FaRupeeSign className="text-green-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Approximate Fare</p>
+                  <p className="font-semibold">₹{journeyDetails.fare.toFixed(2)}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
+                <div className="p-2 bg-purple-100 rounded-full">
+                  <FaMapMarkerAlt className="text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Stations Count</p>
+                  <p className="font-semibold">{journeyDetails.stationsCount} stations</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Route Stations Section */}
       <AnimatePresence>
         {route.length > 0 && (
           <motion.div 
@@ -137,7 +224,7 @@ function RouteFinder() {
             transition={{ duration: 0.5 }}
             className="mt-8"
           >
-            <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">Your Journey</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">Your Journey Route</h3>
             <div className="space-y-4">
               {route.map((st, idx) => (
                 <motion.div 
