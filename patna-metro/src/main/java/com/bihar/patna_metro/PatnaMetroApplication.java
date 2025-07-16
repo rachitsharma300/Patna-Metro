@@ -18,7 +18,7 @@ public class PatnaMetroApplication {
 	@Bean
 	CommandLineRunner dataSeeder(StationRepository repository) {
 		return args -> {
-			// Clean DB first
+			// 🗑️ Clean DB first
 			repository.deleteAll();
 
 			// 🚇 Red Line Stations
