@@ -32,12 +32,12 @@ public class FareService {
         Station source = sourceList.get(0);
         Station destination = destList.get(0);
 
-        // Calculate distance using your utility or simple formula here
+        // Calculate distance using your utility or simple formula.........
         double distance = calculateDistance(
                 source.getLatitude(), source.getLongitude(),
                 destination.getLatitude(), destination.getLongitude()
         );
-
+                    // Change after Official Announcement by BIHAR
         // Fare calculation logic (example: ₹10 for first 2km + ₹5/km afterwards)
         double fare = 10;
         if (distance > 2) {
