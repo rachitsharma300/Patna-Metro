@@ -8,7 +8,7 @@ import com.bihar.patna_metro.service.RouteService;
 
 @RestController
 @RequestMapping("/api/routes")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")  // { Configure in single file }
 public class RouteController {
 
     @Autowired
