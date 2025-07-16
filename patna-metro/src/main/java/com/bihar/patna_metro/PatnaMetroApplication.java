@@ -39,18 +39,18 @@ public class PatnaMetroApplication {
 			saveStation(repository, "Khemni Chak", "Red Line", 25.5500, 85.0900, 15); // interchange
 
 			// Blue Line Stations
-			saveStation(repository, "New ISBT", "Blue Line", 25.5900, 85.0850, 1);
-			saveStation(repository, "Zero Mile", "Blue Line", 25.6000, 85.1000, 2);
-			saveStation(repository, "Bhootnath", "Blue Line", 25.5750, 85.0950, 3);
-			saveStation(repository, "Malahi Pakri", "Blue Line", 25.5850, 85.1050, 4);
-			saveStation(repository, "Rajendra Nagar", "Blue Line", 25.5950, 85.1150, 5);
+			saveStation(repository, "Patna Junction", "Blue Line", 25.6009, 85.1471, 1); // interchange
+			saveStation(repository, "Akashvani", "Blue Line", 25.6110, 85.1442, 2);
+			saveStation(repository, "Gandhi Maidan", "Blue Line", 25.6125, 85.1378, 3);
+			saveStation(repository, "PMCH", "Blue Line", 25.6090, 85.1355, 4);
+			saveStation(repository, "University", "Blue Line", 25.6150, 85.1320, 5);
 			saveStation(repository, "Moin-ul-Haq Stadium", "Blue Line", 25.6000, 85.1250, 6);
-			saveStation(repository, "University", "Blue Line", 25.6150, 85.1320, 7);
-			saveStation(repository, "PMCH", "Blue Line", 25.6090, 85.1355, 8);
-			saveStation(repository, "Gandhi Maidan", "Blue Line", 25.6125, 85.1378, 9);
-			saveStation(repository, "Akashvani", "Blue Line", 25.6110, 85.1442, 10);
-			saveStation(repository, "Khemni Chak", "Blue Line", 25.5500, 85.0900, 11); // interchange
-			saveStation(repository, "Patna Junction", "Blue Line", 25.6009, 85.1471, 12); // interchange
+			saveStation(repository, "Rajendra Nagar", "Blue Line", 25.5950, 85.1150, 7);
+			saveStation(repository, "Malahi Pakri", "Blue Line", 25.5850, 85.1050, 8);
+			saveStation(repository, "Khemni Chak", "Blue Line", 25.5500, 85.0900, 9); // correctly placed
+			saveStation(repository, "Bhootnath", "Blue Line", 25.5750, 85.0950, 10);
+			saveStation(repository, "Zero Mile", "Blue Line", 25.6000, 85.1000, 11);
+			saveStation(repository, "New ISBT", "Blue Line", 25.5900, 85.0850, 12);
 		};
 	}
 
