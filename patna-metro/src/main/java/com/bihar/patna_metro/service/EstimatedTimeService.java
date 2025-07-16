@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.bihar.patna_metro.model.Station;
 import com.bihar.patna_metro.repository.StationRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class EstimatedTimeService {
@@ -20,15 +20,16 @@ public class EstimatedTimeService {
      * @return estimated time in minutes
      */
     public double calculateEstimatedTime(String sourceName, String destinationName) {
-        Optional<Station> optionalSource = stationRepository.findByName(sourceName);
-        Optional<Station> optionalDestination = stationRepository.findByName(destinationName);
 
-        if (optionalSource.isEmpty() || optionalDestination.isEmpty()) {
+        List<Station> sourceList = stationRepository.findByName(sourceName);
+        List<Station> destinationList = stationRepository.findByName(destinationName);
+
+        if (sourceList.isEmpty() || destinationList.isEmpty()) {
             throw new IllegalArgumentException("Invalid station name");
         }
 
-        Station source = optionalSource.get();
-        Station destination = optionalDestination.get();
+        Station source = sourceList.get(0);
+        Station destination = destinationList.get(0);
 
         // Calculate distance using Haversine formula
         double distance = calculateDistance(
