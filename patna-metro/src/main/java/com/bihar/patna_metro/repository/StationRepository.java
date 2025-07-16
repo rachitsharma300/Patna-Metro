@@ -8,4 +8,5 @@ import java.util.List;
 public interface StationRepository extends MongoRepository<Station, String> {
     List<Station> findByName(String name);
     List<Station> findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(String line, int start, int end);
+    List<Station> findByLineAndSequenceNumberBetweenOrderBySequenceNumberDesc(String line, int start, int end);
 }
