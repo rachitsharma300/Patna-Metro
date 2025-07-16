@@ -31,13 +31,13 @@ public class EstimatedTimeService {
         Station source = sourceList.get(0);
         Station destination = destinationList.get(0);
 
-        // Calculate distance using Haversine formula
+        // Calculate distance using Haversine formula { Change After Officially  announced by Bihar Govt }
         double distance = calculateDistance(
                 source.getLatitude(), source.getLongitude(),
                 destination.getLatitude(), destination.getLongitude()
         );
 
-        // Assuming average metro speed = 35 km/h
+        // Assuming average metro speed = 35 km/h { Same as DMRC ( Delhi metro ) }
         double time = (distance / 35) * 60;
 
         return time;
