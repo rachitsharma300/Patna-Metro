@@ -28,10 +28,10 @@ public class RouteService {
         return routeRepository.save(route);
     }
 
-    // ✅ Updated method to find route between two stations ordered by sequenceNumber
+    // find route between two stations ordered by sequenceNumber
     public List<Station> findRoute(String sourceName, String destinationName) {
 
-        // ✔️ Fetching list instead of Optional
+        // Fetching list instead of Optional
         List<Station> sourceList = stationRepository.findByName(sourceName);
         List<Station> destinationList = stationRepository.findByName(destinationName);
 
