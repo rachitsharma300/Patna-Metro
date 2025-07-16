@@ -39,7 +39,7 @@ public class RouteFinderService {
 
                 List<Station> fullRoute = new ArrayList<>(part1);
                 if (!part2.isEmpty()) {
-                    fullRoute.add(interchangeOnDestinationLine); // add interchange if not duplicate
+                    fullRoute.add(interchangeOnDestinationLine); // add interchange if not duplicate {Db}
                     fullRoute.addAll(part2);
                 }
 
