@@ -18,10 +18,10 @@ public class PatnaMetroApplication {
 	@Bean
 	CommandLineRunner dataSeeder(StationRepository repository) {
 		return args -> {
-			// 🗑️ Clean DB first
+			// Clean DB first { Clean Older data in Db  }
 			repository.deleteAll();
 
-			// 🚇 Red Line Stations
+			// Red Line Stations
 			saveStation(repository, "Danapur Cantonment", "Red Line", 25.6340, 85.0464, 1);
 			saveStation(repository, "Saguna Mor", "Red Line", 25.6123, 85.0972, 2);
 			saveStation(repository, "RPS Mor", "Red Line", 25.6128, 85.1233, 3);
@@ -38,7 +38,7 @@ public class PatnaMetroApplication {
 			saveStation(repository, "Jaganpura", "Red Line", 25.5600, 85.1050, 14);
 			saveStation(repository, "Khemni Chak", "Red Line", 25.5500, 85.0900, 15); // interchange
 
-			// 🚇 Blue Line Stations
+			// Blue Line Stations
 			saveStation(repository, "New ISBT", "Blue Line", 25.5900, 85.0850, 1);
 			saveStation(repository, "Zero Mile", "Blue Line", 25.6000, 85.1000, 2);
 			saveStation(repository, "Bhootnath", "Blue Line", 25.5750, 85.0950, 3);
