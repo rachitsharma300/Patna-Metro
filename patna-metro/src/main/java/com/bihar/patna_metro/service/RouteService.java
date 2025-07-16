@@ -28,14 +28,19 @@ public class RouteService {
         return routeRepository.save(route);
     }
 
-    // New method to find route between two stations ordered by sequenceNumber
+    // ✅ Updated method to find route between two stations ordered by sequenceNumber
     public List<Station> findRoute(String sourceName, String destinationName) {
-        Station source = stationRepository.findByName(sourceName).orElse(null);
-        Station destination = stationRepository.findByName(destinationName).orElse(null);
 
-        if (source == null || destination == null) {
+        // ✔️ Fetching list instead of Optional
+        List<Station> sourceList = stationRepository.findByName(sourceName);
+        List<Station> destinationList = stationRepository.findByName(destinationName);
+
+        if (sourceList.isEmpty() || destinationList.isEmpty()) {
             return new ArrayList<>(); // Return empty if source or destination not found
         }
+
+        Station source = sourceList.get(0);
+        Station destination = destinationList.get(0);
 
         if (source.getLine().equals(destination.getLine())) {
             int startSeq = source.getSequenceNumber();
@@ -47,7 +52,7 @@ public class RouteService {
                     Math.max(startSeq, endSeq)
             );
         } else {
-            // Different lines - interchange logic can be added later
+            // TODO: Different lines - interchange logic can be implemented here later
             return new ArrayList<>();
         }
     }
