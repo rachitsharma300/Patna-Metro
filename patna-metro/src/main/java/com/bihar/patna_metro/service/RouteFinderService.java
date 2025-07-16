@@ -14,7 +14,6 @@ public class RouteFinderService {
     private StationRepository stationRepository;
 
     public List<Station> findRoute(String sourceName, String destinationName) {
-
         Station source = getFirstStation(sourceName);
         Station destination = getFirstStation(destinationName);
 
@@ -22,11 +21,12 @@ public class RouteFinderService {
             return Collections.emptyList();
         }
 
+        // If same line, return direct route
         if (source.getLine().equals(destination.getLine())) {
             return getStationsBetween(source, destination);
         }
 
-        // Interchange logic
+        // Find common interchange stations between the lines
         List<String> interchangeStations = Arrays.asList("Patna Junction", "Khemni Chak");
 
         for (String interchangeName : interchangeStations) {
@@ -34,14 +34,20 @@ public class RouteFinderService {
             Station interchangeOnDestinationLine = getStationByNameAndLine(interchangeName, destination.getLine());
 
             if (interchangeOnSourceLine != null && interchangeOnDestinationLine != null) {
-                List<Station> part1 = getStationsBetween(source, interchangeOnSourceLine);
-                List<Station> part2 = getStationsBetween(interchangeOnDestinationLine, destination);
+                List<Station> routeToInterchange = getStationsBetween(source, interchangeOnSourceLine);
+                List<Station> routeFromInterchange = getStationsBetween(interchangeOnDestinationLine, destination);
 
-                List<Station> fullRoute = new ArrayList<>(part1);
-                if (!part2.isEmpty()) {
-                    fullRoute.add(interchangeOnDestinationLine); // add interchange if not duplicate {Db}
-                    fullRoute.addAll(part2);
+                // Combine the routes
+                List<Station> fullRoute = new ArrayList<>(routeToInterchange);
+
+                // Add the interchange station on destination line if not already present
+                if (fullRoute.isEmpty() ||
+                        !fullRoute.get(fullRoute.size()-1).getName().equals(interchangeOnDestinationLine.getName())) {
+                    fullRoute.add(interchangeOnDestinationLine);
                 }
+
+                // Add the remaining route
+                fullRoute.addAll(routeFromInterchange);
 
                 return fullRoute;
             }
@@ -65,8 +71,18 @@ public class RouteFinderService {
 
     private List<Station> getStationsBetween(Station source, Station destination) {
         String line = source.getLine();
-        int start = Math.min(source.getSequenceNumber(), destination.getSequenceNumber());
-        int end = Math.max(source.getSequenceNumber(), destination.getSequenceNumber());
-        return stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, start, end);
+        int start = source.getSequenceNumber();
+        int end = destination.getSequenceNumber();
+
+        List<Station> stations;
+
+        if (start <= end) {
+            stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, start, end);
+        } else {
+            stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, end, start);
+            Collections.reverse(stations); // Reverse to maintain source to destination order
+        }
+
+        return stations;
     }
 }
