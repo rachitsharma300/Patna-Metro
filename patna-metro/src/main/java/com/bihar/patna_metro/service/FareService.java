@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bihar.patna_metro.model.Station;
 import com.bihar.patna_metro.repository.StationRepository;
+import java.util.List;
+
 
 import java.util.Optional;
 
@@ -20,15 +22,15 @@ public class FareService {
      * @return calculated fare
      */
     public double calculateFare(String sourceName, String destinationName) {
-        Optional<Station> sourceOpt = stationRepository.findByName(sourceName);
-        Optional<Station> destOpt = stationRepository.findByName(destinationName);
+        List<Station> sourceList = stationRepository.findByName(sourceName);
+        List<Station> destList = stationRepository.findByName(destinationName);
 
-        if (sourceOpt.isEmpty() || destOpt.isEmpty()) {
+        if (sourceList.isEmpty() || destList.isEmpty()) {
             throw new IllegalArgumentException("Invalid station name");
         }
 
-        Station source = sourceOpt.get();
-        Station destination = destOpt.get();
+        Station source = sourceList.get(0);
+        Station destination = destList.get(0);
 
         // Calculate distance using your utility or simple formula here
         double distance = calculateDistance(
