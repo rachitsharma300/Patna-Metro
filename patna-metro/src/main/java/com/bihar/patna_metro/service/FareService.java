@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bihar.patna_metro.model.Station;
 import com.bihar.patna_metro.repository.StationRepository;
+
 import java.util.List;
-
-
-import java.util.Optional;
 
 @Service
 public class FareService {
@@ -16,7 +14,7 @@ public class FareService {
     private StationRepository stationRepository;
 
     /**
-     * Calculates fare between two stations based on distance.
+     * Calculates fare between two stations based on Delhi Metro-style slabs.
      * @param sourceName source station name
      * @param destinationName destination station name
      * @return calculated fare
@@ -32,20 +30,29 @@ public class FareService {
         Station source = sourceList.get(0);
         Station destination = destList.get(0);
 
-        // Calculate distance using your utility or simple formula.........
         double distance = calculateDistance(
                 source.getLatitude(), source.getLongitude(),
                 destination.getLatitude(), destination.getLongitude()
         );
-                    // Change after Official Announcement by BIHAR
-        // Fare calculation logic (example: ₹10 for first 2km + ₹5/km afterwards)
-        double fare = 10;
-        if (distance > 2) {
-            fare += (distance - 2) * 5;
-        }
-        return fare;
+
+        return getFareByDistance(distance);
     }
 
+    /**
+     * Returns fare based on distance slabs (Delhi Metro approximate model).
+     */
+    private double getFareByDistance(double distanceKm) {
+        if (distanceKm <= 2) return 10;
+        else if (distanceKm <= 5) return 20;
+        else if (distanceKm <= 12) return 30;
+        else if (distanceKm <= 21) return 40;
+        else if (distanceKm <= 32) return 50;
+        else return 60;
+    }
+
+    /**
+     * Haversine formula to calculate distance between two lat-long points in km.
+     */
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         final int R = 6371; // Earth radius in km
 
