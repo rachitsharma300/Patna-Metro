@@ -1,9 +1,8 @@
 package com.bihar.patna_metro.service;
 
+import com.bihar.patna_metro.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bihar.patna_metro.model.Station;
-import com.bihar.patna_metro.repository.StationRepository;
 
 import java.util.List;
 
@@ -11,35 +10,93 @@ import java.util.List;
 public class EstimatedTimeService {
 
     @Autowired
-    private StationRepository stationRepository;
+    private RouteFinderService routeFinderService;
+
+    // Metro Configuration (Adjust these values as needed)
+    private static final double AVERAGE_SPEED_KMPH = 32; // Metro trains don't run at full speed between close stations
+    private static final double STATION_STOP_TIME_MINUTES = 0.75; // 45 seconds per station stop
+    private static final int INTERCHANGE_PENALTY_MINUTES = 7; // Time penalty for line changes
+    private static final double AVERAGE_DISTANCE_BETWEEN_STATIONS_KM = 1.2; // Typical metro station distance
 
     /**
-     * Calculates estimated travel time between two stations based on station count.
-     * Assumes average time per station = 2 mins + 5 mins buffer for interchange.
-     * Adjust buffer as per your project data.
-     * @return estimated time in minutes
+     * Calculates realistic travel time between stations
      */
     public int calculateEstimatedTime(String sourceName, String destinationName) {
-        List<Station> sourceList = stationRepository.findByName(sourceName);
-        List<Station> destinationList = stationRepository.findByName(destinationName);
+        List<Station> route = routeFinderService.findRoute(sourceName, destinationName);
 
-        if (sourceList.isEmpty() || destinationList.isEmpty()) {
-            throw new IllegalArgumentException("Invalid station name");
+        if (route.isEmpty()) {
+            throw new IllegalArgumentException("No route found between stations");
         }
 
-        Station source = sourceList.get(0);
-        Station destination = destinationList.get(0);
+        // Calculate total route distance (precise if available, otherwise estimated)
+        double totalDistanceKm = calculateTotalRouteDistance(route);
 
-        int stationCount = Math.abs(destination.getSequenceNumber() - source.getSequenceNumber()) + 1;
+        // Calculate components
+        int movingTime = calculateMovingTime(totalDistanceKm);
+        int stoppingTime = calculateStoppingTime(route.size());
+        int interchangeTime = checkInterchange(route) ? INTERCHANGE_PENALTY_MINUTES : 0;
 
-        int averageTimePerStation = 2; // minutes
-        int bufferTime = 0;
+        return movingTime + stoppingTime + interchangeTime;
+    }
 
-        // Optional: add buffer if lines are different (interchange)
-        if (!source.getLine().equals(destination.getLine())) {
-            bufferTime = 5; // interchange time
+    /**
+     * Calculates total route distance (precise calculation)
+     */
+    private double calculateTotalRouteDistance(List<Station> route) {
+        double totalDistance = 0;
+
+        // Sum distances between consecutive stations
+        for (int i = 0; i < route.size() - 1; i++) {
+            Station current = route.get(i);
+            Station next = route.get(i + 1);
+            totalDistance += calculateDistanceBetweenStations(current, next);
         }
 
-        return stationCount * averageTimePerStation + bufferTime;
+        return totalDistance;
+    }
+
+    /**
+     * Haversine formula for distance between two stations (in km)
+     */
+    private double calculateDistanceBetweenStations(Station a, Station b) {
+        final int EARTH_RADIUS_KM = 6371;
+
+        double lat1 = a.getLatitude();
+        double lon1 = a.getLongitude();
+        double lat2 = b.getLatitude();
+        double lon2 = b.getLongitude();
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+
+        double haversine = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+        double angularDistance = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+
+        return EARTH_RADIUS_KM * angularDistance;
+    }
+
+    /**
+     * Time spent moving between stations (in minutes)
+     */
+    private int calculateMovingTime(double distanceKm) {
+        return (int) Math.round((distanceKm / AVERAGE_SPEED_KMPH) * 60);
+    }
+
+    /**
+     * Time spent stopped at stations (in minutes)
+     */
+    private int calculateStoppingTime(int numberOfStations) {
+        return (int) Math.round((numberOfStations - 1) * STATION_STOP_TIME_MINUTES);
+    }
+
+    /**
+     * Checks if route requires line interchange
+     */
+    private boolean checkInterchange(List<Station> route) {
+        String firstLine = route.get(0).getLine();
+        return route.stream().anyMatch(station -> !station.getLine().equals(firstLine));
     }
 }
