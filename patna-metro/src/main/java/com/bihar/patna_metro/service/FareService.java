@@ -13,35 +13,45 @@ public class FareService {
     @Autowired
     private StationRepository stationRepository;
 
-    /**
-     * Calculates fare between two stations based on Delhi Metro-style slabs.
-     * @param sourceName source station name
-     * @param destinationName destination station name
-     * @return calculated fare
-     */
-    public double calculateFare(String sourceName, String destinationName) {
-        List<Station> sourceList = stationRepository.findByName(sourceName);
-        List<Station> destList = stationRepository.findByName(destinationName);
+    @Autowired
+    private RouteFinderService routeFinderService;
 
-        if (sourceList.isEmpty() || destList.isEmpty()) {
-            throw new IllegalArgumentException("Invalid station name");
+    /**
+     * Calculates accurate fare based on actual track distance
+     */
+    public int calculateFare(String sourceName, String destinationName) {
+        List<Station> route = routeFinderService.findRoute(sourceName, destinationName);
+
+        if (route.isEmpty()) {
+            throw new IllegalArgumentException("No route found between stations");
         }
 
-        Station source = sourceList.get(0);
-        Station destination = destList.get(0);
-
-        double distance = calculateDistance(
-                source.getLatitude(), source.getLongitude(),
-                destination.getLatitude(), destination.getLongitude()
-        );
-
-        return getFareByDistance(distance);
+        double totalDistance = calculateRouteDistance(route);
+        return getDelhiMetroStyleFare(totalDistance);
     }
 
     /**
-     * Returns fare based on distance slabs (Delhi Metro approximate model).
+     * Calculates cumulative distance of entire route (station-to-station)
      */
-    private double getFareByDistance(double distanceKm) {
+    private double calculateRouteDistance(List<Station> route) {
+        double totalDistance = 0;
+
+        for (int i = 0; i < route.size() - 1; i++) {
+            Station current = route.get(i);
+            Station next = route.get(i + 1);
+            totalDistance += calculateDistance(
+                    current.getLatitude(), current.getLongitude(),
+                    next.getLatitude(), next.getLongitude()
+            );
+        }
+
+        return totalDistance;
+    }
+
+    /**
+     * Delhi Metro fare structure (updated 2023)
+     */
+    private int getDelhiMetroStyleFare(double distanceKm) {
         if (distanceKm <= 2) return 10;
         else if (distanceKm <= 5) return 20;
         else if (distanceKm <= 12) return 30;
@@ -51,20 +61,17 @@ public class FareService {
     }
 
     /**
-     * Haversine formula to calculate distance between two lat-long points in km.
+     * Haversine formula (keep your existing implementation)
      */
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        final int R = 6371; // Earth radius in km
-
+        // Your existing implementation
+        final int R = 6371;
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
-
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
                 + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c; // distance in km
+        return R * c;
     }
 }
