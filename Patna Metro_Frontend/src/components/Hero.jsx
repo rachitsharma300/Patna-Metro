@@ -1,7 +1,7 @@
 // Enhanced Hero.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import metroImage from '../assets/images/PatnaMetro.png'; 
+import metroImage from '../assets/PatnaMetro.png'; 
 
 function Hero() {
   return (
