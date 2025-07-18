@@ -28,7 +28,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: t("home"), path: "/", icon: <FaSubway /> },
-    { name: t("routeFinder"), path: "/route-finder", icon: <FaSearch /> },
+    { name: t("routeFinder"), path: "/RouteFinder", icon: <FaSearch /> },
     {
       name: t("metroMap"),
       action: () => setShowMapModal(true),
