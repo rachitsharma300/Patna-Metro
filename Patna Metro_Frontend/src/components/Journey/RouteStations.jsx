@@ -1,14 +1,16 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import StationCard from '../StationCard';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import StationCard from "../StationCard";
 
 const RouteStations = ({ route }) => {
   return (
     <div className="mt-8">
-      <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">Your Journey Route</h3>
+      <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+        Your Journey Route
+      </h3>
       <div className="space-y-4">
         {route.map((st, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
