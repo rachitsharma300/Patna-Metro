@@ -8,6 +8,7 @@ import About from './pages/About'
 import FareInfo from './pages/FareInfo'
 import MapPage from './pages/MapPage'
 import NotFound from './pages/NotFound'
+import RouteFinder from './components/RouteFinder'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+              <Route path="/routefinder" element={<RouteFinder />} />
             <Route path="/about" element={<About />} />
             <Route path="/fare-info" element={<FareInfo />} />
             <Route path="/metro-map" element={<MapPage />} />
