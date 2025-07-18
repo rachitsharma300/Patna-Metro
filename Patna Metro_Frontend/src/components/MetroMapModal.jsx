@@ -1,10 +1,35 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaExpand, FaDownload } from 'react-icons/fa';
+import { FaTimes, FaExpand, FaDownload, FaCompress } from 'react-icons/fa';
 import { useLanguage } from '../utils/LanguageContext';
 import metroMapImage from '../assets/PatnaMap.png';
+import { useState, useRef } from 'react';
 
 const MetroMapModal = ({ isOpen, onClose }) => {
   const { t } = useLanguage();
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const modalRef = useRef(null);
+  const imageRef = useRef(null);
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = metroMapImage;
+    link.download = 'Patna-Metro-Map.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      modalRef.current?.requestFullscreen?.()
+        .then(() => setIsFullscreen(true))
+        .catch(err => console.error('Error attempting to enable fullscreen:', err));
+    } else {
+      document.exitFullscreen?.()
+        .then(() => setIsFullscreen(false))
+        .catch(err => console.error('Error attempting to exit fullscreen:', err));
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -17,6 +42,7 @@ const MetroMapModal = ({ isOpen, onClose }) => {
           onClick={onClose}
         >
           <motion.div
+            ref={modalRef}
             initial={{ scale: 0.9, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 50 }}
@@ -31,14 +57,16 @@ const MetroMapModal = ({ isOpen, onClose }) => {
                 <button 
                   className="p-2 hover:bg-blue-700 rounded-full transition-colors"
                   title={t('download')}
+                  onClick={handleDownload}
                 >
                   <FaDownload />
                 </button>
                 <button 
                   className="p-2 hover:bg-blue-700 rounded-full transition-colors"
-                  title={t('fullscreen')}
+                  title={isFullscreen ? t('exitFullscreen') : t('fullscreen')}
+                  onClick={toggleFullscreen}
                 >
-                  <FaExpand />
+                  {isFullscreen ? <FaCompress /> : <FaExpand />}
                 </button>
                 <button
                   onClick={onClose}
@@ -53,6 +81,7 @@ const MetroMapModal = ({ isOpen, onClose }) => {
             {/* Map Container */}
             <div className="h-[70vh] p-4 flex items-center justify-center bg-gray-100">
               <img 
+                ref={imageRef}
                 src={metroMapImage}
                 alt="Patna Metro Map" 
                 className="max-w-full max-h-full object-contain border border-gray-300 shadow-md"
