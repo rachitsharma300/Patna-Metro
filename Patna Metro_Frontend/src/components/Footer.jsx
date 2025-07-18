@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const metroLines = [
-    { name: "Blue Line", stations: 24, length: "16.5 km" },
-    { name: "Red Line", stations: 18, length: "14.5 km" }
+    { name: "Blue Line", stations: 12, length: "16.94 km" },
+    { name: "Red Line", stations: 13, length: "14.45 km" }
   ];
 
   return (
