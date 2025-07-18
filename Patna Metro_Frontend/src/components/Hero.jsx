@@ -1,20 +1,20 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import metroImage from '../assets/PatnaMetro.png'; 
-import { useLanguage } from '../utils/LanguageContext';
+import React from "react";
+import { motion } from "framer-motion";
+import metroImage from "../assets/PatnaMetro.png";
+import { useLanguage } from "../utils/LanguageContext";
 
 function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section 
+    <section
       className="relative h-96 flex items-center justify-center text-white overflow-hidden"
       style={{
-        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${metroImage}) center/cover`
+        background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${metroImage}) center/cover`,
       }}
     >
       <div className="container mx-auto px-4 text-center">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -22,7 +22,7 @@ function Hero() {
         >
           Patna Metro Explorer
         </motion.h1>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
