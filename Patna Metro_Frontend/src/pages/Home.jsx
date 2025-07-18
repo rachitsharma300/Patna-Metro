@@ -1,6 +1,6 @@
-import React from 'react';
-import Hero from '../components/Hero';
-import RouteFinder from '../components/RouteFinder';
+import React from "react";
+import Hero from "../components/Hero";
+import RouteFinder from "../components/RouteFinder";
 
 function Home() {
   return (
