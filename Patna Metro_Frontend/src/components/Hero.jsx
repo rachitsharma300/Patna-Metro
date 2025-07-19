@@ -1,11 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import metroImage from "../assets/PatnaMetro.png";
-import { useLanguage } from "../utils/LanguageContext";
 
 function Hero() {
-  const { t } = useLanguage();
-
   return (
     <section
       className="relative h-96 flex items-center justify-center text-white overflow-hidden"

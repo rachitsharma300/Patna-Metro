@@ -1,11 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaExpand, FaDownload, FaCompress } from "react-icons/fa";
-import { useLanguage } from "../utils/LanguageContext";
 import metroMapImage from "../assets/PatnaMap.png";
 import { useState, useRef } from "react";
 
 const MetroMapModal = ({ isOpen, onClose }) => {
-  const { t } = useLanguage();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const modalRef = useRef(null);
   const imageRef = useRef(null);
@@ -58,18 +56,18 @@ const MetroMapModal = ({ isOpen, onClose }) => {
           >
             {/* Header with controls */}
             <div className="flex justify-between items-center bg-blue-600 text-white p-4">
-              <h3 className="text-xl font-bold">{t("patnaMetroMap")}</h3>
+              <h3 className="text-xl font-bold">Patna Metro Map</h3>
               <div className="flex space-x-4">
                 <button
                   className="p-2 hover:bg-blue-700 rounded-full transition-colors"
-                  title={t("download")}
+                  title="Download"
                   onClick={handleDownload}
                 >
                   <FaDownload />
                 </button>
                 <button
                   className="p-2 hover:bg-blue-700 rounded-full transition-colors"
-                  title={isFullscreen ? t("exitFullscreen") : t("fullscreen")}
+                  title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
                   onClick={toggleFullscreen}
                 >
                   {isFullscreen ? <FaCompress /> : <FaExpand />}
@@ -77,7 +75,7 @@ const MetroMapModal = ({ isOpen, onClose }) => {
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-red-500 rounded-full transition-colors"
-                  title={t("close")}
+                  title="Close"
                 >
                   <FaTimes />
                 </button>

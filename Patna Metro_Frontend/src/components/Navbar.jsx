@@ -13,13 +13,11 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import MetroMapModal from "../components/MetroMapModal";
-import { useLanguage } from "../utils/LanguageContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showMapModal, setShowMapModal] = useState(false);
-  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -28,15 +26,15 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: t("home"), path: "/", icon: <FaSubway /> },
-    { name: t("routeFinder"), path: "/RouteFinder", icon: <FaSearch /> },
+    { name: "Home", path: "/", icon: <FaSubway /> },
+    { name: "Route Finder", path: "/RouteFinder", icon: <FaSearch /> },
     {
-      name: t("metroMap"),
+      name: "Metro Map",
       action: () => setShowMapModal(true),
       icon: <FaMap />,
     },
-    { name: t("fareInfo"), path: "/fare-info", icon: <FaRupeeSign /> },
-    { name: t("about"), path: "/about", icon: <FaInfoCircle /> },
+    { name: "Fare Info", path: "/fare-info", icon: <FaRupeeSign /> },
+    { name: "About", path: "/about", icon: <FaInfoCircle /> },
   ];
 
   return (
@@ -62,7 +60,7 @@ const Navbar = () => {
                 <FaSubway />
               </motion.div>
               <span className="text-xl font-bold group-hover:text-yellow-300 transition-colors">
-                {t("Patna Metro")}
+                Patna Metro
               </span>
             </Link>
 
@@ -96,12 +94,12 @@ const Navbar = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={toggleLanguage}
+                onClick={() => {}}
                 className="flex items-center px-3 py-2 rounded-lg bg-black/20 hover:bg-white/10 transition-colors"
-                aria-label={t("selectLanguage")}
+                aria-label="Select Language"
               >
                 <FaLanguage className="mr-2" />
-                {language === "en" ? "हिंदी" : "English"}
+                Hindi
               </motion.button>
             </div>
 
@@ -158,13 +156,11 @@ const Navbar = () => {
 
                 <div className="border-t border-white/20 mt-2 pt-3">
                   <button
-                    onClick={toggleLanguage}
+                    onClick={() => {}}
                     className="flex items-center w-full px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
                   >
                     <FaLanguage className="mr-3" />
-                    {language === "en"
-                      ? "हिंदी में बदलें"
-                      : "Switch to English"}
+                    Switch to Hindi
                   </button>
                 </div>
               </div>
