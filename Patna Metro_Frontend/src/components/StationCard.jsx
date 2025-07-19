@@ -1,31 +1,43 @@
-// Enhanced StationCard.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import { FaTrain } from "react-icons/fa";
 
 function StationCard({ station }) {
-  const lineColor =
-    station.line === "Red Line"
-      ? "bg-gradient-to-r from-red-600 to-red-500"
-      : "bg-gradient-to-r from-blue-600 to-blue-500";
+  const isRedLine = station.line === "Red Line";
+  const lineColor = isRedLine
+    ? "from-red-600 to-red-500"
+    : "from-blue-600 to-blue-500";
+  const textColor = isRedLine ? "text-red-600" : "text-blue-600";
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      className={`flex items-center justify-between p-4 rounded-xl shadow-md ${lineColor} text-white w-full max-w-md`}
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className={`flex items-center justify-between p-4 rounded-xl shadow-lg bg-gradient-to-r ${lineColor} text-white w-full max-w-md backdrop-blur-md bg-opacity-80`}
     >
-      <div className="flex items-center">
-        <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3">
-          <span
-            className={`text-sm font-bold ${station.line === "Red Line" ? "text-red-600" : "text-blue-600"}`}
-          >
-            {station.line.charAt(0)}
-          </span>
+      <div className="flex items-center space-x-3">
+        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-inner">
+          <FaTrain className={`text-xl ${textColor}`} />
         </div>
-        <span className="font-bold text-lg">{station.name}</span>
+        <div>
+          <p className="font-bold text-lg">{station.name}</p>
+          <p className="text-xs opacity-80">{station.code}</p> {/* Optional station code */}
+        </div>
       </div>
-      <span className="text-sm bg-white/20 px-2 py-1 rounded-full">
-        {station.line}
-      </span>
+
+      <div className="flex items-center space-x-2">
+        <span className="text-xs bg-white/20 px-2 py-1 rounded-full">
+          {station.line}
+        </span>
+        <svg
+          className="w-4 h-4 text-white opacity-70"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
     </motion.div>
   );
 }
