@@ -1,5 +1,5 @@
-<p align="center">
-![Metro](https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854)
+
+<p align="center" (https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854)
 </p>
 # 🚇 Patna Metro Route Finder
 <!-- 
