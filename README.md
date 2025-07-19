@@ -270,6 +270,48 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
 ## Future Enhancements
  Graph-based route finding (Dijkstra/BFS)
 
+## Frontend Project Structure
+```
+Patna Metro Frontend/
+ ┣ 📁 src/
+ ┃ ┣ 📁 assets/
+ ┃ ┃ ┣ photo1.png
+ ┃ ┃ ┣ photo2.png
+ ┃ ┃ ┗ photo3.png
+ ┃ ┣ 📁 components/
+ ┃ ┃ ┣ 📁 Journey/
+ ┃ ┃ ┃ ┣ JourneySummary.jsx
+ ┃ ┃ ┃ ┣ RouteForm.jsx
+ ┃ ┃ ┃ ┗ RouteStations.jsx
+ ┃ ┃ ┣ 📁 metro/
+ ┃ ┃ ┃ ┣ InterchangeIcon.jsx
+ ┃ ┃ ┃ ┗ LineBadge.jsx
+ ┃ ┃ ┣ 📁 ui/
+ ┃ ┃ ┃ ┣ Footer.jsx
+ ┃ ┃ ┃ ┣ Hero.jsx
+ ┃ ┃ ┃ ┣ MetroMapModal.jsx
+ ┃ ┃ ┃ ┣ Navbar.jsx
+ ┃ ┃ ┃ ┣ RouteFinder.jsx
+ ┃ ┃ ┃ ┗ StationCard.jsx
+ ┃ ┣ 📁 pages/
+ ┃ ┃ ┣ About.jsx
+ ┃ ┃ ┣ FareInfo.jsx
+ ┃ ┃ ┣ Home.jsx
+ ┃ ┃ ┣ MapPage.jsx
+ ┃ ┃ ┗ NotFound.jsx
+ ┃ ┣ 📁 services/
+ ┃ ┣ 📁 utils/
+ ┃ ┃ ┣ LanguageContext.jsx
+ ┃ ┃ ┣ metroData.js
+ ┃ ┃ ┗ translations.js
+ ┃ ┣ App.css
+ ┃ ┣ App.jsx
+ ┃ ┣ index.css
+ ┃ ┗ main.jsx
+
+```
+
+
 
 ## Contributing
 Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.
