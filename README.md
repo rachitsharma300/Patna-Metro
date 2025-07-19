@@ -275,9 +275,9 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
 Patna Metro Frontend/
  ┣ 📁 src/
  ┃ ┣ 📁 assets/
- ┃ ┃ ┣ photo1.png
- ┃ ┃ ┣ photo2.png
- ┃ ┃ ┗ photo3.png
+ ┃ ┃ ┣ Metro.svg
+ ┃ ┃ ┣ MetroMap.png
+ ┃ ┃ ┗ PatnaMetro.png
  ┃ ┣ 📁 components/
  ┃ ┃ ┣ 📁 Journey/
  ┃ ┃ ┃ ┣ JourneySummary.jsx
