@@ -8,6 +8,7 @@ import {
   FaInfoCircle,
   FaLanguage,
   FaTimes,
+  FaRupeeSign,
   FaBars,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
@@ -34,6 +35,7 @@ const Navbar = () => {
       action: () => setShowMapModal(true),
       icon: <FaMap />,
     },
+    { name: t("fareInfo"), path: "/fare-info", icon: <FaRupeeSign /> },
     { name: t("about"), path: "/about", icon: <FaInfoCircle /> },
   ];
 
