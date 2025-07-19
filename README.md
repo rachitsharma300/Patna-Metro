@@ -1,4 +1,6 @@
-![Metro](https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854)# 🚇 Patna Metro Route Finder
+![Metro](https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854)
+# 🚇 Patna Metro Route Finder
+<!-- 
 ![Uploadin<?xml version="1.0"?>
 <svg width="600" height="76.6" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" enable-background="new 0 0 600 76.6" version="1.1" xml:space="preserve">
  <style type="text/css">.st0{fill:none;stroke:#E7E6DD;stroke-miterlimit:10;}
@@ -90,10 +92,12 @@
   </g>
   <g id="english">
    <!-- English text (shown when going left) -->
+   <!--
    <text fill="#D40000" font-family="Arial" font-size="14" id="english-text" text-anchor="middle" x="300" y="20">Patna Metro</text>
   </g>
   <g id="hindi">
    <!-- Hindi text (shown when going right) -->
+   <!--
    <text fill="#D40000" font-family="Arial" font-size="14" id="hindi-text" text-anchor="middle" x="300" y="20">पटना मेट्रो</text>
   </g>
   <g id="train_1_">
@@ -168,7 +172,7 @@
   </g>
  </g>
 </svg>g Metro.svg…]()
-
+-->
 
 ![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg)
