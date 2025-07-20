@@ -1,19 +1,11 @@
-// src/components/RouteFinder.jsx
-
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaExchangeAlt,
-  FaSearch,
-  FaTrain,
-  FaClock,
-  FaRupeeSign,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-import StationCard from "./StationCard";
 import MetroTrain from "../assets/Metro.svg";
 import { useTranslation } from "react-i18next";
+import RouteForm from "./journey/RouteForm";
+import JourneySummary from "./journey/JourneySummary";
+import RouteStations from "./journey/RouteStations";
 
 function RouteFinder() {
   const { t } = useTranslation();
@@ -49,15 +41,9 @@ function RouteFinder() {
   const fetchJourneyDetails = async () => {
     try {
       const [routeRes, timeRes, fareRes] = await Promise.all([
-        api.get(
-          `/stations/route?source=${selected.source}&destination=${selected.destination}`
-        ),
-        api.get(
-          `/estimated-time?source=${selected.source}&destination=${selected.destination}`
-        ),
-        api.get(
-          `/fare?source=${selected.source}&destination=${selected.destination}`
-        ),
+        api.get(`/stations/route?source=${selected.source}&destination=${selected.destination}`),
+        api.get(`/estimated-time?source=${selected.source}&destination=${selected.destination}`),
+        api.get(`/fare?source=${selected.source}&destination=${selected.destination}`),
       ]);
 
       return {
@@ -122,7 +108,6 @@ function RouteFinder() {
         className="bg-white rounded-xl shadow-2xl p-6 my-10 max-w-2xl mx-auto"
       >
         <div className="flex items-center justify-center mb-6">
-          <FaTrain className="text-3xl text-blue-600 mr-3" />
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
             {t("routeFinder")}
           </h2>
@@ -134,169 +119,31 @@ function RouteFinder() {
           </div>
         )}
 
-        <div className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {t("sourceStation") || "Source Station"}
-              </label>
-              <select
-                onChange={(e) => handleSelect("source", e.target.value)}
-                value={selected.source}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-              >
-                <option value="">{t("selectSource") || "Select Source"}</option>
-                {stations.map((st) => (
-                  <option key={st.id} value={st.name}>
-                    {t(`stations.${st.name}`)}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {t("destinationStation") || "Destination Station"}
-              </label>
-              <select
-                onChange={(e) => handleSelect("destination", e.target.value)}
-                value={selected.destination}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-              >
-                <option value="">
-                  {t("selectDestination") || "Select Destination"}
-                </option>
-                {stations.map((st) => (
-                  <option key={st.id} value={st.name}>
-                    {t(`stations.${st.name}`)}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="flex justify-center space-x-4">
-            <motion.button
-              onClick={getRoute}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={loading}
-              className={`flex items-center px-6 py-3 rounded-lg shadow-md text-white font-medium ${
-                loading ? "bg-gray-400" : "bg-green-600 hover:bg-green-700"
-              } transition-all`}
-            >
-              {loading ? (
-                t("finding") || "Finding..."
-              ) : (
-                <>
-                  <FaSearch className="mr-2" /> {t("findRoute") || "Find Route"}
-                </>
-              )}
-            </motion.button>
-
-            <motion.button
-              onClick={reverseRoute}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center px-6 py-3 rounded-lg shadow-md bg-yellow-500 hover:bg-yellow-600 text-white font-medium transition-all"
-            >
-              <FaExchangeAlt className="mr-2" /> {t("reverse") || "Reverse"}
-            </motion.button>
-          </div>
-        </div>
+        {/* Route Form */}
+        <RouteForm
+          stations={stations}
+          selected={selected}
+          loading={loading}
+          onSelectChange={handleSelect}
+          onFindRoute={getRoute}
+          onReverseRoute={reverseRoute}
+        />
 
         {/* Journey Summary */}
         <AnimatePresence>
           {journeyDetails && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mt-8 bg-blue-50 rounded-xl p-6"
-            >
-              <h3 className="text-xl font-bold mb-4 text-gray-800">
-                {t("journeySummary") || "Journey Summary"}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
-                  <div className="p-2 bg-blue-100 rounded-full">
-                    <FaClock className="text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">
-                      {t("estimatedTime") || "Estimated Time"}
-                    </p>
-                    <p className="font-semibold">
-                      {journeyDetails.time} {t("minutes") || "minutes"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
-                  <div className="p-2 bg-green-100 rounded-full">
-                    <FaRupeeSign className="text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">
-                      {t("approximateFare") || "Approximate Fare"}
-                    </p>
-                    <p className="font-semibold">
-                      ₹{journeyDetails.fare.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
-                  <div className="p-2 bg-purple-100 rounded-full">
-                    <FaMapMarkerAlt className="text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">
-                      {t("stationsCount") || "Stations Count"}
-                    </p>
-                    <p className="font-semibold">
-                      {journeyDetails.stationsCount}{" "}
-                      {t("stations") || "stations"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <JourneySummary
+              time={journeyDetails.time}
+              fare={journeyDetails.fare}
+              stationsCount={journeyDetails.stationsCount}
+               route={route} 
+            />
           )}
         </AnimatePresence>
 
         {/* Route Stations */}
         <AnimatePresence>
-          {route.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mt-8"
-            >
-              <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-                {t("yourJourneyRoute") || "Your Journey Route"}
-              </h3>
-              <div className="space-y-4">
-                {route.map((st, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex flex-col items-center"
-                  >
-                    <StationCard station={st} />
-                    {idx < route.length - 1 && (
-                      <div className="h-6 w-0.5 bg-gray-300 my-1"></div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
+          {route.length > 0 && <RouteStations route={route} />}
         </AnimatePresence>
       </motion.div>
     </>
