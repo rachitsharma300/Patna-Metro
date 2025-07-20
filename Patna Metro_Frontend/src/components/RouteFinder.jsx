@@ -1,3 +1,5 @@
+// src/components/RouteFinder.jsx
+
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,11 +12,11 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import StationCard from "./StationCard";
-
-// Import your SVG
 import MetroTrain from "../assets/Metro.svg";
+import { useTranslation } from "react-i18next";
 
 function RouteFinder() {
+  const { t } = useTranslation();
   const [stations, setStations] = useState([]);
   const [selected, setSelected] = useState({ source: "", destination: "" });
   const [route, setRoute] = useState([]);
@@ -106,13 +108,12 @@ function RouteFinder() {
 
   return (
     <>
-      {/* Metro SVG late add some CSS Properties.. */}
+      {/* Metro SVG */}
       <div className="flex justify-center my-4">
         <img src={MetroTrain} alt="Moving Metro Train" className="w-100" />
       </div>
-      {/*  style={{ width: "800px", height: "auto" }} */}
 
-      {/* Route Finder Component */}
+      {/* Route Finder */}
       <motion.div
         id="route-finder"
         initial={{ opacity: 0, y: 20 }}
@@ -123,7 +124,7 @@ function RouteFinder() {
         <div className="flex items-center justify-center mb-6">
           <FaTrain className="text-3xl text-blue-600 mr-3" />
           <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
-            Route Finder
+            {t("routeFinder")}
           </h2>
         </div>
 
@@ -137,17 +138,17 @@ function RouteFinder() {
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Source Station
+                {t("sourceStation") || "Source Station"}
               </label>
               <select
                 onChange={(e) => handleSelect("source", e.target.value)}
                 value={selected.source}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               >
-                <option value="">Select Source</option>
+                <option value="">{t("selectSource") || "Select Source"}</option>
                 {stations.map((st) => (
                   <option key={st.id} value={st.name}>
-                    {st.name}
+                    {t(`stations.${st.name}`)}
                   </option>
                 ))}
               </select>
@@ -155,17 +156,19 @@ function RouteFinder() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Destination Station
+                {t("destinationStation") || "Destination Station"}
               </label>
               <select
                 onChange={(e) => handleSelect("destination", e.target.value)}
                 value={selected.destination}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
               >
-                <option value="">Select Destination</option>
+                <option value="">
+                  {t("selectDestination") || "Select Destination"}
+                </option>
                 {stations.map((st) => (
                   <option key={st.id} value={st.name}>
-                    {st.name}
+                    {t(`stations.${st.name}`)}
                   </option>
                 ))}
               </select>
@@ -178,13 +181,15 @@ function RouteFinder() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={loading}
-              className={`flex items-center px-6 py-3 rounded-lg shadow-md text-white font-medium ${loading ? "bg-gray-400" : "bg-green-600 hover:bg-green-700"} transition-all`}
+              className={`flex items-center px-6 py-3 rounded-lg shadow-md text-white font-medium ${
+                loading ? "bg-gray-400" : "bg-green-600 hover:bg-green-700"
+              } transition-all`}
             >
               {loading ? (
-                "Finding..."
+                t("finding") || "Finding..."
               ) : (
                 <>
-                  <FaSearch className="mr-2" /> Find Route
+                  <FaSearch className="mr-2" /> {t("findRoute") || "Find Route"}
                 </>
               )}
             </motion.button>
@@ -195,12 +200,12 @@ function RouteFinder() {
               whileTap={{ scale: 0.95 }}
               className="flex items-center px-6 py-3 rounded-lg shadow-md bg-yellow-500 hover:bg-yellow-600 text-white font-medium transition-all"
             >
-              <FaExchangeAlt className="mr-2" /> Reverse
+              <FaExchangeAlt className="mr-2" /> {t("reverse") || "Reverse"}
             </motion.button>
           </div>
         </div>
 
-        {/* Journey Summary Section */}
+        {/* Journey Summary */}
         <AnimatePresence>
           {journeyDetails && (
             <motion.div
@@ -211,7 +216,7 @@ function RouteFinder() {
               className="mt-8 bg-blue-50 rounded-xl p-6"
             >
               <h3 className="text-xl font-bold mb-4 text-gray-800">
-                Journey Summary
+                {t("journeySummary") || "Journey Summary"}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-center space-x-3 bg-white p-3 rounded-lg shadow-sm">
@@ -219,9 +224,11 @@ function RouteFinder() {
                     <FaClock className="text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Estimated Time</p>
+                    <p className="text-sm text-gray-500">
+                      {t("estimatedTime") || "Estimated Time"}
+                    </p>
                     <p className="font-semibold">
-                      {journeyDetails.time} minutes
+                      {journeyDetails.time} {t("minutes") || "minutes"}
                     </p>
                   </div>
                 </div>
@@ -231,7 +238,9 @@ function RouteFinder() {
                     <FaRupeeSign className="text-green-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Approximate Fare</p>
+                    <p className="text-sm text-gray-500">
+                      {t("approximateFare") || "Approximate Fare"}
+                    </p>
                     <p className="font-semibold">
                       ₹{journeyDetails.fare.toFixed(2)}
                     </p>
@@ -243,9 +252,12 @@ function RouteFinder() {
                     <FaMapMarkerAlt className="text-purple-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Stations Count</p>
+                    <p className="text-sm text-gray-500">
+                      {t("stationsCount") || "Stations Count"}
+                    </p>
                     <p className="font-semibold">
-                      {journeyDetails.stationsCount} stations
+                      {journeyDetails.stationsCount}{" "}
+                      {t("stations") || "stations"}
                     </p>
                   </div>
                 </div>
@@ -254,7 +266,7 @@ function RouteFinder() {
           )}
         </AnimatePresence>
 
-        {/* Route Stations Section */}
+        {/* Route Stations */}
         <AnimatePresence>
           {route.length > 0 && (
             <motion.div
@@ -265,7 +277,7 @@ function RouteFinder() {
               className="mt-8"
             >
               <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-                Your Journey Route
+                {t("yourJourneyRoute") || "Your Journey Route"}
               </h3>
               <div className="space-y-4">
                 {route.map((st, idx) => (

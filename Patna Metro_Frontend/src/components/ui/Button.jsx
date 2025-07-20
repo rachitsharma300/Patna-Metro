@@ -10,16 +10,15 @@ export const Button = ({ children, onClick, variant = 'primary', className = '' 
 
   return (
     <motion.button
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg font-medium transition-colors ${variants[variant]} ${className}`}
-      aria-label={typeof children === 'string' ? children : ''}
+      className={`flex items-center px-3 py-2 rounded-lg ${variants[variant]} ${className}`}
+      aria-label="Switch Language"
     >
       {children}
     </motion.button>
   );
 };
-
 
 export default Button;

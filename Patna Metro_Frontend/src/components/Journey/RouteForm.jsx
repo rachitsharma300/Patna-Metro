@@ -1,6 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaExchangeAlt, FaSearch, FaMapMarkerAlt, FaFlagCheckered } from "react-icons/fa";
+import {
+  FaExchangeAlt,
+  FaSearch,
+  FaMapMarkerAlt,
+  FaFlagCheckered,
+} from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const RouteForm = ({
   stations,
@@ -10,29 +16,27 @@ const RouteForm = ({
   onFindRoute,
   onReverseRoute,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl">
-      {/* Source & Destination with Animated Reverse Button */}
-      <motion.div 
+      {/* Source & Destination with Reverse Button */}
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="relative flex flex-col md:flex-row items-center gap-6"
       >
-        {/* Source Station - Animated Card */}
-        <motion.div 
+        {/* Source Station */}
+        <motion.div
           whileHover={{ y: -5 }}
           className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200"
         >
           <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-            <motion.span 
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="inline-flex items-center"
-            >
-              <FaMapMarkerAlt className="mr-2 text-red-500 text-lg" />
-              <span className="font-bold text-gray-800">FROM STATION</span>
-            </motion.span>
+            <FaMapMarkerAlt className="mr-2 text-red-500 text-lg" />
+            <span className="font-bold text-gray-800">
+              {t("RouteFinder.sourceStation")}
+            </span>
           </label>
           <div className="relative">
             <select
@@ -40,7 +44,7 @@ const RouteForm = ({
               value={selected.source}
               className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white font-medium"
             >
-              <option value="">Where are you?</option>
+              <option value="">{t("RouteFinder.selectSource")}</option>
               {stations.map((st) => (
                 <option key={st.id} value={st.name}>
                   {st.name}
@@ -53,7 +57,7 @@ const RouteForm = ({
           </div>
         </motion.div>
 
-        {/* Reverse Button - Now Super Cool */}
+        {/* Reverse Button */}
         <motion.div
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -74,20 +78,16 @@ const RouteForm = ({
           </button>
         </motion.div>
 
-        {/* Destination Station - Animated Card */}
-        <motion.div 
+        {/* Destination Station */}
+        <motion.div
           whileHover={{ y: -5 }}
           className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200 mt-12 md:mt-0"
         >
           <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-            <motion.span 
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 2, delay: 0.5 }}
-              className="inline-flex items-center"
-            >
-              <FaFlagCheckered className="mr-2 text-green-500 text-lg" />
-              <span className="font-bold text-gray-800">TO STATION</span>
-            </motion.span>
+            <FaFlagCheckered className="mr-2 text-green-500 text-lg" />
+            <span className="font-bold text-gray-800">
+              {t("RouteFinder.destinationStation")}
+            </span>
           </label>
           <div className="relative">
             <select
@@ -95,7 +95,7 @@ const RouteForm = ({
               value={selected.destination}
               className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white font-medium"
             >
-              <option value="">Where to go?</option>
+              <option value="">{t("RouteFinder.selectDestination")}</option>
               {stations.map((st) => (
                 <option key={st.id} value={st.name}>
                   {st.name}
@@ -109,8 +109,8 @@ const RouteForm = ({
         </motion.div>
       </motion.div>
 
-      {/* Find Route Button - Now with Awesome Animation */}
-      <motion.div 
+      {/* Find Route Button */}
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -118,9 +118,9 @@ const RouteForm = ({
       >
         <motion.button
           onClick={onFindRoute}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
-            boxShadow: "0px 5px 15px rgba(59, 130, 246, 0.4)"
+            boxShadow: "0px 5px 15px rgba(59, 130, 246, 0.4)",
           }}
           whileTap={{ scale: 0.98 }}
           disabled={loading}
@@ -156,7 +156,7 @@ const RouteForm = ({
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              CALCULATING ROUTE...
+              {t("RouteFinder.calculatingRoute")}
             </motion.span>
           ) : (
             <motion.span
@@ -164,12 +164,14 @@ const RouteForm = ({
               transition={{ duration: 2, repeat: Infinity }}
               className="flex items-center"
             >
-              <FaSearch className="mr-3 text-lg" /> 
+              <FaSearch className="mr-3 text-lg" />
               <motion.span
-                animate={{ textShadow: ["0 0 0px #fff", "0 0 5px #fff", "0 0 0px #fff"] }}
+                animate={{
+                  textShadow: ["0 0 0px #fff", "0 0 5px #fff", "0 0 0px #fff"],
+                }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                FIND BEST ROUTE
+                {t("RouteFinder.findRoute")}
               </motion.span>
             </motion.span>
           )}
