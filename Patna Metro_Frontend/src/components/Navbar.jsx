@@ -13,11 +13,14 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import MetroMapModal from "../components/MetroMapModal";
+import Button from "../components/ui/Button";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showMapModal, setShowMapModal] = useState(false);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -26,16 +29,17 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", path: "/", icon: <FaSubway /> },
-    { name: "Route Finder", path: "/RouteFinder", icon: <FaSearch /> },
-    {
-      name: "Metro Map",
-      action: () => setShowMapModal(true),
-      icon: <FaMap />,
-    },
-    { name: "Fare Info", path: "/fare-info", icon: <FaRupeeSign /> },
-    { name: "About", path: "/about", icon: <FaInfoCircle /> },
+    { name: t("home"), path: "/", icon: <FaSubway /> },
+    { name: t("routeFinder"), path: "/RouteFinder", icon: <FaSearch /> },
+    { name: t("metroMap"), action: () => setShowMapModal(true), icon: <FaMap /> },
+    { name: t("fareInfo"), path: "/fare-info", icon: <FaRupeeSign /> },
+    { name: t("about"), path: "/about", icon: <FaInfoCircle /> },
   ];
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "hi" : "en";
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <>
@@ -91,16 +95,10 @@ const Navbar = () => {
                 )
               )}
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {}}
-                className="flex items-center px-3 py-2 rounded-lg bg-black/20 hover:bg-white/10 transition-colors"
-                aria-label="Select Language"
-              >
+              <Button onClick={toggleLanguage} variant="primary">
                 <FaLanguage className="mr-2" />
-                Hindi
-              </motion.button>
+                {i18n.language === "en" ? "हिंदी" : "English"}
+              </Button>
             </div>
 
             <button
@@ -113,6 +111,7 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -155,13 +154,10 @@ const Navbar = () => {
                 ))}
 
                 <div className="border-t border-white/20 mt-2 pt-3">
-                  <button
-                    onClick={() => {}}
-                    className="flex items-center w-full px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
-                  >
+                  <Button onClick={toggleLanguage} variant="primary">
                     <FaLanguage className="mr-3" />
-                    Switch to Hindi
-                  </button>
+                    {i18n.language === "en" ? "Switch to Hindi" : "Switch to English"}
+                  </Button>
                 </div>
               </div>
             </motion.div>
