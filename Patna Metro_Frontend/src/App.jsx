@@ -1,5 +1,6 @@
 // src/App.jsx
 import React from "react";
+import './i18n';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,6 +10,7 @@ import FareInfo from "./pages/FareInfo";
 import MapPage from "./pages/MapPage";
 import NotFound from "./pages/NotFound";
 import RouteFinder from "./components/RouteFinder";
+
 
 function App() {
   return (
