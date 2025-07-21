@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-🚇 Patna Metro Route Finder
+<h1>🚇 Patna Metro Route Finder</h1>
 </p>
 
 
