@@ -2,9 +2,9 @@
   <img src="https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854" alt="Your Image" />
 </p>
 
-<p align="center">
-<h1>🚇 Patna Metro Route Finder</h1>
-</p>
+
+<h1 align="center">🚇 Patna Metro Route Finder</h1>
+
 
 
 
