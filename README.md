@@ -2,7 +2,12 @@
   <img src="https://github.com/user-attachments/assets/72f76d69-ebbe-4110-8da2-6ddc7ab9f854" alt="Your Image" />
 </p>
 
-# 🚇 Patna Metro Route Finder
+<p align="center">
+🚇 Patna Metro Route Finder
+</p>
+
+
+
 <!-- 
 ![Uploadin<?xml version="1.0"?>
 <svg width="600" height="76.6" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" enable-background="new 0 0 600 76.6" version="1.1" xml:space="preserve">
