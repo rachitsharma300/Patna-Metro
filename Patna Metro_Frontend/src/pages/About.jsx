@@ -141,7 +141,7 @@ export const About = () => {
       <div className="text-center mt-12">
         <Button
           variant="primary"
-          onClick={() => window.open("https://patnametro.in", "_blank")}
+          onClick={() => window.open("https://delhimetrorail.com/", "_blank")}
           className="px-8 py-3 text-lg"
         >
           {t("aboutPage.officialWebsiteButton")}
