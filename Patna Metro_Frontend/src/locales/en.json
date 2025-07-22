@@ -39,9 +39,8 @@
     "quickLinks": {
       "home": "Home",
       "routeFinder": "Route Finder",
-      "fareCalculator": "Fare Calculator",
-      "metroMap": "Metro Map",
-      "timings": "Timings"
+      "fareInfo": "Fare Info",
+      "metroMap": "Metro Map"
     },
     "metroLinesTitle": "Metro Lines",
     "contactUsTitle": "Contact Us",
@@ -57,14 +56,106 @@
     "sitemap": "Sitemap",
     "developedBy": "Developed by Rachit & Kumkum for Patna"
   },
-"RouteFinder": {
-  "sourceStation": "Source Station",
-  "selectSource": "Select Source",
-  "destinationStation": "Destination Station",
-  "selectDestination": "Select Destination",
-  "findRoute": "Find Route",
-  "calculatingRoute": "Calculating Route...",
-  "reverse": "Reverse"
+  "RouteFinder": {
+    "sourceStation": "Source Station",
+    "selectSource": "Select Source",
+    "destinationStation": "Destination Station",
+    "selectDestination": "Select Destination",
+    "findRoute": "Find Route",
+    "calculatingRoute": "Calculating Route...",
+    "reverse": "Reverse"
+  },
+  "fareInfoPage": {
+    "title": "Patna Metro Fare Information",
+    "subtitle": "Know before you go - Plan your journey with accurate fare details",
+    "fareStructure": "Fare Structure",
+    "distanceRange": "Distance Range (km)",
+    "fare": "Fare (₹)",
+    "ticketOptions": "Ticket Options",
+    "smartCards": "Smart Cards - 10% discount on every ride",
+    "dailyPass": "Daily Pass - Unlimited travel for ₹120",
+    "touristPass": "Tourist Pass - 3-day unlimited travel for ₹300",
+    "studentPass": "Student Pass - 25% discount with valid ID",
+    "quickFacts": "Quick Facts",
+    "operatingHours": "Operating Hours",
+    "operatingTime": "5:30 AM - 11:30 PM (Monday-Sunday)",
+    "frequency": "Frequency",
+    "frequencyDetail": "Peak: 5 minutes | Off-peak: 10 minutes",
+    "firstLastTrain": "First & Last Train",
+    "firstTrain": "First: 5:30 AM from both terminals",
+    "lastTrain": "Last: 11:30 PM from both terminals",
+    "contact": "Contact",
+    "helpline": "Helpline: 155370 (24x7)",
+    "email": "Email: info@patnametro.in",
+    "fareCalculator": "Fare Calculator",
+    "fromStation": "From Station",
+    "toStation": "To Station",
+    "selectStation": "Select station",
+    "calculateFare": "Calculate Fare",
+    "importantNotice": "Important Notice",
+    "noticeDetails": "• Children below 90 cm height travel free\n• Senior citizens (60+ years) get 20% discount\n• Smart cards can be recharged online or at any station\n• Fares are subject to revision. Last updated: "
+  },
+  "aboutPage": {
+    "title": "About Patna Metro",
+    "subtitle": "Transforming Patna's Urban Mobility with Modern Rapid Transit",
+    "overviewTitle": "Overview",
+    "overviewPara1": "Patna Metro is a ₹13,365 crore rapid transit system under construction in Patna, Bihar. Approved in 2018, it's set to revolutionize urban transportation in Bihar's capital city.",
+    "projectBackgroundTitle": "Project Background",
+    "projectBackgroundPara1": "The project was conceived to address Patna's growing traffic congestion and pollution problems. With a population exceeding 3 million and rapid urbanization, the need for efficient mass transit became critical.",
+    "projectBackgroundPara2": "The foundation stone was laid by Prime Minister Narendra Modi on February 17, 2019, marking Bihar's entry into the metro rail network era.",
+    "keyFactsTitle": "Key Facts",
+    "totalLength": "Total Length",
+    "totalLengthValue": "31 km (Phase 1)",
+    "lines": "Lines",
+    "linesValue": "2 corridors (Blue & Red Line)",
+    "projectCost": "Project Cost",
+    "projectCostValue": "₹13,365 crore (Phase 1)",
+    "expectedCompletion": "Expected Completion",
+    "expectedCompletionValue": "2026 (Phase 1)",
+    "networkDetailsTitle": "Network Details",
+    "blueLineTitle": "Blue Line (East-West Corridor)",
+    "blueLineDetails": [
+      "Length: 16.5 km (14.5 km elevated, 2 km underground)",
+      "Stations: 12 (10 elevated, 2 underground)",
+      "Route: Patna Junction to Mithapur Bus Stand",
+      "Key Stations: Patna Junction, Raj Bhavan, Vidhan Sabha, PMCH"
+    ],
+    "redLineTitle": "Red Line (North-South Corridor)",
+    "redLineDetails": [
+      "Length: 14.5 km (fully elevated)",
+      "Stations: 12",
+      "Route: Patna Airport to Patna Railway Station",
+      "Key Stations: Patna Airport, Gandhi Maidan, Patna Sahib"
+    ],
+    "projectTimelineTitle": "Project Timeline",
+    "implementationFundingTitle": "Implementation & Funding",
+    "implementationFundingPara1": "The project is being implemented by the Patna Metro Rail Corporation (PMRC), a 50:50 joint venture between the Government of India and Government of Bihar. The funding pattern follows the standard metro rail policy with equal equity participation from both governments.",
+    "implementationFundingPara2": "Japan International Cooperation Agency (JICA) is providing loan assistance for the project, covering about 60% of the total project cost.",
+    "officialWebsiteButton": "Official Website"
+  },
+  "hero": {
+    "title": "PATNA METRO",
+    "description": "Patna Metro is Bihar’s first rapid transit system connecting North and South Patna with modern infrastructure for a smarter commute.",
+    "cta": "Find Your Route",
+    "emergencyTitle": "Emergency Contacts",
+    "emergencyPolice": "Police: 100",
+    "emergencyAmbulance": "Ambulance: 102",
+    "emergencyFire": "Fire: 101",
+    "emergencyMetroHelpline": "Metro Helpline: 9871-8740-XX",
+    "ticker": "• PATNA METRO UPDATE: Phase 1 completion expected December 2025 • Free WiFi at all stations • Metro transforming Bihar's commute •"
+  },
+  "nav": {
+    "home": "Home",
+    "routeFinder": "Route Finder",
+    "metroMap": "Metro Map",
+    "fareInfo": "Fare Info",
+    "about": "About"
+  },
+  "JourneySummary": {
+  "title": "Journey Summary",
+  "time": "Time",
+  "minutes": "min",
+  "fare": "Fare",
+  "stations": "Stations"
 }
-
 }
