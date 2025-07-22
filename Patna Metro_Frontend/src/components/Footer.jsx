@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   FaGithub,
   FaTwitter,
@@ -53,29 +54,24 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-yellow-400 transition-colors">
+                <Link to="/" className="hover:text-yellow-400 transition-colors">
                   {t("footer.quickLinks.home")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#route-finder" className="hover:text-yellow-400 transition-colors">
+                <Link to="/routefinder" className="hover:text-yellow-400 transition-colors">
                   {t("footer.quickLinks.routeFinder")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400 transition-colors">
-                  {t("footer.quickLinks.fareCalculator")}
-                </a>
+                <Link to="/fare-info" className="hover:text-yellow-400 transition-colors">
+                  {t("footer.quickLinks.fareInfo")}
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-400 transition-colors">
+                <Link to="/metro-map" className="hover:text-yellow-400 transition-colors">
                   {t("footer.quickLinks.metroMap")}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-yellow-400 transition-colors">
-                  {t("footer.quickLinks.timings")}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -144,15 +140,15 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p>{t("footer.copyright", { year: currentYear })}</p>
             <div className="flex space-x-4 mt-2 md:mt-0">
-              <a href="#" className="hover:text-yellow-400">
-                {t("footer.privacyPolicy")}
-              </a>
-              <a href="#" className="hover:text-yellow-400">
-                {t("footer.termsOfService")}
-              </a>
-              <a href="#" className="hover:text-yellow-400">
-                {t("footer.sitemap")}
-              </a>
+              <Link to="/privacy-policy" className="hover:text-yellow-400">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-of-service" className="hover:text-yellow-400">
+                Terms of Service
+              </Link>
+              <Link to="/sitemap" className="hover:text-yellow-400">
+                Sitemap
+              </Link>
             </div>
           </div>
           <p className="mt-4 text-gray-500">{t("footer.developedBy")}</p>
