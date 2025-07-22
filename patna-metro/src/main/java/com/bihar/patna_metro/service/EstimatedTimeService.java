@@ -27,6 +27,9 @@ public class EstimatedTimeService {
         if (route.isEmpty()) {
             throw new IllegalArgumentException("No route found between stations");
         }
+        if (route.size() == 1) {
+            return 0; // Same station selected
+        }
 
         // Calculate total route distance (precise if available, otherwise estimated)
         double totalDistanceKm = calculateTotalRouteDistance(route);
