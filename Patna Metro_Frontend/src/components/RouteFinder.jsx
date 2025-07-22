@@ -136,7 +136,7 @@ function RouteFinder() {
               time={journeyDetails.time}
               fare={journeyDetails.fare}
               stationsCount={journeyDetails.stationsCount}
-               route={route} 
+              route={route}
             />
           )}
         </AnimatePresence>
