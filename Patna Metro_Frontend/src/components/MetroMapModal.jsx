@@ -100,16 +100,27 @@ const MetroMapModal = ({ isOpen, onClose }) => {
             <div className="bg-gray-100 p-4 border-t border-gray-300">
               <div className="flex flex-wrap justify-center gap-4">
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-blue-600 rounded-full mr-2"></div>
+                  <div className="w-4 h-1 bg-blue-600 mr-2"></div>
                   <span className="text-sm">Blue Line</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-red-600 rounded-full mr-2"></div>
+                  <div className="w-4 h-1 bg-red-600 mr-2"></div>
                   <span className="text-sm">Red Line</span>
                 </div>
+
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-yellow-400 rounded-full mr-2"></div>
-                  <span className="text-sm">Interchange</span>
+                  <div className="w-4 h-4 bg-gray-400 border-2 border-black rounded-none mr-2"></div>
+                  <span className="text-sm">Elevated Interchange</span>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="w-4 h-4 border-2 border-black rounded-none mr-2"></div>
+                  <span className="text-sm">Underground Interchange</span>
+                </div>
+
+                <div className="flex items-center">
+                  <div className="w-4 h-4 bg-lime-500 rounded-full mr-2"></div>
+                  <span className="text-sm">Depot</span>
                 </div>
               </div>
             </div>
