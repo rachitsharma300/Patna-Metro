@@ -21,7 +21,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         
-        {/* Place DisclaimerPopup here so it shows on all pages */}
+        {/* DisclaimerPopup */}
         <DisclaimerPopup />
 
         <main className="flex-grow">
