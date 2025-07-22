@@ -42,7 +42,7 @@ public class RouteFinderService {
 
                 // Add the interchange station on destination line if not already present
                 if (fullRoute.isEmpty() ||
-                        !fullRoute.get(fullRoute.size()-1).getName().equals(interchangeOnDestinationLine.getName())) {
+                        !fullRoute.get(fullRoute.size() - 1).getName().equals(interchangeOnDestinationLine.getName())) {
                     fullRoute.add(interchangeOnDestinationLine);
                 }
 
@@ -74,15 +74,38 @@ public class RouteFinderService {
         int start = source.getSequenceNumber();
         int end = destination.getSequenceNumber();
 
-        List<Station> stations;
+        List<Station> stations = new ArrayList<>();
 
-        if (start <= end) {
+        if (start == end) {
+            // Same station
+            stations.add(source);
+        } else if (start < end) {
             stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, start, end);
+            if (stations.isEmpty()) {
+                // Fallback: fetch individually if between query fails
+                stations.add(source);
+                stations.add(destination);
+            }
         } else {
             stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, end, start);
-            Collections.reverse(stations); // Reverse to maintain source to destination order
+            if (stations.isEmpty()) {
+                // Fallback: fetch individually
+                stations.add(destination);
+                stations.add(source);
+            } else {
+                Collections.reverse(stations);
+            }
+        }
+
+        // Final safeguard: ensure start and end present
+        if (stations.isEmpty() || !stations.get(0).getName().equals(source.getName())) {
+            stations.add(0, source);
+        }
+        if (!stations.get(stations.size() - 1).getName().equals(destination.getName())) {
+            stations.add(destination);
         }
 
         return stations;
     }
+
 }
