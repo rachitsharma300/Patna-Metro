@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import StationCard from "../StationCard";
 import StationTrack from "../StationTrack";
 import { InterchangeIcon } from "../metro/InterchangeIcon";
+import { useTranslation } from "react-i18next";
 
 const RouteStations = ({ route }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="mt-8">
       <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
@@ -24,7 +27,7 @@ const RouteStations = ({ route }) => {
                 transition={{ delay: index * 0.1 }}
                 className="flex flex-col items-center"
               >
-                <StationCard station={station} />
+                <StationCard station={{ ...station, name: t(`stations.${station.name}`, station.name) }} />
 
                 {isInterchange && (
                   <div className="flex flex-col items-center space-y-1 mt-2">
