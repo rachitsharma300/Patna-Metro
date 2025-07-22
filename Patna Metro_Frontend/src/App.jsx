@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from "react";
-import './i18n';
+import "./i18n";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,7 +10,9 @@ import FareInfo from "./pages/FareInfo";
 import MapPage from "./pages/MapPage";
 import NotFound from "./pages/NotFound";
 import RouteFinder from "./components/RouteFinder";
-
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import TermsOfService from "./pages/legal/TermsOfService";
+import Sitemap from "./pages/legal/Sitemap";
 
 function App() {
   return (
@@ -25,6 +27,10 @@ function App() {
             <Route path="/fare-info" element={<FareInfo />} />
             <Route path="/metro-map" element={<MapPage />} />
             <Route path="*" element={<NotFound />} />
+
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/sitemap" element={<Sitemap />} />
           </Routes>
         </main>
         <Footer />
