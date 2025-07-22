@@ -25,6 +25,9 @@ public class FareService {
         if (route.isEmpty()) {
             throw new IllegalArgumentException("No route found between stations");
         }
+        if (route.size() == 1) {
+            return 10; // Base fare for same station
+        }
 
         double totalDistance = calculateRouteDistance(route);
         return getDelhiMetroStyleFare(totalDistance);
