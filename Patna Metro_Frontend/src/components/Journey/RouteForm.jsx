@@ -39,7 +39,7 @@ const RouteForm = ({
               <option value="">{t("RouteFinder.selectSource")}</option>
               {stations.map((st) => (
                 <option key={st.id} value={st.name}>
-                  {st.name}
+                  {t(`stations.${st.name}`, st.name)}
                 </option>
               ))}
             </select>
@@ -51,17 +51,11 @@ const RouteForm = ({
 
         {/* Reverse Button */}
         <motion.div
-          // whileHover={{ scale: 1.1 }}
-          // whileTap={{ scale: 0.9 }}
-          // className="my-4 md:my-0"
           animate={{ rotateY: [0, 180, 0] }}
           transition={{ repeat: Infinity, duration: 6.0, ease: "linear" }}
           className="my-4 md:my-0"
         >
           <button
-            // onClick={onReverseRoute}
-            // className="p-4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-            // aria-label="Reverse stations"
             onClick={onReverseRoute}
             className="p-4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
             aria-label="Reverse stations"
@@ -72,7 +66,6 @@ const RouteForm = ({
               className="text-white text-xl"
             >
               <FaExchangeAlt className="text-white text-xl" />
-              {/* <FaExchangeAlt /> */}
             </motion.div>
           </button>
         </motion.div>
@@ -94,7 +87,7 @@ const RouteForm = ({
               <option value="">{t("RouteFinder.selectDestination")}</option>
               {stations.map((st) => (
                 <option key={st.id} value={st.name}>
-                  {st.name}
+                  {t(`stations.${st.name}`, st.name)}
                 </option>
               ))}
             </select>
