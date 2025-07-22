@@ -16,7 +16,7 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Clean DB first
+        // Clean DB first { Change Before Deploy }
         repository.deleteAll();
 
         // Red Line Stations
