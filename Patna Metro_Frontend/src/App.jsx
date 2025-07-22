@@ -13,12 +13,17 @@ import RouteFinder from "./components/RouteFinder";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Sitemap from "./pages/legal/Sitemap";
+import DisclaimerPopup from "./components/DisclaimerPopup";
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
         <Navbar />
+        
+        {/* Place DisclaimerPopup here so it shows on all pages */}
+        <DisclaimerPopup />
+
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
