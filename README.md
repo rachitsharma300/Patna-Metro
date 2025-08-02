@@ -213,21 +213,6 @@ Patna Metro Route Finder is a **Java Spring Boot** based backend application to:
 
 ---
 
-## 🛠️ **Project Structure**
-```
-patna-metro/
-├── src/
-│ ├── main/
-│ │ ├── java/com/bihar/patna_metro/
-│ │ │ ├── controller/
-│ │ │ ├── model/
-│ │ │ ├── repository/
-│ │ │ ├── service/
-│ │ │ └── PatnaMetroApplication.java
-│ │ └── resources/
-│ │ └── application.properties
-└── pom.xml
-```
 
 ---
 
