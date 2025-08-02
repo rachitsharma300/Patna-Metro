@@ -239,23 +239,6 @@ Using Maven:
 mvn spring-boot:run
 ```
 
-## 📡 **API Endpoints**
-```
-| Method | Endpoint                                 | Description                     |
-|--------|------------------------------------------|---------------------------------|
-| GET    | `/stations`                              | Get all stations                |
-| GET    | `/route?source=...&destination=...`      | Find route between two stations |
-| POST   | `/stations`                              | Add a new station               |
-| PUT    | `/stations/{id}`                         | Update station info             |
-| DELETE | `/stations/{id}`                         | Delete a station                |
-
-
-Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
-```
-## Future Enhancements
- Graph-based route finding (Dijkstra/BFS)
-
-
 ## Backend Project Structure
 ```
 patna-metro/
@@ -312,6 +295,23 @@ Patna Metro Frontend/
  ┃ ┗ main.jsx
 
 ```
+
+
+## 📡 **API Endpoints**
+```
+| Method | Endpoint                                 | Description                     |
+|--------|------------------------------------------|---------------------------------|
+| GET    | `/stations`                              | Get all stations                |
+| GET    | `/route?source=...&destination=...`      | Find route between two stations |
+| POST   | `/stations`                              | Add a new station               |
+| PUT    | `/stations/{id}`                         | Update station info             |
+| DELETE | `/stations/{id}`                         | Delete a station                |
+
+
+Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+```
+## Future Enhancements
+ Graph-based route finding (Dijkstra/BFS)
 
 ## Contributing
 Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.
