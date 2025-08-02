@@ -270,6 +270,23 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
 ## Future Enhancements
  Graph-based route finding (Dijkstra/BFS)
 
+
+## Backend Project Structure
+```
+patna-metro/
+├── src/
+│ ├── main/
+│ │ ├── java/com/bihar/patna_metro/
+│ │ │ ├── controller/
+│ │ │ ├── model/
+│ │ │ ├── repository/
+│ │ │ ├── service/
+│ │ │ └── PatnaMetroApplication.java
+│ │ └── resources/
+│ │ └── application.properties
+└── pom.xml
+```
+
 ## Frontend Project Structure
 ```
 Patna Metro Frontend/
