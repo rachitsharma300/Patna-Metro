@@ -213,13 +213,10 @@ Patna Metro Route Finder is a **Java Spring Boot** based backend application to:
 
 ---
 
-
 ---
 
 ## 🔧 **Setup & Run**
-
 1. **Clone the repository**
-
 ```bash
 git clone https://github.com/yourusername/patna-metro.git
 cd patna-metro
