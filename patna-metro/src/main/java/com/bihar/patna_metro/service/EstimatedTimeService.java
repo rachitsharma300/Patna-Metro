@@ -22,7 +22,7 @@ public class EstimatedTimeService {
      * Calculates realistic travel time between stations
      */
     public int calculateEstimatedTime(String sourceName, String destinationName) {
-        List<Station> route = routeFinderService.findRoute(sourceName, destinationName);
+        List<Station> route =  routeFinderService.findRoute(sourceName, destinationName);
 
         if (route.isEmpty()) {
             throw new IllegalArgumentException("No route found between stations");
