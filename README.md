@@ -213,28 +213,10 @@ Patna Metro Route Finder is a **Java Spring Boot** based backend application to:
 
 ---
 
-## 🛠️ **Project Structure**
-```
-patna-metro/
-├── src/
-│ ├── main/
-│ │ ├── java/com/bihar/patna_metro/
-│ │ │ ├── controller/
-│ │ │ ├── model/
-│ │ │ ├── repository/
-│ │ │ ├── service/
-│ │ │ └── PatnaMetroApplication.java
-│ │ └── resources/
-│ │ └── application.properties
-└── pom.xml
-```
-
 ---
 
 ## 🔧 **Setup & Run**
-
 1. **Clone the repository**
-
 ```bash
 git clone https://github.com/yourusername/patna-metro.git
 cd patna-metro
@@ -254,21 +236,21 @@ Using Maven:
 mvn spring-boot:run
 ```
 
-## 📡 **API Endpoints**
+## Backend Project Structure
 ```
-| Method | Endpoint                                 | Description                     |
-|--------|------------------------------------------|---------------------------------|
-| GET    | `/stations`                              | Get all stations                |
-| GET    | `/route?source=...&destination=...`      | Find route between two stations |
-| POST   | `/stations`                              | Add a new station               |
-| PUT    | `/stations/{id}`                         | Update station info             |
-| DELETE | `/stations/{id}`                         | Delete a station                |
-
-
-Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+patna-metro/
+├── src/
+│ ├── main/
+│ │ ├── java/com/bihar/patna_metro/
+│ │ │ ├── controller/
+│ │ │ ├── model/
+│ │ │ ├── repository/
+│ │ │ ├── service/
+│ │ │ └── PatnaMetroApplication.java
+│ │ └── resources/
+│ │ └── application.properties
+└── pom.xml
 ```
-## Future Enhancements
- Graph-based route finding (Dijkstra/BFS)
 
 ## Frontend Project Structure
 ```
@@ -312,18 +294,27 @@ Patna Metro Frontend/
 ```
 
 
+## 📡 **API Endpoints**
+```
+| Method | Endpoint                                 | Description                     |
+|--------|------------------------------------------|---------------------------------|
+| GET    | `/stations`                              | Get all stations                |
+| GET    | `/route?source=...&destination=...`      | Find route between two stations |
+| POST   | `/stations`                              | Add a new station               |
+| PUT    | `/stations/{id}`                         | Update station info             |
+| DELETE | `/stations/{id}`                         | Delete a station                |
+
+
+Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+```
+## Future Enhancements
+ Graph-based route finding (Dijkstra/BFS)
 
 ## Contributing
 Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/48e4e3fd-ac1e-4a05-8da4-8e2e13262eb7" alt="Your Image" />
 </p>
-
-
-
-
-
-
 
 
 
