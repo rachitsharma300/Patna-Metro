@@ -1,0 +1,240 @@
+{
+  "stations": [
+    {
+      "name": "Danapur Cantonment",
+      "synonyms": [
+        "Danapur Cantonment",
+        "दनापुर छावनी",
+        "दनापुर कैंट",
+        "दनापुर",
+        "Danapur",
+        "दनापुर कंटोनमेंट"
+      ]
+    },
+    {
+      "name": "Saguna Mor",
+      "synonyms": [
+        "Saguna Mor",
+        "सगुना मोड़",
+        "सगुना मोर",
+        "सगुना",
+        "Saguna"
+      ]
+    },
+    {
+      "name": "RPS Mor",
+      "synonyms": [
+        "RPS Mor",
+        "आरपीएस मोड़",
+        "आरपीएस मोर",
+        "RPS",
+        "आरपीएस"
+      ]
+    },
+    {
+      "name": "Patliputra",
+      "synonyms": [
+        "Patliputra",
+        "पटलीपुत्र",
+        "पतलीपुत्र",
+        "Patli Putra"
+      ]
+    },
+    {
+      "name": "Rukanpura",
+      "synonyms": [
+        "Rukanpura",
+        "रुकनपुरा",
+        "रुकन पूरा",
+        "Rukan Pura"
+      ]
+    },
+    {
+      "name": "Raja Bazar",
+      "synonyms": [
+        "Raja Bazar",
+        "राजा बाजार",
+        "राजा बाज़ार",
+        "Raja Bazaar"
+      ]
+    },
+    {
+      "name": "Patna Zoo",
+      "synonyms": [
+        "Patna Zoo",
+        "पटना जू",
+        "पटना चिड़ियाघर",
+        "पटना चिडिया घर",
+        "पटना जू चिड़ियाघर",
+        "चिड़ियाघर",
+        "चिडिया घर",
+        "जू",
+        "जू पटना"
+      ]
+    },
+    {
+      "name": "Vikas Bhawan",
+      "synonyms": [
+        "Vikas Bhawan",
+        "विकास भवन",
+        "विकाश भवन",
+        "विकास भावन"
+      ]
+    },
+    {
+      "name": "Vidyut Bhawan",
+      "synonyms": [
+        "Vidyut Bhawan",
+        "विद्युत भवन",
+        "विद्युत भावन",
+        "विधुत भवन"
+      ]
+    },
+    {
+      "name": "Patna Junction",
+      "synonyms": [
+        "Patna Junction",
+        "पटना जंक्शन",
+        "पटना जंकसन",
+        "पटना स्टेशन",
+        "जंक्शन",
+        "स्टेशन पटना"
+      ]
+    },
+    {
+      "name": "CNLU",
+      "synonyms": [
+        "CNLU",
+        "सीएनएलयू",
+        "Chanakya National Law University",
+        "चाणक्य लॉ यूनिवर्सिटी",
+        "चाणक्य लॉ"
+      ]
+    },
+    {
+      "name": "Mithapur",
+      "synonyms": [
+        "Mithapur",
+        "मिथापुर"
+      ]
+    },
+    {
+      "name": "Ramkrishna Nagar",
+      "synonyms": [
+        "Ramkrishna Nagar",
+        "रामकृष्ण नगर",
+        "राम कृष्ण नगर"
+      ]
+    },
+    {
+      "name": "Jaganpura",
+      "synonyms": [
+        "Jaganpura",
+        "जगनपुरा",
+        "जगन पूरा"
+      ]
+    },
+    {
+      "name": "Khemni Chak",
+      "synonyms": [
+        "Khemni Chak",
+        "खेमनी चक",
+        "खेमनी चक",
+        "Khemni Check"
+      ]
+    },
+    {
+      "name": "Akashvani",
+      "synonyms": [
+        "Akashvani",
+        "आकाशवाणी",
+        "आकाश वाणी"
+      ]
+    },
+    {
+      "name": "Gandhi Maidan",
+      "synonyms": [
+        "Gandhi Maidan",
+        "गांधी मैदान",
+        "गांधी मेदान"
+      ]
+    },
+    {
+      "name": "PMCH",
+      "synonyms": [
+        "PMCH",
+        "पीएमसीएच",
+        "पी एम सी एच",
+        "पीएम सी एच",
+        "पटना मेडिकल कॉलेज",
+        "मेडिकल कॉलेज",
+        "पी एम सी"
+      ]
+    },
+    {
+      "name": "University",
+      "synonyms": [
+        "University",
+        "यूनिवर्सिटी",
+        "विश्वविद्यालय",
+        "यूनिवर्सिटी पटना",
+        "पटना यूनिवर्सिटी"
+      ]
+    },
+    {
+      "name": "Moin-ul-Haq Stadium",
+      "synonyms": [
+        "Moin-ul-Haq Stadium",
+        "मोइन-उल-हक स्टेडियम",
+        "मोइन उल हक स्टेडियम",
+        "मोइनुलहक स्टेडियम"
+      ]
+    },
+    {
+      "name": "Rajendra Nagar",
+      "synonyms": [
+        "Rajendra Nagar",
+        "राजेंद्र नगर",
+        "राजेन्द्र नगर"
+      ]
+    },
+    {
+      "name": "Malahi Pakri",
+      "synonyms": [
+        "Malahi Pakri",
+        "मलाही पकड़ी",
+        "मलाही पकरी",
+        "मलाही पकरि"
+      ]
+    },
+    {
+      "name": "Bhootnath",
+      "synonyms": [
+        "Bhootnath",
+        "भूतनाथ",
+        "भूत नाथ"
+      ]
+    },
+    {
+      "name": "Zero Mile",
+      "synonyms": [
+        "Zero Mile",
+        "ज़ीरो माइल",
+        "जीरो माइल",
+        "Zero Mile",
+        "जीरोमाइल"
+      ]
+    },
+    {
+      "name": "New ISBT",
+      "synonyms": [
+        "New ISBT",
+        "नया आईएसबीटी",
+        "न्यू आईएसबीटी",
+        "आईएसबीटी",
+        "ISBT",
+        "नया ISBT"
+      ]
+    }
+  ]
+}
