@@ -193,8 +193,8 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
 <h3>Future Enhancements</h3>
  <p>Graph-based route finding (Dijkstra/BFS)</p>
 
-## Contributing
-Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.
+<h3>Contributing</h3>
+<p>Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.</p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/48e4e3fd-ac1e-4a05-8da4-8e2e13262eb7" alt="Your Image" />
 </p>
