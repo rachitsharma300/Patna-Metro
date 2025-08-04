@@ -36,7 +36,7 @@
 </ul>
 
 <h3>🔧 Setup & Run</h3>
-<ul><li>Clone the repository</li></ul>
+<p>Clone the repository</p>
 ```bash
 git clone https://github.com/yourusername/patna-metro.git
 cd patna-metro
