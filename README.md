@@ -237,6 +237,8 @@ mvn spring-boot:run
 ```
 
 <details> <summary><strong>📁 patna-metro</strong></summary>
+  
+  ```
 📦 patna-metro
  ┣ 📂 .idea
  ┣ 📂 .mvn
@@ -281,6 +283,8 @@ mvn spring-boot:run
  ┃ ┃ ┃ ┃ ┣ 📂 controller
  ┃ ┃ ┃ ┃ ┣ 📂 seeder
  ┃ ┃ ┃ ┃ ┗ 📄 PatnaMetroApplicationTests
+  
+  ```
 </details>
 
 ## Backend Project Structure
