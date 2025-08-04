@@ -34,10 +34,6 @@
 - **Database:** MongoDB Atlas or Local MongoDB
 - **Build Tool:** Maven
 
----
-
----
-
 ## 🔧 **Setup & Run**
 1. **Clone the repository**
 ```bash
