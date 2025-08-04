@@ -28,11 +28,12 @@
 <li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
 </ul>
 
-## 🚀 **Tech Stack**
-
-- **Backend:** Java 24, Spring Boot 3.5.3
-- **Database:** MongoDB Atlas or Local MongoDB
-- **Build Tool:** Maven
+<h3>🚀 Tech Stack</h3>
+<ul>
+<li></li>Backend: Java 24, Spring Boot 3.5.3</li>
+<li></li>Database: MongoDB Atlas or Local MongoDB</li>
+<li></li>Build Tool: Maven</li>
+</ul>
 
 ## 🔧 **Setup & Run**
 1. **Clone the repository**
