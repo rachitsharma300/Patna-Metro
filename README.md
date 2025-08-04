@@ -4,12 +4,11 @@
 <h1 align="center">🚇 Patna Metro Route Finder</h1>
 
 <p align="center">
-![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg)
-![MongoDB](https://img.shields.io/badge/MongoDB-%2324292e.svg?logo=mongodb&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+<img src= "https://img.shields.io/badge/Java-17%2B-blue.svg" />
+<img src= "https://img.shields.io/badge/Spring%20Boot-3.5.3-brightgreen.svg" />
+<img src= "https://img.shields.io/badge/MongoDB-%2324292e.svg?logo=mongodb&logoColor=white" />
+<img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
-
 ---
 
 ## 📌 **Project Overview**
