@@ -18,8 +18,6 @@
   <li>Manages station data in MongoDB</li>
   <li>Provides REST APIs for route finding and station listing</li>
 </ul>
-```
-
 ## 💡 **Features**
 
 ✅ REST APIs for CRUD operations on Stations  
@@ -27,8 +25,6 @@
 ✅ MongoDB integration for data persistence  
 ✅ CommandLineRunner seeder for initial station data  
 ✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)
-
----
 
 ## 🚀 **Tech Stack**
 
