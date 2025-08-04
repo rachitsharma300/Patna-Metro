@@ -287,7 +287,7 @@ mvn spring-boot:run
   ```
 </details>
 
-<details> <summary><strong>📁 Patna_Metro_Frontend</strong></summary>
+<details> <summary><strong>📁 Patna Metro Frontend</strong></summary>
   
 ```
 📦 Patna_Metro_Frontend
@@ -306,18 +306,18 @@ mvn spring-boot:run
  ┃ ┃ ┣ 📂 metro
  ┃ ┃ ┃ ┣ 📄 InterchangeIcon.jsx
  ┃ ┃ ┃ ┗ 📄 LineBadge.jsx
- ┃ ┃ ┗ 📂 ui
+ ┃ ┃ ┣ 📂 ui
  ┃ ┃ ┃ ┣ 📄 Button.jsx
- ┃ ┃ ┃ ┣ 📄 DisclaimerPopup.jsx
- ┃ ┃ ┃ ┣ 📄 Footer.jsx
- ┃ ┃ ┃ ┣ 📄 Hero.jsx
- ┃ ┃ ┃ ┣ 📄 LanguageSelect.jsx
- ┃ ┃ ┃ ┣ 📄 MetroMapModal.jsx
- ┃ ┃ ┃ ┣ 📄 MetroTimeline.jsx
- ┃ ┃ ┃ ┣ 📄 Navbar.jsx
- ┃ ┃ ┃ ┣ 📄 RouteFinder.jsx
- ┃ ┃ ┃ ┣ 📄 StationCard.jsx
- ┃ ┃ ┃ ┗ 📄 StationTrack.jsx
+ ┃ ┃ ┃ ┗ 📄 LanguageSelect.jsx
+ ┃ ┃ ┣ 📄 DisclaimerPopup.jsx
+ ┃ ┃ ┣ 📄 Footer.jsx
+ ┃ ┃ ┣ 📄 Hero.jsx
+ ┃ ┃ ┣ 📄 MetroMapModal.jsx
+ ┃ ┃ ┣ 📄 MetroTimeline.jsx
+ ┃ ┃ ┣ 📄 Navbar.jsx
+ ┃ ┃ ┣ 📄 RouteFinder.jsx
+ ┃ ┃ ┣ 📄 StationCard.jsx
+ ┃ ┃ ┗ 📄 StationTrack.jsx
  ┃ ┣ 📂 locales
  ┃ ┃ ┣ 📄 en.json
  ┃ ┃ ┗ 📄 hi.json
