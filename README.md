@@ -12,13 +12,13 @@
 
 ## 📌 **Project Overview**
 
-<p>Patna Metro Route Finder is a **Java Spring Boot** based backend application to: </p>
-
+<p>Patna Metro Route Finder is a Java Spring Boot based backend application to: </p>
+<li>
 - Store all metro stations of Patna Metro (Red Line & Blue Line)
 - Find routes between two stations
 - Manage station data in MongoDB
 - Provide REST APIs for route finding and station listing
-
+</li>
 ---
 
 ## 💡 **Features**
