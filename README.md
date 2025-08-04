@@ -35,7 +35,7 @@
 <li>Build Tool: Maven</li>
 </ul>
 
-## 🔧 **Setup & Run**
+<h3>🔧 Setup & Run</h3>
 1. **Clone the repository**
 ```bash
 git clone https://github.com/yourusername/patna-metro.git
