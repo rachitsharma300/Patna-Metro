@@ -236,7 +236,7 @@ Using Maven:
 mvn spring-boot:run
 ```
 
-<details> <summary><strong>📁 patna-metro</strong></summary>
+<details> <summary><strong>📁 Patna Metro Backend</strong></summary>
   
   ```
 📦 patna-metro
@@ -286,22 +286,6 @@ mvn spring-boot:run
   
   ```
 </details>
-
-## Backend Project Structure
-```
-patna-metro/
-├── src/
-│ ├── main/
-│ │ ├── java/com/bihar/patna_metro/
-│ │ │ ├── controller/
-│ │ │ ├── model/
-│ │ │ ├── repository/
-│ │ │ ├── service/
-│ │ │ └── PatnaMetroApplication.java
-│ │ └── resources/
-│ │ └── application.properties
-└── pom.xml
-```
 
 ## Frontend Project Structure
 ```
