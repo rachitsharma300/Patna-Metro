@@ -236,6 +236,53 @@ Using Maven:
 mvn spring-boot:run
 ```
 
+<details> <summary><strong>📁 patna-metro</strong></summary>
+📦 patna-metro
+ ┣ 📂 .idea
+ ┣ 📂 .mvn
+ ┣ 📂 src
+ ┃ ┗ 📂 main
+ ┃ ┃ ┣ 📂 java
+ ┃ ┃ ┃ ┗ 📂 com.bihar.patna_metro
+ ┃ ┃ ┃ ┃ ┣ 📂 config
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 CorsConfig
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 MongoConfig
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 SwaggerConfig.java
+ ┃ ┃ ┃ ┃ ┣ 📂 controller
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 EstimatedTimeController
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 FareController
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 RouteController
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 StationController
+ ┃ ┃ ┃ ┃ ┣ 📂 exception
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 GlobalExceptionHandler
+ ┃ ┃ ┃ ┃ ┃ ┗ ⚠️ ResourceNotFoundException
+ ┃ ┃ ┃ ┃ ┣ 📂 model
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 Route
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 Station
+ ┃ ┃ ┃ ┃ ┣ 📂 repository
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 RouteRepository
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 StationRepository
+ ┃ ┃ ┃ ┃ ┣ 📂 seeder
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 DataSeeder
+ ┃ ┃ ┃ ┃ ┣ 📂 service
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 EstimatedTimeService
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 FareService
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 RouteFinderService
+ ┃ ┃ ┃ ┃ ┃ ┣ 📄 RouteService
+ ┃ ┃ ┃ ┃ ┃ ┗ 📄 StationService
+ ┃ ┃ ┃ ┃ ┗ 📄 PatnaMetroApplication
+ ┃ ┃ ┗ 📂 resources
+ ┃ ┃ ┃ ┣ 📂 static
+ ┃ ┃ ┃ ┣ 📂 templates
+ ┃ ┃ ┃ ┗ 📄 application.properties
+ ┃ ┗ 📂 test
+ ┃ ┃ ┗ 📂 java
+ ┃ ┃ ┃ ┗ 📂 com.bihar.patna_metro
+ ┃ ┃ ┃ ┃ ┣ 📂 controller
+ ┃ ┃ ┃ ┃ ┣ 📂 seeder
+ ┃ ┃ ┃ ┃ ┗ 📄 PatnaMetroApplicationTests
+</details>
+
 ## Backend Project Structure
 ```
 patna-metro/
