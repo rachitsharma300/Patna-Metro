@@ -43,9 +43,10 @@ git clone https://github.com/yourusername/patna-metro.git
 cd patna-metro
 ```
 
-## **Configure MongoDB**
+<h3>Configure MongoDB</h3>
 
-### Update application.properties:
+<p>Update application.properties:</p>
+
 ```
 spring.data.mongodb.uri=mongodb://localhost:27017/patnametro
 ```
