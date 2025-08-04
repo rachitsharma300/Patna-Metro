@@ -190,8 +190,8 @@ mvn spring-boot:run
 
 Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
 ```
-## Future Enhancements
- Graph-based route finding (Dijkstra/BFS)
+<h3>Future Enhancements</h3>
+ <p>Graph-based route finding (Dijkstra/BFS)</p>
 
 ## Contributing
 Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.
