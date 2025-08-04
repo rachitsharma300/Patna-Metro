@@ -51,16 +51,17 @@ cd patna-metro
 spring.data.mongodb.uri=mongodb://localhost:27017/patnametro
 ```
 
-Build & Run
+<h3>Build & Run</h3>
 
-Using Maven:
+<p>Using Maven:</p>
+
 ```
 mvn spring-boot:run
 ```
 
 <details> <summary><strong>📁 Patna Metro Backend</strong></summary>
   
-  ```
+```
 📦 patna-metro
  ┣ 📂 .idea
  ┣ 📂 .mvn
@@ -105,8 +106,8 @@ mvn spring-boot:run
  ┃ ┃ ┃ ┃ ┣ 📂 controller
  ┃ ┃ ┃ ┃ ┣ 📂 seeder
  ┃ ┃ ┃ ┃ ┗ 📄 PatnaMetroApplicationTests
-  
-  ```
+
+```
 </details>
 
 <details> <summary><strong>📁 Patna Metro Frontend</strong></summary>
@@ -173,7 +174,6 @@ mvn spring-boot:run
  ┣ 📄 tailwind.config.js
  ┗ 📄 vite.config.js
 ```
-
 </details>
 
 
