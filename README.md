@@ -30,9 +30,9 @@
 
 <h3>🚀 Tech Stack</h3>
 <ul>
-<li></li>Backend: Java 24, Spring Boot 3.5.3</li>
-<li></li>Database: MongoDB Atlas or Local MongoDB</li>
-<li></li>Build Tool: Maven</li>
+<li>Backend: Java 24, Spring Boot 3.5.3</li>
+<li>Database: MongoDB Atlas or Local MongoDB</li>
+<li>Build Tool: Maven</li>
 </ul>
 
 ## 🔧 **Setup & Run**
