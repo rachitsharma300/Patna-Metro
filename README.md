@@ -18,14 +18,15 @@
   <li>Manages station data in MongoDB</li>
   <li>Provides REST APIs for route finding and station listing</li>
 </ul>
+
 ## 💡 **Features**
-
-✅ REST APIs for CRUD operations on Stations  
-✅ Route finding between two stations (line-wise basic implementation)  
-✅ MongoDB integration for data persistence  
-✅ CommandLineRunner seeder for initial station data  
-✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)
-
+<ul>
+<li>✅ REST APIs for CRUD operations on Stations</li>
+<li>✅ Route finding between two stations (line-wise basic implementation)</li>
+<li>✅ MongoDB integration for data persistence</li>
+<li>✅ CommandLineRunner seeder for initial station data</li>  
+<li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
+</ul>
 ## 🚀 **Tech Stack**
 
 - **Backend:** Java 24, Spring Boot 3.5.3
