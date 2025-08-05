@@ -61,19 +61,34 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-wrap justify-center gap-4 mb-10"
         >
-          <Link to="/" className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition">
+          <Link
+            to="/"
+            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+          >
             {t("nav.home")}
           </Link>
-          <Link to="/routefinder" className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition">
+          <Link
+            to="/routefinder"
+            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+          >
             {t("nav.routeFinder")}
           </Link>
-          <Link to="/metro-map" className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition">
+          <Link
+            to="/metro-map"
+            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+          >
             {t("nav.metroMap")}
           </Link>
-          <Link to="/fare-info" className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition">
+          <Link
+            to="/fare-info"
+            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+          >
             {t("nav.fareInfo")}
           </Link>
-          <Link to="/about" className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition">
+          <Link
+            to="/about"
+            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+          >
             {t("nav.about")}
           </Link>
           <button
@@ -99,18 +114,28 @@ function Hero() {
       </div>
 
       {/* Emergency right side */}
-<motion.div
-  initial={{ opacity: 0, x: 50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8, delay: 1 }}
-  className="hidden md:block absolute top-1/3 right-4 bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 max-w-xs shadow-xl border border-white border-opacity-30 text-sm"
->
-        <h2 className="text-lg font-bold mb-3 text-white">{t("hero.emergencyTitle")}</h2>
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+        className="hidden md:block absolute top-1/3 right-4 bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 max-w-xs shadow-xl border border-white border-opacity-30 text-sm"
+      >
+        <h2 className="text-lg font-bold mb-3 text-white">
+          {t("hero.emergencyTitle")}
+        </h2>
         <div className="grid grid-cols-1 gap-2">
-          <div className="bg-white bg-opacity-20 p-2 rounded">{t("hero.emergencyPolice")}</div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">{t("hero.emergencyAmbulance")}</div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">{t("hero.emergencyFire")}</div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">{t("hero.emergencyMetroHelpline")}</div>
+          <div className="bg-white bg-opacity-20 p-2 rounded">
+            {t("hero.emergencyPolice")}
+          </div>
+          <div className="bg-white bg-opacity-20 p-2 rounded">
+            {t("hero.emergencyAmbulance")}
+          </div>
+          <div className="bg-white bg-opacity-20 p-2 rounded">
+            {t("hero.emergencyFire")}
+          </div>
+          <div className="bg-white bg-opacity-20 p-2 rounded">
+            {t("hero.emergencyMetroHelpline")}
+          </div>
         </div>
       </motion.div>
 
