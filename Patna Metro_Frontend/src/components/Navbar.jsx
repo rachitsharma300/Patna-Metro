@@ -31,7 +31,11 @@ const Navbar = () => {
   const navItems = [
     { name: t("home"), path: "/", icon: <FaSubway /> },
     { name: t("routeFinder"), path: "/RouteFinder", icon: <FaSearch /> },
-    { name: t("metroMap"), action: () => setShowMapModal(true), icon: <FaMap /> },
+    {
+      name: t("metroMap"),
+      action: () => setShowMapModal(true),
+      icon: <FaMap />,
+    },
     { name: t("fareInfo"), path: "/fare-info", icon: <FaRupeeSign /> },
     { name: t("about"), path: "/about", icon: <FaInfoCircle /> },
   ];
@@ -156,7 +160,9 @@ const Navbar = () => {
                 <div className="border-t border-white/20 mt-2 pt-3">
                   <Button onClick={toggleLanguage} variant="primary">
                     <FaLanguage className="mr-3" />
-                    {i18n.language === "en" ? "Switch to Hindi" : "Switch to English"}
+                    {i18n.language === "en"
+                      ? "Switch to Hindi"
+                      : "Switch to English"}
                   </Button>
                 </div>
               </div>
