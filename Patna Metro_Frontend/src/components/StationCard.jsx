@@ -21,7 +21,8 @@ function StationCard({ station }) {
         </div>
         <div>
           <p className="font-bold text-lg">{station.name}</p>
-          <p className="text-xs opacity-80">{station.code}</p> {/* Optional station code */}
+          <p className="text-xs opacity-80">{station.code}</p>{" "}
+          {/* Optional station code */}
         </div>
       </div>
 
@@ -35,7 +36,12 @@ function StationCard({ station }) {
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
         </svg>
       </div>
     </motion.div>
