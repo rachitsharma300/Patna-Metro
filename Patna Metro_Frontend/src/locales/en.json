@@ -152,10 +152,10 @@
     "about": "About"
   },
   "JourneySummary": {
-  "title": "Journey Summary",
-  "time": "Time",
-  "minutes": "min",
-  "fare": "Fare",
-  "stations": "Stations"
-}
+    "title": "Journey Summary",
+    "time": "Time",
+    "minutes": "min",
+    "fare": "Fare",
+    "stations": "Stations"
+  }
 }
