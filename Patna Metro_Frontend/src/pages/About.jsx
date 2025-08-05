@@ -46,7 +46,9 @@ export const About = () => {
                 <h3 className="font-semibold text-gray-800">
                   {t("aboutPage.totalLength")}
                 </h3>
-                <p className="text-gray-600">{t("aboutPage.totalLengthValue")}</p>
+                <p className="text-gray-600">
+                  {t("aboutPage.totalLengthValue")}
+                </p>
               </div>
             </div>
 
@@ -70,7 +72,9 @@ export const About = () => {
                 <h3 className="font-semibold text-gray-800">
                   {t("aboutPage.projectCost")}
                 </h3>
-                <p className="text-gray-600">{t("aboutPage.projectCostValue")}</p>
+                <p className="text-gray-600">
+                  {t("aboutPage.projectCostValue")}
+                </p>
               </div>
             </div>
 
