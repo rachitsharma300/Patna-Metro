@@ -41,9 +41,15 @@ function RouteFinder() {
   const fetchJourneyDetails = async () => {
     try {
       const [routeRes, timeRes, fareRes] = await Promise.all([
-        api.get(`/stations/route?source=${selected.source}&destination=${selected.destination}`),
-        api.get(`/estimated-time?source=${selected.source}&destination=${selected.destination}`),
-        api.get(`/fare?source=${selected.source}&destination=${selected.destination}`),
+        api.get(
+          `/stations/route?source=${selected.source}&destination=${selected.destination}`
+        ),
+        api.get(
+          `/estimated-time?source=${selected.source}&destination=${selected.destination}`
+        ),
+        api.get(
+          `/fare?source=${selected.source}&destination=${selected.destination}`
+        ),
       ]);
 
       return {
