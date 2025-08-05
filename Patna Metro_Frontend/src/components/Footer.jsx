@@ -35,13 +35,22 @@ const Footer = () => {
             </h3>
             <p className="text-sm mb-4">{t("footer.aboutDescription")}</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FaGithub className="text-xl" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FaTwitter className="text-xl" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <FaLinkedin className="text-xl" />
               </a>
             </div>
@@ -54,22 +63,34 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="hover:text-yellow-400 transition-colors">
+                <Link
+                  to="/"
+                  className="hover:text-yellow-400 transition-colors"
+                >
                   {t("footer.quickLinks.home")}
                 </Link>
               </li>
               <li>
-                <Link to="/routefinder" className="hover:text-yellow-400 transition-colors">
+                <Link
+                  to="/routefinder"
+                  className="hover:text-yellow-400 transition-colors"
+                >
                   {t("footer.quickLinks.routeFinder")}
                 </Link>
               </li>
               <li>
-                <Link to="/fare-info" className="hover:text-yellow-400 transition-colors">
+                <Link
+                  to="/fare-info"
+                  className="hover:text-yellow-400 transition-colors"
+                >
                   {t("footer.quickLinks.fareInfo")}
                 </Link>
               </li>
               <li>
-                <Link to="/metro-map" className="hover:text-yellow-400 transition-colors">
+                <Link
+                  to="/metro-map"
+                  className="hover:text-yellow-400 transition-colors"
+                >
                   {t("footer.quickLinks.metroMap")}
                 </Link>
               </li>
@@ -87,7 +108,9 @@ const Footer = () => {
                   <div className="flex items-center mb-1">
                     <div
                       className={`w-3 h-3 rounded-full mr-2 ${
-                        line.name.includes("Blue") ? "bg-blue-500" : "bg-red-500"
+                        line.name.includes("Blue")
+                          ? "bg-blue-500"
+                          : "bg-red-500"
                       }`}
                     ></div>
                     <span className="font-medium">{line.name}</span>
