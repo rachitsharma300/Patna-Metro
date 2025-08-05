@@ -13,50 +13,23 @@
     },
     {
       "name": "Saguna Mor",
-      "synonyms": [
-        "Saguna Mor",
-        "सगुना मोड़",
-        "सगुना मोर",
-        "सगुना",
-        "Saguna"
-      ]
+      "synonyms": ["Saguna Mor", "सगुना मोड़", "सगुना मोर", "सगुना", "Saguna"]
     },
     {
       "name": "RPS Mor",
-      "synonyms": [
-        "RPS Mor",
-        "आरपीएस मोड़",
-        "आरपीएस मोर",
-        "RPS",
-        "आरपीएस"
-      ]
+      "synonyms": ["RPS Mor", "आरपीएस मोड़", "आरपीएस मोर", "RPS", "आरपीएस"]
     },
     {
       "name": "Patliputra",
-      "synonyms": [
-        "Patliputra",
-        "पटलीपुत्र",
-        "पतलीपुत्र",
-        "Patli Putra"
-      ]
+      "synonyms": ["Patliputra", "पटलीपुत्र", "पतलीपुत्र", "Patli Putra"]
     },
     {
       "name": "Rukanpura",
-      "synonyms": [
-        "Rukanpura",
-        "रुकनपुरा",
-        "रुकन पूरा",
-        "Rukan Pura"
-      ]
+      "synonyms": ["Rukanpura", "रुकनपुरा", "रुकन पूरा", "Rukan Pura"]
     },
     {
       "name": "Raja Bazar",
-      "synonyms": [
-        "Raja Bazar",
-        "राजा बाजार",
-        "राजा बाज़ार",
-        "Raja Bazaar"
-      ]
+      "synonyms": ["Raja Bazar", "राजा बाजार", "राजा बाज़ार", "Raja Bazaar"]
     },
     {
       "name": "Patna Zoo",
@@ -74,21 +47,11 @@
     },
     {
       "name": "Vikas Bhawan",
-      "synonyms": [
-        "Vikas Bhawan",
-        "विकास भवन",
-        "विकाश भवन",
-        "विकास भावन"
-      ]
+      "synonyms": ["Vikas Bhawan", "विकास भवन", "विकाश भवन", "विकास भावन"]
     },
     {
       "name": "Vidyut Bhawan",
-      "synonyms": [
-        "Vidyut Bhawan",
-        "विद्युत भवन",
-        "विद्युत भावन",
-        "विधुत भवन"
-      ]
+      "synonyms": ["Vidyut Bhawan", "विद्युत भवन", "विद्युत भावन", "विधुत भवन"]
     },
     {
       "name": "Patna Junction",
@@ -113,51 +76,27 @@
     },
     {
       "name": "Mithapur",
-      "synonyms": [
-        "Mithapur",
-        "मिथापुर"
-      ]
+      "synonyms": ["Mithapur", "मिथापुर"]
     },
     {
       "name": "Ramkrishna Nagar",
-      "synonyms": [
-        "Ramkrishna Nagar",
-        "रामकृष्ण नगर",
-        "राम कृष्ण नगर"
-      ]
+      "synonyms": ["Ramkrishna Nagar", "रामकृष्ण नगर", "राम कृष्ण नगर"]
     },
     {
       "name": "Jaganpura",
-      "synonyms": [
-        "Jaganpura",
-        "जगनपुरा",
-        "जगन पूरा"
-      ]
+      "synonyms": ["Jaganpura", "जगनपुरा", "जगन पूरा"]
     },
     {
       "name": "Khemni Chak",
-      "synonyms": [
-        "Khemni Chak",
-        "खेमनी चक",
-        "खेमनी चक",
-        "Khemni Check"
-      ]
+      "synonyms": ["Khemni Chak", "खेमनी चक", "खेमनी चक", "Khemni Check"]
     },
     {
       "name": "Akashvani",
-      "synonyms": [
-        "Akashvani",
-        "आकाशवाणी",
-        "आकाश वाणी"
-      ]
+      "synonyms": ["Akashvani", "आकाशवाणी", "आकाश वाणी"]
     },
     {
       "name": "Gandhi Maidan",
-      "synonyms": [
-        "Gandhi Maidan",
-        "गांधी मैदान",
-        "गांधी मेदान"
-      ]
+      "synonyms": ["Gandhi Maidan", "गांधी मैदान", "गांधी मेदान"]
     },
     {
       "name": "PMCH",
@@ -192,28 +131,15 @@
     },
     {
       "name": "Rajendra Nagar",
-      "synonyms": [
-        "Rajendra Nagar",
-        "राजेंद्र नगर",
-        "राजेन्द्र नगर"
-      ]
+      "synonyms": ["Rajendra Nagar", "राजेंद्र नगर", "राजेन्द्र नगर"]
     },
     {
       "name": "Malahi Pakri",
-      "synonyms": [
-        "Malahi Pakri",
-        "मलाही पकड़ी",
-        "मलाही पकरी",
-        "मलाही पकरि"
-      ]
+      "synonyms": ["Malahi Pakri", "मलाही पकड़ी", "मलाही पकरी", "मलाही पकरि"]
     },
     {
       "name": "Bhootnath",
-      "synonyms": [
-        "Bhootnath",
-        "भूतनाथ",
-        "भूत नाथ"
-      ]
+      "synonyms": ["Bhootnath", "भूतनाथ", "भूत नाथ"]
     },
     {
       "name": "Zero Mile",
