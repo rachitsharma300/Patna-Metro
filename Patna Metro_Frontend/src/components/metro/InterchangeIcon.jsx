@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export const InterchangeIcon = ({ 
-  size = 40, 
-  onClick = () => {}, 
-  animated = true 
+export const InterchangeIcon = ({
+  size = 40,
+  onClick = () => {},
+  animated = true,
 }) => {
   return (
     <motion.button
@@ -18,21 +18,21 @@ export const InterchangeIcon = ({
         cursor-pointer border-2 border-yellow-600
         transition-all duration-200
       `}
-      style={{ 
-        width: size, 
+      style={{
+        width: size,
         height: size,
-        fontSize: size * 0.6
+        fontSize: size * 0.6,
       }}
       aria-label="Interchange"
     >
       {animated ? (
         <motion.span
           animate={{ rotate: 360 }}
-          transition={{ 
-            duration: 1.5, 
-            repeat: Infinity, 
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
             ease: "linear",
-            repeatType: "loop"
+            repeatType: "loop",
           }}
         >
           ⇄
