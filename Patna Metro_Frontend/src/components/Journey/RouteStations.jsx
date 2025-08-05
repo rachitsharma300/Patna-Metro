@@ -17,7 +17,8 @@ const RouteStations = ({ route }) => {
       <div className="space-y-4">
         {route.map((station, index) => {
           const nextStation = route[index + 1];
-          const isInterchange = nextStation && station.line !== nextStation.line;
+          const isInterchange =
+            nextStation && station.line !== nextStation.line;
 
           return (
             <React.Fragment key={station.id || index}>
@@ -27,7 +28,12 @@ const RouteStations = ({ route }) => {
                 transition={{ delay: index * 0.1 }}
                 className="flex flex-col items-center"
               >
-                <StationCard station={{ ...station, name: t(`stations.${station.name}`, station.name) }} />
+                <StationCard
+                  station={{
+                    ...station,
+                    name: t(`stations.${station.name}`, station.name),
+                  }}
+                />
 
                 {isInterchange && (
                   <div className="flex flex-col items-center space-y-1 mt-2">
