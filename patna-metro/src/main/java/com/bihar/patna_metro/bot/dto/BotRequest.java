@@ -1,8 +1,12 @@
 package com.bihar.patna_metro.bot.dto;
 
-import lombok.Data;
-
-@Data
 public class BotRequest {
-    private String voiceCommand; // Ex "Patna Junction to Rajendra Nagar"
+    private String input; // वॉइस/टेक्स्ट इनपुट
+    private boolean isVoice; // true = वॉइस, false = टेक्स्ट
+
+    // Getters & Setters
+    public String getInput() { return input; }
+    public void setInput(String input) { this.input = input; }
+    public boolean isVoice() { return isVoice; }
+    public void setVoice(boolean voice) { isVoice = voice; }
 }
