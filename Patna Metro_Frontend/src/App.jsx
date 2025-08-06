@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./i18n";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Components and Pages
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -16,31 +18,50 @@ import DisclaimerPopup from "./components/DisclaimerPopup";
 import Bot from "./components/bot/Bot";
 
 function App() {
+  //Ref for RouteFinder trigger
+  const routeFinderRef = useRef();
+
+  // Function passed to Bot to call triggerSearch in RouteFinder
+  const handleTriggerSearch = () => {
+    if (routeFinderRef.current) {
+      routeFinderRef.current(); // Calls triggerSearch() from RouteFinder
+    }
+  };
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
+        {/* Top Navigation Bar */}
         <Navbar />
 
-        {/* DisclaimerPopup */}
+        {/* Popup for Disclaimer */}
         <DisclaimerPopup />
 
+        {/* Main Content */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/routefinder" element={<RouteFinder />} />
+            <Route
+              path="/routefinder"
+              element={
+                // RouteFinder receives the ref so it can expose triggerSearch
+                <RouteFinder triggerSearchRef={routeFinderRef} />
+              }
+            />
             <Route path="/about" element={<About />} />
             <Route path="/fare-info" element={<FareInfo />} />
             <Route path="/metro-map" element={<MapPage />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
-        {/* Place Bot here, outside Routes */}
-        <Bot />
+        {/*Bot is always visible and can now trigger RouteFinder */}
+        <Bot triggerSearch={handleTriggerSearch} />
 
+        {/* Bottom Footer */}
         <Footer />
       </div>
     </Router>
