@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import axios from "axios";
-import stationsData from "../../utils/Stations.json";
+import React, { useState } from 'react';
+import axios from 'axios';
+import stationsData from '../../utils/Stations.json';
 
-const Bot = () => {
+const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [botResponse, setBotResponse] = useState("");
+  const [greeted, setGreeted] = useState(false);
+  const API_URL = "http://localhost:8080";
+
+  const handleBotClick = () => {
+    setIsOpen(!isOpen);
+    if (!greeted) {
+      const greetText = "नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ। कृपया बताएं, आपको कहाँ से कहाँ जाना है?";
+      speak(greetText);
+      setBotResponse(greetText);
+      setGreeted(true);
+    }
+  };
 
   const handleMicClick = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -21,62 +33,60 @@ const Bot = () => {
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setMessage(transcript);
-      console.log("User said:", transcript);
-
-      const found = [];
-
-      stationsData.stations.forEach(station => {
-        station.synonyms.forEach(synonym => {
-          if (transcript.includes(synonym)) {
-            found.push(station.name);
-          }
-        });
-      });
-
-      console.log("Found stations:", found);
-
-      if (found.length >= 2) {
-        const source = found[0];
-        const destination = found[1];
-
-        axios.post("http://localhost:8080/api/route", { source, destination })
-          .then(res => {
-            const data = res.data;
-
-            //  Defensive check
-            if (!data.lines || data.lines.length === 0) {
-              const noRoute = "Maaf kijiye, is route ka data uplabdh nahi hai.";
-              setBotResponse(noRoute);
-              speak(noRoute);
-              return;
-            }
-
-            const speakText = `Aapko ${data.lines.join(" aur ")} line ki metro leni hogi. 
-            Total samay ${data.totalTime} hai. Kiraya ${data.fare} rupaye. 
-            ${data.interchange ? 'Aapko ' + data.interchange + ' par metro change karna hoga.' : ''}`;
-
-            setBotResponse(speakText);
-            speak(speakText);
-          })
-          .catch(err => {
-            console.error(err);
-            const errorText = "Maaf kijiye, route nahi mil paaya.";
-            setBotResponse(errorText);
-            speak(errorText);
-          });
-      } else {
-        const incompleteText = "Kripya fir se bataen ki aap kahaan se kahaan jaana chaahate hain.";
-        setBotResponse(incompleteText);
-        speak(incompleteText);
-      }
+      const foundStations = findStationsInTranscript(transcript);
+      processRouteRequest(foundStations);
     };
 
     recognition.onerror = (event) => {
-      console.error(event.error);
-      const errorText = "Mic input me koi dikkat aa gayi hai.";
-      setBotResponse(errorText);
-      speak(errorText);
+      console.error("Speech error:", event.error);
+      showError("माइक से इनपुट लेने में समस्या हुई। कृपया दोबारा प्रयास करें।");
     };
+  };
+
+  const findStationsInTranscript = (transcript) => {
+    const found = [];
+    stationsData.stations.forEach(station => {
+      station.synonyms.forEach(synonym => {
+        if (transcript.toLowerCase().includes(synonym.toLowerCase())) {
+          found.push(station.name);
+        }
+      });
+    });
+    return [...new Set(found)];
+  };
+
+  const processRouteRequest = async (matchedStations) => {
+    if (matchedStations.length >= 2) {
+      const [source, destination] = matchedStations;
+      if (setSource) setSource(source);
+      if (setDestination) setDestination(destination);
+
+      try {
+        const res = await axios.post(`${API_URL}/api/bot/voice-route`, {
+          source,
+          destination
+        });
+
+        const data = res.data;
+        setBotResponse(data.voiceResponse);
+        speak(data.voiceResponse);
+
+        // Wait a short delay to ensure states are updated
+        setTimeout(() => {
+          if (triggerSearch) triggerSearch();
+        }, 300); // delay to allow UI to update source/destination
+      } catch (err) {
+        console.error(err);
+        showError("माफ़ कीजिए, रूट निकालने में समस्या आ रही है।");
+      }
+    } else {
+      showError("कृपया फिर से बताएं: 'पटना जंक्शन से पीएमसीएच जाना है'");
+    }
+  };
+
+  const showError = (errorText) => {
+    setBotResponse(errorText);
+    speak(errorText);
   };
 
   const speak = (text) => {
@@ -88,27 +98,24 @@ const Bot = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg focus:outline-none"
+        onClick={handleBotClick}
+        className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg"
       >
         🤖
       </button>
 
       {isOpen && (
-        <div className="mt-2 w-72 bg-white border border-gray-300 rounded-lg shadow-lg p-4">
-          <h2 className="text-lg font-bold mb-2 text-gray-800">🙏 नमस्ते, मैं Patna Metro Bot हूँ</h2>
-          <p className="text-sm text-gray-600 mb-3">मैं आपका route ढूँढने में मदद कर सकता हूँ। बोलिए आप कहाँ जाना चाहते हैं।</p>
-
+        <div className="mt-2 w-80 bg-white border border-gray-300 rounded-lg shadow-lg p-4">
+          <h2 className="text-lg font-bold mb-2">पटना मेट्रो सहायक</h2>
           <button
             onClick={handleMicClick}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full"
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full mb-3"
           >
-            🎤 Mic से बोलें
+            🎤 बोलकर बताएं
           </button>
-
-          <div className="mt-3 bg-gray-100 rounded p-2 max-h-40 overflow-y-auto">
-            <p className="text-sm"><strong>You😎:</strong> {message}</p>
-            <p className="text-sm"><strong>Bodhi🤖:</strong> {botResponse}</p>
+          <div className="bg-gray-100 p-3 rounded">
+            <p><strong>आप:</strong> {message || "..."}</p>
+            <p><strong>बोधि:</strong> {botResponse || "आपकी प्रतीक्षा कर रहा हूँ..."}</p>
           </div>
         </div>
       )}
@@ -117,4 +124,3 @@ const Bot = () => {
 };
 
 export default Bot;
- 
