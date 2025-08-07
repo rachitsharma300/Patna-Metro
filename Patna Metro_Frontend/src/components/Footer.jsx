@@ -5,6 +5,7 @@ import {
   FaLinkedin,
   FaPhone,
   FaMapMarkerAlt,
+  FaInstagram,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -36,22 +37,22 @@ const Footer = () => {
             <p className="text-sm mb-4">{t("footer.aboutDescription")}</p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://github.com/rachitsharma300"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <FaGithub className="text-xl" />
               </a>
               <a
-                href="#"
+                href="https://x.com/rachitsharma300"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <FaTwitter className="text-xl" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/rachitsharma300/"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <FaLinkedin className="text-xl" />
+                <FaInstagram className="text-xl" />
               </a>
             </div>
           </div>
