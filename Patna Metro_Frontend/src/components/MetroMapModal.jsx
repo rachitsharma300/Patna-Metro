@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaExpand, FaDownload, FaCompress } from "react-icons/fa";
 import metroMapImage from "../assets/PatnaMap.png";
