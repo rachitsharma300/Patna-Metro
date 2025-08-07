@@ -11,6 +11,7 @@ import {
   FaRupeeSign,
   FaBars,
 } from "react-icons/fa";
+/* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import MetroMapModal from "../components/MetroMapModal";
 import Button from "../components/ui/Button";
