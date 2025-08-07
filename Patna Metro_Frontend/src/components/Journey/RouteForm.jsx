@@ -1,4 +1,5 @@
 import React from "react";
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import {
   FaExchangeAlt,
@@ -24,7 +25,7 @@ const RouteForm = ({
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Source Station */}
         <div className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200">
-          <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
             <FaMapMarkerAlt className="mr-2 text-red-500 text-lg" />
             <span className="font-bold text-gray-800">
               {t("RouteFinder.sourceStation")}
@@ -72,7 +73,7 @@ const RouteForm = ({
 
         {/* Destination Station */}
         <div className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200">
-          <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
             <FaFlagCheckered className="mr-2 text-green-500 text-lg" />
             <span className="font-bold text-gray-800">
               {t("RouteFinder.destinationStation")}
