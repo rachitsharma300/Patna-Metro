@@ -8,6 +8,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
