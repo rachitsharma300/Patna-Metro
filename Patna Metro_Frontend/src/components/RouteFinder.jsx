@@ -5,12 +5,13 @@ import React, {
   useState,
 } from "react";
 import api from "../services/api";
+/* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import MetroTrain from "../assets/Metro.svg";
 import { useTranslation } from "react-i18next";
-import RouteForm from "./journey/RouteForm";
+import RouteForm from "./Journey/RouteForm";
 import JourneySummary from "./journey/JourneySummary";
-import RouteStations from "./journey/RouteStations";
+import RouteStations from "./Journey/RouteStations";
 
 const RouteFinder = forwardRef(({ source, destination }, ref) => {
   const { t } = useTranslation();
