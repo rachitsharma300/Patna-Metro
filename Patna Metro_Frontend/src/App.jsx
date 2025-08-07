@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./i18n";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,13 +18,25 @@ import DisclaimerPopup from "./components/DisclaimerPopup";
 import Bot from "./components/bot/Bot";
 
 function App() {
-  //Ref for RouteFinder trigger
+  //  Create a ref to access triggerSearch method from RouteFinder
   const routeFinderRef = useRef();
 
-  // Function passed to Bot to call triggerSearch in RouteFinder
+  //  States to hold source and destination selected by Bot
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+
+  //  Function that Bot will call to trigger the RouteFinder search
   const handleTriggerSearch = () => {
+    //   if (routeFinderRef.current && typeof routeFinderRef.current.triggerSearch === "function") {
+    //     console.log("Triggering search from Bot via ref...");
+    //     routeFinderRef.current.triggerSearch(); // calling exposed method
+    //   } else {
+    //     console.warn("routeFinderRef is not ready or triggerSearch is undefined.");
+    //   }
+    // };
     if (routeFinderRef.current) {
-      routeFinderRef.current(); // Calls triggerSearch() from RouteFinder
+      // console.log(" Triggering search from Bot via ref...");   // Debugging log
+      routeFinderRef.current.triggerSearch();
     }
   };
 
@@ -41,13 +53,19 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+
+            {/* RouteFinder receives source, destination, and ref */}
             <Route
               path="/routefinder"
               element={
-                // RouteFinder receives the ref so it can expose triggerSearch
-                <RouteFinder triggerSearchRef={routeFinderRef} />
+                <RouteFinder
+                  ref={routeFinderRef}
+                  source={source}
+                  destination={destination}
+                />
               }
             />
+
             <Route path="/about" element={<About />} />
             <Route path="/fare-info" element={<FareInfo />} />
             <Route path="/metro-map" element={<MapPage />} />
@@ -58,8 +76,12 @@ function App() {
           </Routes>
         </main>
 
-        {/*Bot is always visible and can now trigger RouteFinder */}
-        <Bot triggerSearch={handleTriggerSearch} />
+        {/* Bot always visible. We pass trigger + setSource + setDestination to it. */}
+        <Bot
+          triggerSearch={handleTriggerSearch}
+          setSource={setSource}
+          setDestination={setDestination}
+        />
 
         {/* Bottom Footer */}
         <Footer />
