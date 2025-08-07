@@ -1,7 +1,8 @@
 package com.bihar.patna_metro.controller;
 
 import com.bihar.patna_metro.model.Station;
-import com.bihar.patna_metro.repository.StationRepository;
+import com.bihar.patna_metro.service.StationService;
+import com.bihar.patna_metro.service.RouteFinderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,7 +22,10 @@ public class StationControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private StationRepository repository;
+    private StationService stationService;
+
+    @MockBean
+    private RouteFinderService routeFinderService;
 
     @Test
     void testGetAllStations() throws Exception {
@@ -29,11 +33,11 @@ public class StationControllerTest {
         Station s1 = new Station(null, "Patna Junction", "Red Line", 25.6, 85.1, 1);
         Station s2 = new Station(null, "Khemni Chak", "Blue Line", 25.5, 85.09, 2);
 
-        // Mock repository behaviour
-        when(repository.findAll()).thenReturn(Arrays.asList(s1, s2));
+        // Mock service behavior
+        when(stationService.getAllStations()).thenReturn(Arrays.asList(s1, s2));
 
-        // Perform GET /stations
-        mockMvc.perform(get("/stations"))
+        // Perform GET /api/stations
+        mockMvc.perform(get("/api/stations"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].name").value("Patna Junction"))
