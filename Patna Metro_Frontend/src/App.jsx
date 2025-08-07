@@ -50,6 +50,7 @@ function App() {
         <DisclaimerPopup />
 
         {/* Main Content */}
+        {/*   className="flex-grow overflow-y-auto bg-gray-100 px-0 py-16">  Fix Screen  */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
