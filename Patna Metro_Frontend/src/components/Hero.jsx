@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import metroImage from "../assets/patnaMetro.png";
 
