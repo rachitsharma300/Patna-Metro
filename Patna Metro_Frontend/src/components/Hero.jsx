@@ -1,158 +1,153 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  FaSubway,
+  FaMap,
+  FaSearch,
+  FaInfoCircle,
+  FaLanguage,
+  FaTimes,
+  FaRupeeSign,
+  FaBars,
+} from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import metroImage from "../assets/patnaMetro.png";
+import cmImage from "../assets/CM.png";
+import pmImage from "../assets/PM.jpg";
 
 function Hero() {
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
+  const changeLanguage = () => {
+    i18n.changeLanguage(i18n.language === "en" ? "hi" : "en");
   };
 
   return (
-    <section
-      className="relative min-h-screen flex flex-col justify-center items-center text-white overflow-hidden"
-      style={{
-        background: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${metroImage}) center/cover`,
-      }}
-    >
-      {/* Overlay animated metro line */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-500 via-blue-500 to-green-500 z-20">
-        <motion.div
-          className="h-full w-16 bg-white"
-          initial={{ x: "-100%" }}
-          animate={{ x: "100vw" }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+    <section className="flex flex-col lg:flex-row min-h-[90vh] w-full overflow-hidden bg-blue-950">
+      {/* Left Section - Metro Image */}
+      <div className="lg:w-1/2 h-[30vh] lg:h-auto relative">
+        <img
+          src={metroImage}
+          alt="Patna Metro"
+          className="w-full h-full object-cover object-center"
         />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-blue-500"
-        >
-          {t("hero.title")}
-        </motion.h1>
+      {/* Right Section - Content */}
+      <div className="lg:w-1/2 p-6 md:p-10 flex flex-col justify-center">
+        {/* Title with CM and PM photos */}
+        <div className="flex items-end justify-between mb-4">
+          <img
+            src={pmImage}
+            alt="PM Narendra Modi"
+            className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full border-2 border-white"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            // className="mb-1"
+          >
+            <h1 className="text-2xl md:text-5xl font-bold text-white text-center">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-blue-300">
+                {t("hero.title")}
+              </span>
+            </h1>
+          </motion.div>
+          <img
+            src={cmImage}
+            alt="CM Nitish Kumar"
+            className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-full border-2 border-white"
+          />
+        </div>
 
-        {/* About Patna Metro */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl mb-8 font-medium max-w-2xl mx-auto"
-        >
-          {t("hero.description")}
-        </motion.p>
-
-        {/* Visible Navbar Options */}
+        {/* Rest of the content remains exactly the same */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-10"
+          transition={{ duration: 0.6 }}
+          className="mb-8"
+        >
+          <p className="text-lg text-blue-100 text-center">
+            {t("hero.description")}
+          </p>
+        </motion.div>
+
+        {/* Navigation Buttons - Unique Colors */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-2 md:flex md:justify-center flex-wrap gap-3 mb-8"
         >
           <Link
             to="/"
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-blue-600 hover:bg-blue-500 gap-2"
           >
+            <FaSubway className="text-base" />
             {t("nav.home")}
           </Link>
           <Link
             to="/routefinder"
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-green-600 hover:bg-green-500 gap-2"
           >
+            <FaSearch className="text-base" />
             {t("nav.routeFinder")}
           </Link>
           <Link
             to="/metro-map"
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-purple-600 hover:bg-purple-500 gap-2"
           >
+            <FaMap className="text-base" />
             {t("nav.metroMap")}
           </Link>
           <Link
             to="/fare-info"
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-red-600 hover:bg-red-500 gap-2"
           >
+            <FaRupeeSign className="text-base" />
             {t("nav.fareInfo")}
           </Link>
           <Link
             to="/about"
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-yellow-600 hover:bg-yellow-500 gap-2"
           >
+            <FaInfoCircle className="text-base" />
             {t("nav.about")}
           </Link>
           <button
-            onClick={() => changeLanguage(i18n.language === "en" ? "hi" : "en")}
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 px-4 py-2 rounded-full transition"
+            onClick={changeLanguage}
+            className="flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-white transition-all rounded-lg bg-pink-600 hover:bg-pink-500 gap-2"
           >
+            <FaLanguage className="text-base" />
             {i18n.language === "en" ? "हिन्दी" : "English"}
           </button>
         </motion.div>
 
         {/* CTA Button */}
-        <motion.a
-          href="#route-finder"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-10 rounded-full shadow-lg transition-all mb-10"
-        >
-          {t("hero.cta")}
-        </motion.a>
-      </div>
-
-      {/* Emergency right side */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="hidden md:block absolute top-1/3 right-4 bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 max-w-xs shadow-xl border border-white border-opacity-30 text-sm"
-      >
-        <h2 className="text-lg font-bold mb-3 text-white">
-          {t("hero.emergencyTitle")}
-        </h2>
-        <div className="grid grid-cols-1 gap-2">
-          <div className="bg-white bg-opacity-20 p-2 rounded">
-            {t("hero.emergencyPolice")}
-          </div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">
-            {t("hero.emergencyAmbulance")}
-          </div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">
-            {t("hero.emergencyFire")}
-          </div>
-          <div className="bg-white bg-opacity-20 p-2 rounded">
-            {t("hero.emergencyMetroHelpline")}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Scrolling ticker for updates */}
-      <div className="absolute bottom-0 left-0 w-full bg-black py-2 overflow-hidden z-20">
         <motion.div
-          className="whitespace-nowrap text-yellow-400 text-sm"
-          animate={{ x: ["100%", "-100%"] }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {t("hero.ticker")}
-        </motion.div>
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-5"
+        ></motion.div>
+
+        {/* News Ticker */}
+        <div className="mt-4 py-3 overflow-hidden bg-black/20 rounded-lg">
+          <motion.div
+            className="text-sm font-medium text-yellow-400 whitespace-nowrap"
+            animate={{ x: ["100%", "-100%"] }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {t("hero.ticker")}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
