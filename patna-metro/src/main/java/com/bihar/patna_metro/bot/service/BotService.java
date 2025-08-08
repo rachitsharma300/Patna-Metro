@@ -64,7 +64,7 @@ public class BotService {
         String line = route.get(0).getLine();
         StringBuilder response = new StringBuilder()
                 .append("आपको ").append(source).append(" से ").append(dest)
-                .append(" जाने के लिए ").append(line).append(" लाइन की मेट्रो लेनी होगी। ");
+                .append(" जाने के लिए ").append(line).append(" की मेट्रो लेनी होगी। ");
 
         if (hasInterchange(route)) {
             response.append(findInterchange(route)).append(" पर मेट्रो बदलनी होगी। ");
