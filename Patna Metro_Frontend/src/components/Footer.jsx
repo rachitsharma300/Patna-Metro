@@ -28,7 +28,7 @@ const Footer = () => {
       className="bg-gray-900 text-gray-300 pt-12 pb-6"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 mb-8">
           {/* About Section */}
           <div>
             <h3 className="text-xl font-bold text-white mb-4 flex items-center">
@@ -36,8 +36,8 @@ const Footer = () => {
               {t("footer.aboutTitle")}
             </h3>
             <p className="text-sm mb-4">{t("footer.aboutDescription")}</p>
-            <div className="flex space-x-4">
-              <a
+            <div className="flex space-x-flex flex-wrap gap-4">  
+              <a 
                 href="https://github.com/rachitsharma300"
                 className="text-gray-400 hover:text-white transition-colors"
               >
@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/fare-info"
+                  to="/fare-info" 
                   className="hover:text-yellow-400 transition-colors"
                 >
                   {t("footer.quickLinks.fareInfo")}
@@ -147,13 +147,13 @@ const Footer = () => {
 
             <div className="mt-6">
               <h5 className="text-white mb-2">{t("footer.subscribeTitle")}</h5>
-              <div className="flex">
+              <div className="flex flex-col sm:flex-row">
                 <input
                   type="email"
                   placeholder={t("footer.subscribePlaceholder")}
-                  className="px-3 py-2 bg-gray-700 text-white rounded-l-lg focus:outline-none w-full"
+                  className="px-3 py-2 bg-gray-700 text-white rounded-t-lg sm:rounded-l-lg sm:rounded-t-none focus:outline-none w-full"
                 />
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-r-lg transition-colors">
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-b-lg sm:rounded-r-lg sm:rounded-b-none transition-colors">
                   {t("footer.subscribeButton")}
                 </button>
               </div>
