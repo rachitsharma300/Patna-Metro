@@ -13,9 +13,11 @@ import {
 import { useTranslation } from "react-i18next";
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import metroImage from "../assets/patnaMetro.png";
+import metroImage from "../assets/patnaMetro2.png";
 import cmImage from "../assets/CM.png";
 import pmImage from "../assets/PM.jpg";
+import MetroSvg from "../assets/Metro.svg";
+
 
 function Hero() {
   const { t, i18n } = useTranslation();
@@ -55,6 +57,11 @@ function Hero() {
                 {t("hero.title")}
               </span>
             </h1>
+
+            {/* Metro SVG */}
+            <div className="mt-0 flex justify-center">
+              <img src={MetroSvg} alt="Metro Route" className="w-full max-w-md" />
+            </div>
           </motion.div>
           <img
             src={cmImage}
