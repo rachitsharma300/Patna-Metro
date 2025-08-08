@@ -52,7 +52,7 @@ function App() {
         {/* Main Content */}
         {/*   className="flex-grow overflow-y-auto bg-gray-100 px-0 py-16">  Fix Screen  */}
         <main
-          className="flex-grow overflow-y-auto bg-gray-100 px-0 py-4 sm:py-8 lg:py-12 min-h-screen"
+          className="flex-grow overflow-y-auto bg-gray-100 px-0 py-16"
         >
           <Routes>
             <Route path="/" element={<Home />} />
