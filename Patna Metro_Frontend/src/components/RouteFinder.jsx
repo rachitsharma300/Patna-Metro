@@ -125,7 +125,7 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
   return (
     <>
       {/* Metro banner */}
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center mt-4 -mb-8">    
         <img src={MetroTrain} alt="Metro" className="w-100" />
       </div>
 
