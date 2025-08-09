@@ -8,10 +8,9 @@ import {
   FaInfoCircle,
   FaLanguage,
   FaTimes,
-  FaRupeeSign,
   FaBars,
+  FaRupeeSign,
 } from "react-icons/fa";
-/* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import MetroMapModal from "../components/MetroMapModal";
 import Button from "../components/ui/Button";
@@ -34,7 +33,10 @@ const Navbar = () => {
     { name: t("routeFinder"), path: "/routefinder", icon: <FaSearch /> },
     {
       name: t("metroMap"),
-      action: () => setShowMapModal(true),
+      action: () => {
+        setShowMapModal(true);
+        setMobileMenuOpen(false); // Close menu when modal opens
+      },
       icon: <FaMap />,
     },
     { name: t("fareInfo"), path: "/fare-info", icon: <FaRupeeSign /> },
@@ -107,7 +109,7 @@ const Navbar = () => {
             </div>
 
             <button
-              className="md:hidden text-2xl focus:outline-none"
+              className="md:hidden text-xl focus:outline-none"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -145,10 +147,7 @@ const Navbar = () => {
                       </Link>
                     ) : (
                       <button
-                        onClick={() => {
-                          item.action();
-                          setMobileMenuOpen(false);
-                        }}
+                        onClick={item.action}
                         className="flex items-center w-full px-4 py-3 rounded-lg hover:bg-white/10 transition-colors mb-1"
                       >
                         <span className="mr-3">{item.icon}</span>
@@ -161,9 +160,7 @@ const Navbar = () => {
                 <div className="border-t border-white/20 mt-2 pt-3">
                   <Button onClick={toggleLanguage} variant="primary">
                     <FaLanguage className="mr-3" />
-                    {i18n.language === "en"
-                      ? "Switch to Hindi"
-                      : "Switch to English"}
+                    {i18n.language === "en" ? "हिंदी" : "English"}
                   </Button>
                 </div>
               </div>
