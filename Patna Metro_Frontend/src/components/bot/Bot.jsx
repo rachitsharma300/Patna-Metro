@@ -2,16 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import stationsData from '../../utils/Stations.json';
-import { FaRobot, FaMicrophone, FaTimes } from 'react-icons/fa';
+import { FaMicrophone, FaTimes } from 'react-icons/fa';
 import { BsSendFill } from 'react-icons/bs';
 
 const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [botResponse, setBotResponse] = useState("");
-  const [greeted, setGreeted] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputText, setInputText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
+  const [isBotAwake, setIsBotAwake] = useState(false); // To control the periodic popup
   const API_URL = "http://localhost:8080";
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
@@ -23,18 +24,61 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [botResponse, message]);
+  }, [messages]);
 
-  // Toggle Bot open/close
+  // Initial greeting when bot is opened
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      const greetText = "नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ। कृपया बताएं, आपको कहाँ से कहाँ जाना है?";
+      addBotMessage(greetText);
+      speak(greetText);
+    }
+  }, [isOpen]);
+
+  // Handle periodic popup display
+  useEffect(() => {
+    // Show popup initially for 3 seconds
+    const initialTimer = setTimeout(() => {
+      setShowPopup(false);
+      setIsBotAwake(true);
+    }, 3000);
+
+    // Then start the periodic show/hide cycle
+    let interval;
+    if (isBotAwake && !isOpen) {
+      interval = setInterval(() => {
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 1000);
+      }, 2000);
+    }
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
+  }, [isBotAwake, isOpen]);
+
+  // Handle bot open/close click
   const handleBotClick = () => {
     setIsOpen(!isOpen);
-
-    if (!isOpen && !greeted) {
-      const greetText = "नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ। कृपया बताएं, आपको कहाँ से कहाँ जाना है?";
-      speak(greetText);
-      setBotResponse(greetText);
-      setGreeted(true);
+    setShowPopup(false); // Hide popup immediately on click
+    setIsBotAwake(false); // Stop the periodic popup
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
     }
+  };
+
+  // Add a new bot message to the chat history
+  const addBotMessage = (text) => {
+    setMessages(prev => [...prev, { type: 'bot', text }]);
+  };
+
+  // Add a new user message to the chat history
+  const addUserMessage = (text) => {
+    setMessages(prev => [...prev, { type: 'user', text }]);
   };
 
   // Handle Mic Input
@@ -53,9 +97,11 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      setMessage(transcript);
+      setInputText(transcript);
       setIsListening(false);
+      
       const foundStations = findStationsInTranscript(transcript);
+      addUserMessage(transcript);
       processRouteRequest(foundStations);
     };
 
@@ -91,7 +137,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
         });
 
         const data = res.data;
-        setBotResponse(data.voiceResponse);
+        addBotMessage(data.voiceResponse);
         speak(data.voiceResponse);
 
         setSource(source);
@@ -111,6 +157,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
     } else {
       showError("कृपया फिर से बताएं: 'पटना जंक्शन से पीएमसीएच जाना है'");
     }
+    setInputText(""); // Clear input after processing
   };
 
   // Speak Bot response
@@ -128,100 +175,95 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
 
   // Show error response
   const showError = (errorText) => {
-    setBotResponse(errorText);
+    addBotMessage(errorText);
     speak(errorText);
   };
 
   // Handle text input submission
   const handleTextSubmit = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!inputText.trim()) return;
 
-    const foundStations = findStationsInTranscript(message);
+    addUserMessage(inputText);
+    const foundStations = findStationsInTranscript(inputText);
     processRouteRequest(foundStations);
   };
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Floating Bot Button with pulse animation */}
-      <button
-        onClick={handleBotClick}
-        className={`relative rounded-full p-4 shadow-xl ${isOpen ? 'bg-red-500' : 'bg-gradient-to-b from-blue-700 to-red-700'}`}
-        style={{
-          animation: isOpen ? 'none' : 'pulse 1.5s infinite'
-        }}
-      >
-        {isOpen ? (
-          <FaTimes className="text-white text-xl" />
-        ) : (
-          <FaRobot className="text-white text-xl" />
+      {/* Floating Bot Button */}
+      <div className="relative">
+        {/* "Hi, I'm your assistant" popup */}
+        {!isOpen && showPopup && (
+          // <div className="absolute bottom-6 sm:bottom-16 -left-40 sm:-left-60 bg-white text-yellow text-sm p-3 rounded-xl shadow-lg whitespace-nowrap animate-slide-in">
+          //   Hi, I'm Bodhi Voice Assistant 
+          // </div>
+          <div className="absolute bottom-6 sm:bottom-16 -left-[195px] bg-white text-yellow text-sm p-3 rounded-xl shadow-lg whitespace-nowrap animate-slide-in">
+  Hi, I'm Bodhi Voice Assistant 
+</div>
         )}
-        {isSpeaking && (
-          <div className="absolute -top-1 -right-1 flex space-x-1">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-1 h-1 bg-white rounded-full"
-                style={{
-                  animation: `wave 1s infinite ${i * 0.2}s`,
-                  height: isSpeaking ? '10px' : '4px'
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </button>
+        <button
+          onClick={handleBotClick}
+          className={`relative rounded-full p-2 shadow-xl border-4 transition-all duration-300 ease-in-out
+            ${isOpen ? 'bg-red-500 border-red-500' : 'bg-transparent border-transparent'}
+            ${!isOpen ? 'animate-vibrate' : ''}`}
+          style={{
+            animation: isOpen ? 'none' : 'callRing 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }}
+        >
+          {isOpen ? (
+            <FaTimes className="text-white text-xl" />
+          ) : (
+            <div className="w-12 h-12 flex items-center justify-center p-1 rounded-full bg-gradient-to-br from-gray-600 to-white">
+              <img src="/bodhi.png" alt="Patna Metro Bot" className="w-full h-full rounded-full" />
+            </div>
+          )}
+        </button>
+      </div>
 
       {/* Chat Interface */}
       {isOpen && (
-        <div className="mt-4 w-80 bg-white rounded-xl shadow-2xl overflow-hidden">
+        <div className="mt-4 w-80 h-[400px] bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
           {/* Chat Header */}
-          <div className="bg-gradient-to-r from-blue-700 to-red-700 p-4 text-white">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <FaRobot className="text-xl" />
-                <h2 className="text-lg font-bold">Bodhi</h2>
+          <div className="bg-gradient-to-r from-blue-700 to-red-700 p-4 text-white flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 p-1 bg-white rounded-full">
+                <img src="/bodhi.png" alt="Patna Metro Bot" className="w-full h-full rounded-full" />
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="text-white hover:text-gray-200"
-              >
-                <FaTimes />
-              </button>
+              <h2 className="text-lg font-bold">
+                Bodhi
+                {isListening && (
+                  <span className="relative flex h-3 w-3 inline-block ml-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  </span>
+                )}
+              </h2>
             </div>
+            <button 
+              onClick={handleBotClick}
+              className="p-2 text-white hover:text-gray-200 transition-colors"
+            >
+              <FaTimes />
+            </button>
           </div>
 
           {/* Chat Messages */}
-          <div className="h-64 overflow-y-auto p-4 bg-gray-50">
-            {greeted && (
-              <div className="mb-4">
-                <div className="text-xs text-gray-500 mb-1">Bodhi</div>
-                <div className="bg-blue-100 text-gray-800 p-3 rounded-lg max-w-xs">
-                  नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ।
+          <div className="flex-1 overflow-y-auto p-4 bg-gray-50 flex flex-col space-y-4">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-xs p-3 rounded-xl shadow-md ${
+                    msg.type === 'user' ? 'bg-green-100 text-gray-800 rounded-br-none' : 'bg-blue-100 text-gray-800 rounded-bl-none'
+                  }`}
+                >
+                  {msg.text}
                 </div>
               </div>
-            )}
-
-            {message && (
-              <div className="mb-4 flex justify-end">
-                <div className="text-right">
-                  <div className="text-xs text-gray-500 mb-1">आप</div>
-                  <div className="bg-green-100 text-gray-800 p-3 rounded-lg max-w-xs">
-                    {message}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {botResponse && (
-              <div className="mb-4">
-                <div className="text-xs text-gray-500 mb-1">Bodhi</div>
-                <div className="bg-blue-100 text-gray-800 p-3 rounded-lg max-w-xs">
-                  {botResponse}
-                </div>
-              </div>
-            )}
-
+            ))}
             <div ref={messagesEndRef} />
           </div>
 
@@ -231,22 +273,23 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
               <button
                 type="button"
                 onClick={handleMicClick}
-                className={`p-3 rounded-full ${isListening ? 'bg-red-500' : 'bg-green-500'} text-white`}
+                className={`p-3 rounded-full transition-colors duration-300 ease-in-out text-white 
+                  ${isListening ? 'bg-red-500 animate-pulse-slow' : 'bg-green-500'}`}
                 disabled={isListening}
               >
-                <FaMicrophone className={isListening ? 'animate-pulse' : ''} />
+                <FaMicrophone />
               </button>
               <input
                 type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
                 placeholder="संदेश टाइप करें..."
                 className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button 
+              <button
                 type="submit"
                 className="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
-                disabled={!message.trim()}
+                disabled={!inputText.trim()}
               >
                 <BsSendFill />
               </button>
@@ -257,6 +300,35 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
           </form>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes callRing {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        @keyframes vibrate {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-1px); }
+          50% { transform: translateX(1px); }
+          75% { transform: translateX(-1px); }
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .animate-vibrate {
+          animation: vibrate 0.2s infinite;
+        }
+        .animate-slide-in {
+            animation: slide-in 0.5s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 };
