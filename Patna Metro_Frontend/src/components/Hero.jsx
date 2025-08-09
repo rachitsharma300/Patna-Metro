@@ -77,7 +77,7 @@ function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <p className="text-lg text-blue-100 text-center">
+         <p className="text-base md:text-lg text-blue-100 text-center">
             {t("hero.description")}
           </p>
         </motion.div>
