@@ -20,16 +20,16 @@ function DisclaimerPopup() {
           This website currently displays demo data for informational and
           testing purposes only. Patna Metro has not yet officially released the
           complete details. Actual fares, timings, and route information may
-          vary. Once the official data is published, this website will be
-          updated accordingly.
+          vary. <b>Once the official data is published, this website will be
+          updated accordingly.</b>
         </p>
         <h2 className="text-xl font-semibold mb-4">अस्वीकरण</h2>
         <p>
           यह वेबसाइट वर्तमान में केवल डेमो डेटा दिखा रही है, जिसका उपयोग जानकारी
           और टेस्टिंग के लिए किया जा रहा है। पटना मेट्रो ने अभी तक आधिकारिक
           जानकारी साझा नहीं की है। वास्तविक किराया, समय और रूट जानकारी अलग हो
-          सकती है। जैसे ही आधिकारिक डेटा जारी होगा, यह वेबसाइट अपडेट कर दी
-          जाएगी।
+          सकती है। <b>जैसे ही आधिकारिक डेटा जारी होगा, यह वेबसाइट अपडेट कर दी
+          जाएगी।</b>
         </p>
         <button
           onClick={() => setShow(false)}
