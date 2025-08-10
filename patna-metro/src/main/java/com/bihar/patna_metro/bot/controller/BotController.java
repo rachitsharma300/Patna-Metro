@@ -45,29 +45,63 @@ public class BotController {
         );
     }
 
-    private String buildHindiResponse(String source, String dest,
-                                      List<Station> route, int fare, int time) {
+//    private String buildHindiResponse(String source, String dest,
+//                                      List<Station> route, int fare, int time) {
+//        if (route == null || route.isEmpty()) {
+//            return "माफ कीजिए, इस मार्ग की जानकारी उपलब्ध नहीं है";
+//        }
+//
+//        List<String> lines = getLines(route);
+//        String line = String.join(" और ", lines);
+//
+//        StringBuilder response = new StringBuilder()
+//                .append("आपको ").append(source).append(" से ").append(dest)
+//                .append(" जाने के लिए ").append(line).append(" लाइन की मेट्रो लेनी होगी। ");
+//
+//        String interchange = findInterchange(route);
+//        if (interchange != null) {
+//            response.append(interchange).append(" पर मेट्रो बदलनी होगी। ");
+//        }
+//
+//        return response.append("कुल समय: ").append(time)
+//                .append(" मिनट, किराया: ₹").append(fare)
+//                .append(", स्टेशन: ").append(route.size())
+//                .append(". आपकी यात्रा शुभ हो!")
+//                .toString();
+//    }
+
+    private String buildHindiResponse(String source, String dest, List<Station> route, int fare, int time) {
         if (route == null || route.isEmpty()) {
             return "माफ कीजिए, इस मार्ग की जानकारी उपलब्ध नहीं है";
         }
 
-        List<String> lines = getLines(route);
-        String line = String.join(" और ", lines);
+        String startLine = route.get(0).getLine();
+        String interchangeStation = findInterchange(route);
+        int totalStations = route.size();
 
-        StringBuilder response = new StringBuilder()
-                .append("आपको ").append(source).append(" से ").append(dest)
-                .append(" जाने के लिए ").append(line).append(" लाइन की मेट्रो लेनी होगी। ");
+        StringBuilder response = new StringBuilder();
 
-        String interchange = findInterchange(route);
-        if (interchange != null) {
-            response.append(interchange).append(" पर मेट्रो बदलनी होगी। ");
+        response.append("आपको ").append(source).append(" से ").append(dest).append(" जाने के लिए, ");
+
+        if (interchangeStation != null) {
+            String secondLine = route.stream()
+                    .filter(s -> !s.getLine().equals(startLine))
+                    .map(Station::getLine)
+                    .findFirst()
+                    .orElse("अन्य");
+
+            response.append("पहले आपको ").append(startLine).append(" की मेट्रो लेनी होगी। ");
+            response.append(interchangeStation).append(" पर आपको ").append(secondLine).append(" की मेट्रो बदलनी होगी। ");
+        } else {
+            response.append(startLine).append(" लाइन की मेट्रो लेनी होगी। ");
         }
 
-        return response.append("कुल समय: ").append(time)
-                .append(" मिनट, किराया: ₹").append(fare)
-                .append(", स्टेशन: ").append(route.size())
-                .append(". आपकी यात्रा शुभ हो!")
-                .toString();
+        response.append("इस यात्रा में कुल ").append(totalStations).append(" स्टेशन, ")
+                .append(time).append(" मिनट का समय और ₹").append(fare).append(" का किराया लगेगा। ");
+
+        response.append("आपकी यात्रा शुभ और खुशियों से भरी हो!");
+
+        return response.toString();
     }
 
     private List<String> getLines(List<Station> route) {
