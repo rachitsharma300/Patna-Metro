@@ -97,6 +97,9 @@
   },
 
   "aboutPage": {
+    "developerTitle": "About the Developer",
+    "developerCredit": "This application was designed and developed by <1>Rachit Sharma</1> with the aim of providing comprehensive information about the Patna Metro.",
+    "developerContribution": "This project is a labor of love, developed over 1.5 months to empower the people of Patna with a 100% free and user-friendly metro navigation tool. My goal is to anticipate the future needs of commuters, ensuring a smooth and effortless travel experience once all stations are live.",
     "title": "About Patna Metro",
     "subtitle": "Transforming Patna's Urban Mobility with Modern Rapid Transit",
     "overviewTitle": "Overview",
@@ -144,7 +147,7 @@
     "emergencyAmbulance": "Ambulance: 102",
     "emergencyFire": "Fire: 101",
     "emergencyMetroHelpline": "Metro Helpline: 9871-8740-XX",
-    "ticker": "• PATNA METRO UPDATE: Phase 1 completion expected December 2025 • Free WiFi at all stations • Metro transforming Bihar's commute •"
+    "ticker": "• PATNA METRO UPDATE: Operations on the priority corridor (Malahi Pakri to ISBT) with 5 stations are scheduled to begin by August 15, 2025. Stay safe! For emergencies, contact Police: 112 or Fire: 101. The metro will offer free WiFi at all stations. •"
   },
 
   "nav": {
@@ -179,7 +182,6 @@
     "section4Text": "We may update our Privacy Policy from time to time. Whenever we make a change, we will post the new policy on this page. We encourage you to review this page periodically."
   },
 
-  
   "terms": {
     "title": "Terms of Service",
     "section1Title": "1. Acceptance of Terms",
@@ -191,5 +193,5 @@
     "section4Title": "4. Changes to Terms",
     "section4Text": "We reserve the right to modify these Terms of Service at any time. Any changes will be effective immediately upon posting. Your continued use of the service signifies your acceptance of the updated terms."
   }
+  
 }
-
