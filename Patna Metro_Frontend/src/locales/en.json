@@ -95,6 +95,7 @@
     "importantNotice": "Important Notice",
     "noticeDetails": "• Children below 90 cm height travel free\n• Senior citizens (60+ years) get 20% discount\n• Smart cards can be recharged online or at any station\n• Fares are subject to revision. Last updated: "
   },
+
   "aboutPage": {
     "title": "About Patna Metro",
     "subtitle": "Transforming Patna's Urban Mobility with Modern Rapid Transit",
@@ -133,6 +134,7 @@
     "implementationFundingPara2": "Japan International Cooperation Agency (JICA) is providing loan assistance for the project, covering about 60% of the total project cost.",
     "officialWebsiteButton": "Official Website"
   },
+
   "hero": {
     "title": "PATNA METRO",
     "description": "Under the visionary leadership of Hon’ble Prime Minister Narendra Modi and Hon’ble Chief Minister Nitish Kumar, Patna Metro — Bihar’s first rapid transit system — is set to transform the city’s connectivity by seamlessly connecting North and South Patna with modern infrastructure, world-class facilities, and a smarter, faster commute.",
@@ -144,6 +146,7 @@
     "emergencyMetroHelpline": "Metro Helpline: 9871-8740-XX",
     "ticker": "• PATNA METRO UPDATE: Phase 1 completion expected December 2025 • Free WiFi at all stations • Metro transforming Bihar's commute •"
   },
+
   "nav": {
     "home": "Home",
     "routeFinder": "Route Finder",
@@ -157,5 +160,36 @@
     "minutes": "min",
     "fare": "Fare",
     "stations": "Stations"
+  },
+
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "This Privacy Policy explains how we collect, use, and protect your information when you use our Patna Metro Bot. We do not collect or store any personal data.",
+    "section1Title": "1. What Information Do We Collect?",
+    "section1Text": "We do not collect any personal information about you, such as your name, phone number, or email ID. When you use our bot, we only process your conversation to provide you with the correct metro route and fare. This information is used solely for route-finding purposes and is not stored anywhere.",
+    "section2Title": "2. How Do We Use Your Information?",
+    "section2Text": "We use your conversation data only for the following purposes:",
+    "section2List1": "To provide you with the best metro route from one station to another.",
+    "section2List2": "To give you an estimated travel time and fare.",
+    "section2List3": "To answer your questions and assist you.",
+    "section2Text2": "This information is not used for any marketing or advertising purposes.",
+    "section3Title": "3. How Do We Protect Your Information?",
+    "section3Text": "We take all necessary steps to keep your data secure. Since we do not store any personal information, the security of your data is ensured. Our bot processes your conversation only while you are using it, and the data is deleted immediately afterward.",
+    "section4Title": "4. Changes to This Policy",
+    "section4Text": "We may update our Privacy Policy from time to time. Whenever we make a change, we will post the new policy on this page. We encourage you to review this page periodically."
+  },
+
+  
+  "terms": {
+    "title": "Terms of Service",
+    "section1Title": "1. Acceptance of Terms",
+    "section1Text": "By accessing and using this bot, you agree to comply with and be bound by these Terms of Service. If you do not agree with any part of these terms, you must not use our service.",
+    "section2Title": "2. Use of the Service",
+    "section2Text": "Our bot is provided for informational purposes only. The metro routes, fares, and timings are based on publicly available data and may not always be 100% accurate. We are not responsible for any inaccuracies or issues arising from this information. You agree to use the service for personal, non-commercial purposes only.",
+    "section3Title": "3. Limitation of Liability",
+    "section3Text": "We are not liable for any direct, indirect, incidental, or consequential damages that may result from the use or inability to use our bot. The service is provided 'as is' without any warranties.",
+    "section4Title": "4. Changes to Terms",
+    "section4Text": "We reserve the right to modify these Terms of Service at any time. Any changes will be effective immediately upon posting. Your continued use of the service signifies your acceptance of the updated terms."
   }
 }
+
