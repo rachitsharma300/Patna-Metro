@@ -40,7 +40,7 @@ public class BotController {
                 "fare", fare,
                 "time", time,
                 "interchange", findInterchange(route),
-                "totalStations", route.size(),
+                "totalStations", route != null ? route.size() : 0,
                 "lines", getLines(route)
         );
     }
@@ -51,7 +51,9 @@ public class BotController {
             return "माफ कीजिए, इस मार्ग की जानकारी उपलब्ध नहीं है";
         }
 
-        String line = String.join(" और ", getLines(route));
+        List<String> lines = getLines(route);
+        String line = String.join(" और ", lines);
+
         StringBuilder response = new StringBuilder()
                 .append("आपको ").append(source).append(" से ").append(dest)
                 .append(" जाने के लिए ").append(line).append(" लाइन की मेट्रो लेनी होगी। ");
@@ -69,6 +71,7 @@ public class BotController {
     }
 
     private List<String> getLines(List<Station> route) {
+        if (route == null) return Collections.emptyList();
         return route.stream()
                 .map(Station::getLine)
                 .distinct()
@@ -78,10 +81,10 @@ public class BotController {
     private String findInterchange(List<Station> route) {
         if (route == null || route.size() < 2) return null;
         String firstLine = route.get(0).getLine();
-        return route.stream()
+        Optional<Station> interchangeStation = route.stream()
                 .filter(s -> !s.getLine().equals(firstLine))
-                .findFirst()
-                .map(Station::getName)
-                .orElse(null);
+                .findFirst();
+
+        return interchangeStation.isPresent() ? interchangeStation.get().getName() : null;
     }
 }
