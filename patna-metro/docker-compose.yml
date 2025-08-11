@@ -1,23 +1,10 @@
 version: '3.8'
 
 services:
-  mongo:
-    image: mongo
-    container_name: patna-metro-mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
   backend:
     build: .
     container_name: patna-metro-backend
     ports:
       - "8080:8080"
-    depends_on:
-      - mongo
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/patnametro
-
-volumes:
-  mongo_data:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://rachitsharma300:KIz75qu6cIjnOD6n@patna-metro-cluster.m83ejco.mongodb.net/patnametro?retryWrites=true&w=majority&appName=patna-metro-cluster
