@@ -19,6 +19,7 @@ import metroImage2 from "../assets/patnaMetro2.png";
 import metroImage3 from "../assets/patnaMetro3.png";
 import cmImage from "../assets/CM.png";
 import pmImage from "../assets/PM.jpg";
+import MetroSvg from "../assets/Metro.svg";
 
 // Array of images for the slider
 const metroImages = [metroImage1, metroImage2, metroImage3];
@@ -72,6 +73,9 @@ function Hero() {
                   {t("hero.title")}
                 </span>
               </h1>
+                          <div className="mt-0 flex justify-center">
+              <img src={MetroSvg} alt="Metro Route" className="w-full max-w-md" />
+            </div>
             </motion.div>
             <img
               src={cmImage}
