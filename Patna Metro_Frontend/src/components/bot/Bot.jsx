@@ -22,7 +22,8 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [isBotAwake, setIsBotAwake] = useState(false);
-  const API_URL = "http://localhost:8080";
+  // const API_URL = "http://localhost:8080";
+  const API_URL = import.meta.env.VITE_API_BASE_URL || "https://patna-metro-backend-latest.onrender.com";
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
@@ -160,7 +161,8 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       const [source, destination] = matchedStations;
 
       try {
-        const res = await axios.post(`${API_URL}/api/bot/voice-route`, {
+        // const res = await axios.post(`${API_URL}/api/bot/voice-route`, {
+        const res = await axios.post(`${API_URL}/bot/voice-route`, {
           source,
           destination,
         });
