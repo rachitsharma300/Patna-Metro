@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaExpand, FaDownload, FaCompress } from "react-icons/fa";
-import metroMapImage from "../assets/PatnaMap.png";
+import metroMapImage from "../assets/PatnaMap.webp";
 import { useState, useRef } from "react";
 
 const MetroMapModal = ({ isOpen, onClose }) => {
