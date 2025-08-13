@@ -11,13 +11,14 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 // Import your images
-import metroImage1 from "../assets/patnaMetro1.png";
-import metroImage2 from "../assets/patnaMetro2.png";
-import metroImage3 from "../assets/patnaMetro3.png";
-import cmImage from "../assets/CM.png";
+import metroImage1 from "../assets/patnaMetro1.webp";
+import metroImage2 from "../assets/patnaMetro2.webp";
+import metroImage3 from "../assets/patnaMetro3.webp";
+import cmImage from "../assets/CM.webp";
 import pmImage from "../assets/PM.jpg";
 import MetroSvg from "../assets/Metro.svg";
 
@@ -38,14 +39,24 @@ function Hero() {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === metroImages.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000); 
+    }, 4000);
 
-    return () => clearInterval(interval);  }, []);
+    return () => clearInterval(interval);
+  }, []);
+
+  // New useEffect hook to preload images
+  useEffect(() => {
+    console.log("Preloading images...");
+    metroImages.forEach((imageUrl) => {
+      const img = new Image();
+      img.src = imageUrl;
+    });
+  }, []); // Run only once when the component mounts
 
   return (
     <section className="flex flex-col min-h-[90vh] w-full overflow-hidden bg-blue-950">
       <div className="flex flex-col lg:flex-row flex-1">
-        {/* Left Section - Image Carousel C.logic */}
+        {/* Left Section - Image Carousel */}
         <div className="lg:w-1/2 h-[30vh] lg:h-auto relative">
           <img
             src={metroImages[currentImageIndex]}
@@ -73,9 +84,9 @@ function Hero() {
                   {t("hero.title")}
                 </span>
               </h1>
-                          <div className="mt-0 flex justify-center">
-              <img src={MetroSvg} alt="Metro Route" className="w-full max-w-md" />
-            </div>
+              <div className="mt-0 flex justify-center">
+                <img src={MetroSvg} alt="Metro Route" className="w-full max-w-md" />
+              </div>
             </motion.div>
             <img
               src={cmImage}
@@ -148,7 +159,7 @@ function Hero() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* News Ticker */}
       <div className="w-full py-3 overflow-hidden bg-black/20 rounded-none md:rounded-lg mt-4">
         <motion.div
