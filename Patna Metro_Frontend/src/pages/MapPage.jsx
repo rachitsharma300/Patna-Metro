@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FaExpand, FaDownload, FaCompress } from "react-icons/fa";
-import metroMapImage from "../assets/PatnaMap.png";
+import metroMapImage from "../assets/PatnaMap.webp";
 
 const MapPage = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
