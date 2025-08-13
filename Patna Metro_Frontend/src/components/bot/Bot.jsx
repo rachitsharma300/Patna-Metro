@@ -19,6 +19,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null); // recognition object ko store karne ke liye
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [isBotAwake, setIsBotAwake] = useState(false);
@@ -85,6 +86,14 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   };
 
   const handleMicClick = () => {
+    // Agar pehle se sun raha hai, to ise rok dein
+    if (isListening && recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      console.log("Recognition stopped by user.");
+      return;
+    }
+
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -92,19 +101,30 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       alert("Speech Recognition not supported in this browser.");
       return;
     }
-
-    setIsListening(true);
+    
+    // Naya recognition object banayein aur use ref mein store karein
     const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
+
     recognition.lang = "hi-IN";
     recognition.start();
+    setIsListening(true);
+    console.log("Recognition started...");
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setInputText(transcript);
-      setIsListening(false);
       addUserMessage(transcript);
       const foundStations = findStationsInTranscript(transcript);
       processRouteRequest(foundStations);
+      // onresult ke baad bhi listening state ko false karein
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+        // jab recognition khud se band ho jae
+        setIsListening(false);
+        console.log("Recognition ended automatically.");
     };
 
     recognition.onerror = (event) => {
@@ -232,8 +252,8 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
         <button
           onClick={handleBotClick}
           className={`relative rounded-full p-2 shadow-xl border-4 transition-all duration-300 ease-in-out
-                        ${isOpen ? "bg-red-500 border-red-500" : "bg-transparent border-transparent"}
-                        ${!isOpen ? "animate-vibrate" : ""}`}
+                          ${isOpen ? "bg-red-500 border-red-500" : "bg-transparent border-transparent"}
+                          ${!isOpen ? "animate-vibrate" : ""}`}
           style={{
             animation: isOpen
               ? "none"
@@ -309,10 +329,9 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
                 type="button"
                 onClick={handleMicClick}
                 className={`p-3 rounded-full transition-colors duration-300 ease-in-out text-white
-                                    ${isListening ? "bg-red-500 animate-pulse-slow" : "bg-green-500"}`}
-                disabled={isListening}
+                          ${isListening ? "bg-red-500 animate-pulse-slow" : "bg-green-500"}`}
               >
-                <FaMicrophone />
+                {isListening ? <FaTimes /> : <FaMicrophone />}
               </button>
               <input
                 type="text"
