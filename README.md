@@ -63,7 +63,7 @@ mvn spring-boot:run
 <details> <summary><strong>📁 Patna Metro Backend</strong></summary>
   
 ```
-📦 patna-metro
+ patna-metro
  ┣ 📂 .idea
  ┣ 📂 .mvn
  ┣ 📂 src
