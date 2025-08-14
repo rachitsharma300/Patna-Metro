@@ -20,7 +20,7 @@
   <li>Provides REST APIs for route finding and station listing</li>
 </ul>
 
-<h3>💡 Features</h3>
+<h3>Features</h3>
 <ul>
 <li>✅ REST APIs for CRUD operations on Stations</li>
 <li>✅ Route finding between two stations (line-wise basic implementation)</li>
