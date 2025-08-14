@@ -11,7 +11,7 @@
 <img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
-<h3>📌 Project Overview</h3>
+<h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
   <li>Stores all metro stations of Patna Metro (Red Line &amp; Blue Line)</li>
