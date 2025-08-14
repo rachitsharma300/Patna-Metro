@@ -114,7 +114,7 @@ mvn spring-boot:run
 <details> <summary><strong>📁 Patna Metro Frontend</strong></summary>
   
 ```
-📦 Patna_Metro_Frontend
+ Patna_Metro_Frontend
  ┣ 📂 node_modules
  ┣ 📂 public
  ┣ 📂 src
