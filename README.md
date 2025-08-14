@@ -29,7 +29,7 @@
 <li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
 </ul>
 
-<h3>🚀 Tech Stack</h3>
+<h3> Tech Stack</h3>
 <ul>
 <li>Backend: Java 24, Spring Boot 3.5.3</li>
 <li>Database: MongoDB Atlas or Local MongoDB</li>
