@@ -227,6 +227,21 @@ docker tag myapp:latest ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 docker push ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 ```
 
+<h3>Deploy to AWS
+Option A: ECS Fargate (Serverless Containers)</h3>
+<p align="center">
+  <img width="1783" height="210" alt="deepseek_mermaid_20250815_b94c8e" src="https://github.com/user-attachments/assets/8fc191e5-0732-4ae6-8880-20b33fa96854" />
+</p>
+
+
+
+
+
+
+
+
+
+
 
 
 
