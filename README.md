@@ -203,10 +203,14 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
 </p>
 
 <h3>Dockerfile Example:</h3>
+
 ```
+
 FROM openjdk:17-jdk
 COPY target/app.jar /app.jar
 CMD ["java", "-jar", "/app.jar"]
+
+
 ```
 
 
