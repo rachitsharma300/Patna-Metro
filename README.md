@@ -219,6 +219,15 @@ CMD ["java", "-jar", "/app.jar"]
 </p>
 
 
+<h3>Commands:</h3>
+
+```
+aws ecr get-login-password | docker login --username AWS --password-stdin ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+docker tag myapp:latest ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+docker push ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+```
+
+
 
 
 <h3>Future Enhancements</h3>
