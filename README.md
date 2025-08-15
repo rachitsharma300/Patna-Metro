@@ -197,6 +197,14 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
   <img width="3105" height="1323" alt="deepseek_mermaid_20250805_b6100b" src="https://github.com/user-attachments/assets/c7feb174-2b4b-4927-a699-01d09166b0d6" />
 </p>
 
+<h3>  Java Code → Docker Image </h3>
+<p align="center">
+  <img width="2613" height="210" alt="deepseek_mermaid_20250815_c6f876" src="https://github.com/user-attachments/assets/a791054a-083d-4caf-88d2-46b22934e6ea" />
+</p>
+
+
+
+
 <h3>Future Enhancements</h3>
  <p>Graph-based route finding (Dijkstra/BFS)</p>
 
