@@ -213,6 +213,12 @@ CMD ["java", "-jar", "/app.jar"]
 
 ```
 
+<h3>Push to AWS ECR (Elastic Container Registry)</h3>
+<p align="center">
+  <img width="1627" height="210" alt="deepseek_mermaid_20250815_b9ff6d" src="https://github.com/user-attachments/assets/d96779cb-601a-4380-b3f8-8396c01219b0" />
+</p>
+
+
 
 
 <h3>Future Enhancements</h3>
