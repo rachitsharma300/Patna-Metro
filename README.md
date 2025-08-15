@@ -202,6 +202,12 @@ Note: Current /route API supports same-line routes only. Graph-based route findi
   <img width="2613" height="210" alt="deepseek_mermaid_20250815_c6f876" src="https://github.com/user-attachments/assets/a791054a-083d-4caf-88d2-46b22934e6ea" />
 </p>
 
+<h3>Dockerfile Example:</h3>
+```
+FROM openjdk:17-jdk
+COPY target/app.jar /app.jar
+CMD ["java", "-jar", "/app.jar"]
+```
 
 
 
