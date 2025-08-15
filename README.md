@@ -235,11 +235,12 @@ Option A: ECS Fargate (Serverless Containers)</h3>
 
 
 <h3>Elastic Beanstalk (Single Command)</h3>
+
 ```
 eb init -p docker myapp
 eb create myapp-env
-
 ```
+
 
 
 
