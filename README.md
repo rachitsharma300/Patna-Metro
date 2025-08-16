@@ -211,6 +211,19 @@ public double calculateDistance(Station s1, Station s2) {
 
 ⚡ Cached results in Redis for frequent routes</p>
 
+
+<h3>Haversine Formula</h3>
+
+```
+a = sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)
+c = 2 * atan2(√a, √(1−a))
+d = R * c 
+
+```
+<p>Where φ = latitude, λ = longitude, R = Earth's radius (6371 km)
+
+Precision: ±0.3% error margin vs. Vincenty formula
+</p>
 <h3> Bot workflow</h3>
 <p align="center">
   <img width="3105" height="1323" alt="deepseek_mermaid_20250805_b6100b" src="https://github.com/user-attachments/assets/c7feb174-2b4b-4927-a699-01d09166b0d6" />
