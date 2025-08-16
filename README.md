@@ -14,9 +14,10 @@
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
-  <li>Stores all metro stations of Patna Metro (Red Line &amp; Blue Line)</li>
-  <li>Finds routes between two stations</li>
+  <li>🗺️ Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
+  <li>🧮 Estimates travel time/fares via Haversine distance + metro speed metricss</li>
   <li>Manages station data in MongoDB</li>
+  <li> i18n support (English/Hindi)</li>
   <li>Provides REST APIs for route finding and station listing</li>
 </ul>
 
@@ -31,7 +32,8 @@
 
 <h3> Tech Stack</h3>
 <ul>
-<li>Backend: Java 24, Spring Boot 3.5.3</li>
+<li>Backend: Java 21, Spring Boot 3.5.3</li>
+<li>Frontend	React 18, TailwindCSS, Vite</li>
 <li>Database: MongoDB Atlas or Local MongoDB</li>
 <li>Build Tool: Maven</li>
 </ul>
@@ -190,6 +192,20 @@ mvn spring-boot:run
 
 
 Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+```
+
+
+<h3>Haversine-Powered Distance Calculation</h3>
+
+```
+// StationService.java
+public double calculateDistance(Station s1, Station s2) {
+    double lat1 = s1.getLocation().getLat();
+    double lon1 = s1.getLocation().getLng();
+    // ... (Haversine implementation)
+    return 12742 * Math.asin(Math.sqrt(a)); // km
+}
+
 ```
 
 <h3> Bot workflow</h3>
