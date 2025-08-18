@@ -23,8 +23,8 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [isBotAwake, setIsBotAwake] = useState(false);
-  // const API_URL = "http://localhost:8080";
-  const API_URL = import.meta.env.VITE_API_BASE_URL || "https://patna-metro-backend-latest.onrender.com";
+  // const API_URL = "http://localhost:8080";              || https://patna-metro-backend-latest.onrender.com
+  const API_URL = import.meta.env.VITE_API_BASE_URL || "http://patna-metro-b.ap-south-1.elasticbeanstalk.com/api";
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
