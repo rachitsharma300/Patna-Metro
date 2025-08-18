@@ -11,16 +11,17 @@
 <img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
-<h3>📌 Project Overview</h3>
+<h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
-  <li>Stores all metro stations of Patna Metro (Red Line &amp; Blue Line)</li>
-  <li>Finds routes between two stations</li>
+  <li>🗺️ Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
+  <li>🧮 Estimates travel time/fares via Haversine distance + metro speed metricss</li>
   <li>Manages station data in MongoDB</li>
+  <li> i18n support (English/Hindi)</li>
   <li>Provides REST APIs for route finding and station listing</li>
 </ul>
 
-<h3>💡 Features</h3>
+<h3>Features</h3>
 <ul>
 <li>✅ REST APIs for CRUD operations on Stations</li>
 <li>✅ Route finding between two stations (line-wise basic implementation)</li>
@@ -29,9 +30,10 @@
 <li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
 </ul>
 
-<h3>🚀 Tech Stack</h3>
+<h3> Tech Stack</h3>
 <ul>
-<li>Backend: Java 24, Spring Boot 3.5.3</li>
+<li>Backend: Java 21, Spring Boot 3.5.3</li>
+<li>Frontend	React 18, TailwindCSS, Vite</li>
 <li>Database: MongoDB Atlas or Local MongoDB</li>
 <li>Build Tool: Maven</li>
 </ul>
@@ -63,7 +65,7 @@ mvn spring-boot:run
 <details> <summary><strong>📁 Patna Metro Backend</strong></summary>
   
 ```
-📦 patna-metro
+ patna-metro
  ┣ 📂 .idea
  ┣ 📂 .mvn
  ┣ 📂 src
@@ -114,7 +116,7 @@ mvn spring-boot:run
 <details> <summary><strong>📁 Patna Metro Frontend</strong></summary>
   
 ```
-📦 Patna_Metro_Frontend
+ Patna_Metro_Frontend
  ┣ 📂 node_modules
  ┣ 📂 public
  ┣ 📂 src
@@ -192,10 +194,84 @@ mvn spring-boot:run
 Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
 ```
 
+
+<h3>Haversine-Powered Distance Calculation</h3>
+
+```
+// StationService.java
+public double calculateDistance(Station s1, Station s2) {
+    double lat1 = s1.getLocation().getLat();
+    double lon1 = s1.getLocation().getLng();
+    // ... (Haversine implementation)
+    return 12742 * Math.asin(Math.sqrt(a)); // km
+}
+
+```
+<p>🌍 Earth's curvature-aware measurements between stations
+
+⚡ Cached results in Redis for frequent routes</p>
+
+
+<h3>Haversine Formula</h3>
+
+```
+a = sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)
+c = 2 * atan2(√a, √(1−a))
+d = R * c 
+
+```
+<p>Where φ = latitude, λ = longitude, R = Earth's radius (6371 km)
+
+Precision: ±0.3% error margin vs. Vincenty formula
+</p>
 <h3> Bot workflow</h3>
 <p align="center">
   <img width="3105" height="1323" alt="deepseek_mermaid_20250805_b6100b" src="https://github.com/user-attachments/assets/c7feb174-2b4b-4927-a699-01d09166b0d6" />
 </p>
+
+<h3>  Java Code → Docker Image </h3>
+<p align="center">
+  <img width="2613" height="210" alt="deepseek_mermaid_20250815_c6f876" src="https://github.com/user-attachments/assets/a791054a-083d-4caf-88d2-46b22934e6ea" />
+</p>
+
+<h3>Dockerfile Example:</h3>
+
+```
+
+FROM openjdk:17-jdk
+COPY target/app.jar /app.jar
+CMD ["java", "-jar", "/app.jar"]
+
+
+```
+
+<h3>Push to AWS ECR (Elastic Container Registry)</h3>
+<p align="center">
+  <img width="1627" height="210" alt="deepseek_mermaid_20250815_b9ff6d" src="https://github.com/user-attachments/assets/d96779cb-601a-4380-b3f8-8396c01219b0" />
+</p>
+
+
+<h3>Commands:</h3>
+
+```
+aws ecr get-login-password | docker login --username AWS --password-stdin ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+docker tag myapp:latest ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+docker push ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+```
+
+<h3>Deploy to AWS
+Option A: ECS Fargate (Serverless Containers)</h3>
+<p align="center">
+  <img width="1783" height="210" alt="deepseek_mermaid_20250815_b94c8e" src="https://github.com/user-attachments/assets/8fc191e5-0732-4ae6-8880-20b33fa96854" />
+</p>
+
+
+<h3>Elastic Beanstalk (Single Command)</h3>
+
+```
+eb init -p docker myapp
+eb create myapp-env
+```
 
 <h3>Future Enhancements</h3>
  <p>Graph-based route finding (Dijkstra/BFS)</p>
