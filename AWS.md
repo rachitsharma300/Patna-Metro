@@ -42,3 +42,5 @@ Production Architecture:
 # Configure hosted zone
 # Note: This will automatically create NS records
 ```
+
+<p>2. SSL Certificate Setup with ACM</p>
