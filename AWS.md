@@ -15,3 +15,6 @@ Production Architecture:
 ```
 <h3>📋 Prerequisites</h3>
 <p>AWS Account Setup</p>
+<li>AWS Account with admin permissions</li>
+<li>Registered domain name (or purchase through Route 53)</li>
+<li>IAM user with appropriate permissions (avoid root account)</li>
