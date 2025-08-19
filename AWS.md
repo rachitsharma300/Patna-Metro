@@ -31,3 +31,14 @@ Production Architecture:
 <li>IAM (Permissions)</li>
 
 <h3>🚀 Deployment Steps</h3>
+
+<p>1. Domain Configuration with Route 53</p>
+
+```
+# Purchase domain (if not already owned)
+# Navigate to Route 53 → Register Domain
+# Choose domain name: patnametro.in (example)
+
+# Configure hosted zone
+# Note: This will automatically create NS records
+```
