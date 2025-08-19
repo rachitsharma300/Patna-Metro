@@ -57,3 +57,5 @@ Production Architecture:
 # Validate using DNS validation (Route 53 integration)
 # Certificate will be provisioned within minutes
 ```
+
+<p>3. Backend Deployment (Elastic Beanstalk)</p>
