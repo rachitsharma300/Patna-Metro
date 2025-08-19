@@ -13,3 +13,5 @@ Production Architecture:
 - Compute: EC2 instances (Managed by Elastic Beanstalk)
 - Storage: Amazon S3 (For assets and backups)
 ```
+<h3>📋 Prerequisites</h3>
+<p>AWS Account Setup</p>
