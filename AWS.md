@@ -59,3 +59,21 @@ Production Architecture:
 ```
 
 <p>3. Backend Deployment (Elastic Beanstalk)</p>
+
+```
+# Create Elastic Beanstalk configuration file
+# .ebextensions/patna-metro.config
+
+option_settings:
+  aws:elasticbeanstalk:container:nodejs:
+    NodeVersion: 18
+  aws:elasticbeanstalk:application:environment:
+    NODE_ENV: production
+    DB_HOST: patna-metro-db.xyz.us-east-1.rds.amazonaws.com
+    DB_PORT: 5432
+    JWT_SECRET: your-production-jwt-secret
+  aws:elb:listener:443:
+    InstancePort: 80
+    InstanceProtocol: HTTP
+    SSLCertificateId: arn:aws:acm:us-east-1:123456789012:certificate/abc123...
+```
