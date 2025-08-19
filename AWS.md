@@ -20,3 +20,12 @@ Production Architecture:
 <li>IAM user with appropriate permissions (avoid root account)</li>
 
 <p>Required AWS Services</p>
+<li>AWS Amplify (Frontend)</li>
+<li>AWS Elastic Beanstalk (Backend)</li>
+<li>Amazon RDS (Database)</li>
+<li>AWS Certificate Manager (SSL)</li>
+<li>Amazon Route 53 (DNS)</li>
+<li>Amazon CloudFront (CDN)</li>
+<li>IAM (Permissions)</li>
+
+
