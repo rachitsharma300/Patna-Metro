@@ -19,7 +19,9 @@ Production Architecture:
 <li>Registered domain name (or purchase through Route 53)</li>
 <li>IAM user with appropriate permissions (avoid root account)</li>
 
+
 <p>Required AWS Services</p>
+
 <li>AWS Amplify (Frontend)</li>
 <li>AWS Elastic Beanstalk (Backend)</li>
 <li>Amazon RDS (Database)</li>
@@ -28,4 +30,4 @@ Production Architecture:
 <li>Amazon CloudFront (CDN)</li>
 <li>IAM (Permissions)</li>
 
-
+<h3>🚀 Deployment Steps</h3>
