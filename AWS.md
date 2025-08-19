@@ -18,3 +18,5 @@ Production Architecture:
 <li>AWS Account with admin permissions</li>
 <li>Registered domain name (or purchase through Route 53)</li>
 <li>IAM user with appropriate permissions (avoid root account)</li>
+
+<p>Required AWS Services</p>
