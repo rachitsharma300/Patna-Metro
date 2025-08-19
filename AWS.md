@@ -44,3 +44,16 @@ Production Architecture:
 ```
 
 <p>2. SSL Certificate Setup with ACM</p>
+
+```
+# Request SSL certificate
+# Services → Certificate Manager → Request certificate
+# Add domains: 
+# - patnametro.in
+# - *.patnametro.in
+# - api.patnametro.in
+# - www.patnametro.in
+
+# Validate using DNS validation (Route 53 integration)
+# Certificate will be provisioned within minutes
+```
