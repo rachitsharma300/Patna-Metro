@@ -15,9 +15,9 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5173",
-                                "https://patna-metro-B.us-east-1.elasticbeanstalk.com",
                                 "https://www.patnametromap.in",
                                 "https://patnametromap.in"
+//                                "http://patna-metro-B.us-east-1.elasticbeanstalk.com",
 //                                "https://patna-metro-map.netlify.app"
 //                                "http://patna-metro-frontend.s3-website.ap-south-1.amazonaws.com"
                         )
