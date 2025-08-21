@@ -85,6 +85,27 @@ function App() {
           setSource={setSource}
           setDestination={setDestination}
         />
+                {/* Feedback Sidebar - Fixed Left Button */}
+<a
+  href="https://forms.gle/kVNBywtBtG131zmcA"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed right-0 top-1/2 -translate-y-1/2
+             bg-black/50 backdrop-blur-md 
+             text-white font-semibold tracking-wider
+             px-2 py-1 rounded-l-xl shadow-lg
+             hover:scale-110 hover:bg-yellow-400 hover:text-black
+             transition-all duration-500 ease-in-out 
+             animate-pulse rotate-180 [writing-mode:vertical-rl]"
+>
+  ✨ Feedback
+</a>
+
+
+
+
+
+        {/* Bottom Footer */}
 
         {/* Bottom Footer */}
         <Footer />
