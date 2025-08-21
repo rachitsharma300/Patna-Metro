@@ -5,11 +5,10 @@ import stationsData from "../../utils/Stations.json";
 import { FaMicrophone, FaTimes } from "react-icons/fa";
 import { BsSendFill } from "react-icons/bs";
 
-// Create a station alias map for quick lookups, initialized once.
+// स्टेशन synonyms की mapping
 const stationAliases = new Map();
 stationsData.stations.forEach((station) => {
   station.synonyms.forEach((synonym) => {
-    // All synonyms are converted to lowercase for consistent matching
     stationAliases.set(synonym.toLowerCase(), station.name);
   });
 });
@@ -19,12 +18,15 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef(null); // recognition object ko store karne ke liye
+  const recognitionRef = useRef(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [isBotAwake, setIsBotAwake] = useState(false);
-  // const API_URL = "http://localhost:8080";              || https://patna-metro-backend-latest.onrender.com
-  const API_URL = import.meta.env.VITE_API_BASE_URL || "https://patna-metro-backend-latest.onrender.com/api";
+
+  const API_URL =
+    import.meta.env.VITE_API_BASE_URL ||
+    "https://patna-metro-backend-latest.onrender.com/api";
+
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const greetText =
-        "नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ। कृपया बताएं, आपको कहाँ से कहाँ जाना है?";
+        "नमस्कार, Patna Metro में आपका स्वागत है। मैं बोधि हूँ। Mic बटन दबाकर बोलें या नीचे लिखकर बताएँ, आपको कहाँ से कहाँ जाना है।";
       addBotMessage(greetText);
       speak(greetText);
     }
@@ -86,11 +88,9 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   };
 
   const handleMicClick = () => {
-    // Agar pehle se sun raha hai, to ise rok dein
     if (isListening && recognitionRef.current) {
       recognitionRef.current.stop();
       setIsListening(false);
-      console.log("Recognition stopped by user.");
       return;
     }
 
@@ -98,18 +98,18 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      alert("Speech Recognition not supported in this browser.");
+      showError(
+        "माफ़ कीजिए, आपका ब्राउज़र voice सपोर्ट नहीं करता। Brave browser इस्तेमाल करें या लिखकर बताएँ।"
+      );
       return;
     }
-    
-    // Naya recognition object banayein aur use ref mein store karein
+
     const recognition = new SpeechRecognition();
     recognitionRef.current = recognition;
 
     recognition.lang = "hi-IN";
     recognition.start();
     setIsListening(true);
-    console.log("Recognition started...");
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
@@ -117,45 +117,32 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       addUserMessage(transcript);
       const foundStations = findStationsInTranscript(transcript);
       processRouteRequest(foundStations);
-      // onresult ke baad bhi listening state ko false karein
       setIsListening(false);
     };
 
     recognition.onend = () => {
-        // jab recognition khud se band ho jae
-        setIsListening(false);
-        console.log("Recognition ended automatically.");
+      setIsListening(false);
     };
 
-    recognition.onerror = (event) => {
-      console.error("Speech error:", event.error);
-      showError("माइक से इनपुट लेने में समस्या हुई। कृपया दोबारा प्रयास करें।");
+    recognition.onerror = () => {
+      showError(
+        "आवाज़ समझने में समस्या हुई। आप चाहें तो लिखकर भी स्टेशन का नाम बता सकते हैं।"
+      );
       setIsListening(false);
     };
   };
 
-  // --- CORRECTED STATION RECOGNITION LOGIC ---
   const findStationsInTranscript = (transcript) => {
-    // We create a mutable copy of the transcript to "blank out" found stations.
     let searchableTranscript = transcript.toLowerCase();
     const foundStations = [];
-
-    // The logic to sort aliases by length is excellent and we keep it.
-    // It ensures "Patna Junction" is checked before "Patna".
     const sortedAliases = new Map(
       [...stationAliases.entries()].sort((a, b) => b[0].length - a[0].length)
     );
 
     sortedAliases.forEach((stationName, synonym) => {
-      // Find the synonym in the *current* state of the searchable transcript
       const index = searchableTranscript.indexOf(synonym);
-
       if (index !== -1) {
-        // If found, add the official station name and its original position to our list.
         foundStations.push({ name: stationName, index: index });
-
-        // CRUCIAL STEP: "Blank out" the found synonym in the searchable transcript
-        // so it cannot be matched again. We replace it with a placeholder.
         const placeholder = "#".repeat(synonym.length);
         searchableTranscript =
           searchableTranscript.substring(0, index) +
@@ -164,24 +151,15 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       }
     });
 
-    // Sort the found stations based on their appearance order in the original sentence.
     foundStations.sort((a, b) => a.index - b.index);
-
-    // Return the unique station names in the order they appeared.
-    // The new Set is a safeguard, but our logic should prevent duplicate processing.
     const uniqueStationNames = [...new Set(foundStations.map((s) => s.name))];
-
-    console.log("Found Stations:", uniqueStationNames); // For debugging
     return uniqueStationNames;
   };
-  // --------------------------------------------------
 
   const processRouteRequest = async (matchedStations) => {
     if (matchedStations.length >= 2) {
       const [source, destination] = matchedStations;
-
       try {
-        // const res = await axios.post(`${API_URL}/api/bot/voice-route`, {
         const res = await axios.post(`${API_URL}/bot/voice-route`, {
           source,
           destination,
@@ -201,7 +179,6 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
           }
         }, 500);
       } catch (err) {
-        console.error("API Error:", err);
         showError("माफ़ कीजिए, रूट निकालने में समस्या आ रही है।");
       }
     } else if (matchedStations.length === 1) {
@@ -210,7 +187,9 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       addBotMessage(singleStationText);
       speak(singleStationText);
     } else {
-      showError("कृपया फिर से बताएं: 'पटना जंक्शन से पीएमसीएच जाना है'");
+      showError(
+        "कृपया फिर से बताइए: जैसे 'पटना जंक्शन से पीएमसीएच जाना है।'"
+      );
     }
     setInputText("");
   };
@@ -219,11 +198,9 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
     setIsSpeaking(true);
     const msg = new SpeechSynthesisUtterance(text);
     msg.lang = "hi-IN";
-
     msg.onend = () => {
       setIsSpeaking(false);
     };
-
     window.speechSynthesis.speak(msg);
   };
 
@@ -235,7 +212,6 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
   const handleTextSubmit = (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;
-
     addUserMessage(inputText);
     const foundStations = findStationsInTranscript(inputText);
     processRouteRequest(foundStations);
@@ -246,7 +222,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
       <div className="relative">
         {!isOpen && showPopup && (
           <div className="absolute bottom-6 sm:bottom-16 -left-[195px] bg-white text-yellow text-sm p-3 rounded-xl shadow-lg whitespace-nowrap animate-slide-in">
-            Hi, I'm Bodhi Voice Assistant
+            नमस्ते! मैं बोधि वॉइस असिस्टेंट हूँ
           </div>
         )}
         <button
@@ -285,7 +261,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
                 />
               </div>
               <h2 className="text-lg font-bold">
-                Bodhi
+                बोधि
                 {isListening && (
                   <span className="relative flex h-3 w-3 inline-block ml-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -337,7 +313,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="संदेश टाइप करें..."
+                placeholder="यहाँ लिखें..."
                 className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
@@ -349,7 +325,7 @@ const Bot = ({ setSource, setDestination, triggerSearch }) => {
               </button>
             </div>
             <div className="text-xs text-gray-500 mt-2 text-center">
-              या माइक बटन दबाकर बोलें
+              Mic बटन दबाकर बोलें या लिखकर बताएँ
             </div>
           </form>
         </div>
