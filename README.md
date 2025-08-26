@@ -11,9 +11,9 @@
 <img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
-<p align="center"><Demo>
+<h3 align="center">Demo></h3>
 https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
-</p>
+
 
 
 <h3> Project Overview</h3>
