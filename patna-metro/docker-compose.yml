@@ -7,4 +7,4 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb+srv://rachitsharma300:KIz75qu6cIjnOD6n@patna-metro-cluster.m83ejco.mongodb.net/patnametro?retryWrites=true&w=majority&appName=patna-metro-cluster
+      - 
