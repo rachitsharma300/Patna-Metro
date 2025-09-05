@@ -1,0 +1,14 @@
+name: Keep Render Backend Alive
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # 30 min
+  workflow_dispatch: 
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl request to backend
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" https://www.patnametromap.in
