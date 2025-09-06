@@ -277,8 +277,6 @@ eb init -p docker myapp
 eb create myapp-env
 ```
 
-<h3>Future Enhancements</h3>
- <p>Graph-based route finding (Dijkstra/BFS)</p>
 
 <h3>Contributing</h3>
 <p>Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.</p>
