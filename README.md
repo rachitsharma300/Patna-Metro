@@ -212,7 +212,7 @@ public double calculateDistance(Station s1, Station s2) {
 ```
 <p>🌍 Earth's curvature-aware measurements between stations
 
-⚡ Cached results in Redis for frequent routes</p>
+Cached results in Redis for frequent routes</p>
 
 
 <h3>Haversine Formula</h3>
