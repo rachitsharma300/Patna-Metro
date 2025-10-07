@@ -13,8 +13,6 @@
 
 https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 
-
-
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
@@ -195,7 +193,8 @@ mvn spring-boot:run
 | DELETE | `/stations/{id}`                         | Delete a station                |
 
 
-Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+Note: Current /route API supports same-line routes only.
+Graph-based route finding for inter-line connectivity is under development.
 ```
 
 
@@ -269,14 +268,12 @@ Option A: ECS Fargate (Serverless Containers)</h3>
   <img width="1783" height="210" alt="deepseek_mermaid_20250815_b94c8e" src="https://github.com/user-attachments/assets/8fc191e5-0732-4ae6-8880-20b33fa96854" />
 </p>
 
-
 <h3>Elastic Beanstalk (Single Command)</h3>
 
 ```
 eb init -p docker myapp
 eb create myapp-env
 ```
-
 
 <h3>Contributing</h3>
 <p>Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.</p>
