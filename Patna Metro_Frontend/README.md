@@ -1,6 +1,7 @@
 # Patna Metro Frontend
 
-```
+## Project Structure
+``` React Project Structure
  ┣ 📂 node_modules
  ┣ 📂 public
  ┣ 📂 src
