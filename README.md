@@ -16,7 +16,7 @@ https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
-  <li>🗺Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
+  <li>Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
   <li>Estimates travel time/fares via Haversine distance + metro speed metricss</li>
   <li>Manages station data in MongoDB</li>
   <li> i18n support (English/Hindi)</li>
