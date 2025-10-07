@@ -25,11 +25,11 @@ https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 
 <h3>Features</h3>
 <ul>
-<li>✅ REST APIs for CRUD operations on Stations</li>
-<li>✅ Route finding between two stations (line-wise basic implementation)</li>
-<li>✅ MongoDB integration for data persistence</li>
-<li>✅ CommandLineRunner seeder for initial station data</li>  
-<li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
+<li>REST APIs for CRUD operations on Stations</li>
+<li>Route finding between two stations (line-wise basic implementation)</li>
+<li>MongoDB integration for data persistence</li>
+<li>CommandLineRunner seeder for initial station data</li>  
+<li>Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
 </ul>
 
 <h3> Tech Stack</h3>
