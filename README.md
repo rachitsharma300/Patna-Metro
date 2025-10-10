@@ -238,6 +238,8 @@ Precision: ±0.3% error margin vs. Vincenty formula
 </p>
 --->
 
+
+<!---
 <h3>Dockerfile Example:</h3>
 
 ```
@@ -245,9 +247,8 @@ Precision: ±0.3% error margin vs. Vincenty formula
 FROM openjdk:17-jdk
 COPY target/app.jar /app.jar
 CMD ["java", "-jar", "/app.jar"]
-
-
 ```
+--->
 <!---
 <h3>Push to AWS ECR (Elastic Container Registry)</h3>
 <p align="center">
