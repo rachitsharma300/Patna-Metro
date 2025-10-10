@@ -248,13 +248,14 @@ CMD ["java", "-jar", "/app.jar"]
 
 
 ```
-
+<!---
 <h3>Push to AWS ECR (Elastic Container Registry)</h3>
 <p align="center">
   <img width="1627" height="210" alt="deepseek_mermaid_20250815_b9ff6d" src="https://github.com/user-attachments/assets/d96779cb-601a-4380-b3f8-8396c01219b0" />
 </p>
+--->
 
-
+<!--
 <h3>Commands:</h3>
 
 ```
@@ -262,6 +263,8 @@ aws ecr get-login-password | docker login --username AWS --password-stdin ACCOUN
 docker tag myapp:latest ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 docker push ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 ```
+--->
+
 <!---
 <h3>Deploy to AWS
 Option A: ECS Fargate (Serverless Containers)</h3>
