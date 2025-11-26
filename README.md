@@ -11,11 +11,13 @@
 <img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
 
+https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
+
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
 <ul>
-  <li>🗺️ Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
-  <li>🧮 Estimates travel time/fares via Haversine distance + metro speed metricss</li>
+  <li>Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
+  <li>Estimates travel time/fares via Haversine distance + metro speed metricss</li>
   <li>Manages station data in MongoDB</li>
   <li> i18n support (English/Hindi)</li>
   <li>Provides REST APIs for route finding and station listing</li>
@@ -23,11 +25,11 @@
 
 <h3>Features</h3>
 <ul>
-<li>✅ REST APIs for CRUD operations on Stations</li>
-<li>✅ Route finding between two stations (line-wise basic implementation)</li>
-<li>✅ MongoDB integration for data persistence</li>
-<li>✅ CommandLineRunner seeder for initial station data</li>  
-<li>✅ Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
+<li>REST APIs for CRUD operations on Stations</li>
+<li>Route finding between two stations (line-wise basic implementation)</li>
+<li>MongoDB integration for data persistence</li>
+<li>CommandLineRunner seeder for initial station data</li>  
+<li>Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
 </ul>
 
 <h3> Tech Stack</h3>
@@ -191,7 +193,8 @@ mvn spring-boot:run
 | DELETE | `/stations/{id}`                         | Delete a station                |
 
 
-Note: Current /route API supports same-line routes only. Graph-based route finding for inter-line connectivity is under development.
+Note: Current /route API supports same-line routes only.
+Graph-based route finding for inter-line connectivity is under development.
 ```
 
 
@@ -209,7 +212,7 @@ public double calculateDistance(Station s1, Station s2) {
 ```
 <p>🌍 Earth's curvature-aware measurements between stations
 
-⚡ Cached results in Redis for frequent routes</p>
+Cached results in Redis for frequent routes</p>
 
 
 <h3>Haversine Formula</h3>
@@ -229,7 +232,7 @@ Precision: ±0.3% error margin vs. Vincenty formula
   <img width="3105" height="1323" alt="deepseek_mermaid_20250805_b6100b" src="https://github.com/user-attachments/assets/c7feb174-2b4b-4927-a699-01d09166b0d6" />
 </p>
 
-<h3>  Java Code → Docker Image </h3>
+ <h3>  Java Code → Docker Image </h3>
 <p align="center">
   <img width="2613" height="210" alt="deepseek_mermaid_20250815_c6f876" src="https://github.com/user-attachments/assets/a791054a-083d-4caf-88d2-46b22934e6ea" />
 </p>
@@ -241,16 +244,16 @@ Precision: ±0.3% error margin vs. Vincenty formula
 FROM openjdk:17-jdk
 COPY target/app.jar /app.jar
 CMD ["java", "-jar", "/app.jar"]
-
-
 ```
 
+<!---
 <h3>Push to AWS ECR (Elastic Container Registry)</h3>
 <p align="center">
   <img width="1627" height="210" alt="deepseek_mermaid_20250815_b9ff6d" src="https://github.com/user-attachments/assets/d96779cb-601a-4380-b3f8-8396c01219b0" />
 </p>
+--->
 
-
+<!--
 <h3>Commands:</h3>
 
 ```
@@ -258,23 +261,24 @@ aws ecr get-login-password | docker login --username AWS --password-stdin ACCOUN
 docker tag myapp:latest ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 docker push ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
 ```
+--->
 
+<!---
 <h3>Deploy to AWS
 Option A: ECS Fargate (Serverless Containers)</h3>
 <p align="center">
   <img width="1783" height="210" alt="deepseek_mermaid_20250815_b94c8e" src="https://github.com/user-attachments/assets/8fc191e5-0732-4ae6-8880-20b33fa96854" />
 </p>
+--->
 
-
+<!---
 <h3>Elastic Beanstalk (Single Command)</h3>
 
 ```
 eb init -p docker myapp
 eb create myapp-env
 ```
-
-<h3>Future Enhancements</h3>
- <p>Graph-based route finding (Dijkstra/BFS)</p>
+--->
 
 <h3>Contributing</h3>
 <p>Contributions are welcome! Please create issues or pull requests to suggest improvements or new features.</p>

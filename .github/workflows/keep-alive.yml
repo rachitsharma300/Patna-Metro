@@ -1,0 +1,14 @@
+name: Keep Render Backend Alive
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: 
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl request to backend
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" https://patna-metro-backend-latest.onrender.com
