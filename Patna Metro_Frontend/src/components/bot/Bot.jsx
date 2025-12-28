@@ -5,7 +5,7 @@ import stationsData from "../../utils/Stations.json";
 import { FaMicrophone, FaTimes } from "react-icons/fa";
 import { BsSendFill } from "react-icons/bs";
 
-// स्टेशन synonyms की mapping
+// Station synonyms mapping
 const stationAliases = new Map();
 stationsData.stations.forEach((station) => {
   station.synonyms.forEach((synonym) => {
