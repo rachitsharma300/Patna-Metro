@@ -1,9 +1,8 @@
 package com.bihar.patna_metro.service;
 
+import com.bihar.patna_metro.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bihar.patna_metro.model.Station;
-import com.bihar.patna_metro.repository.StationRepository;
 
 import java.util.List;
 
@@ -11,37 +10,40 @@ import java.util.List;
 public class FareService {
 
     @Autowired
-    private StationRepository stationRepository;
-
-    @Autowired
     private RouteFinderService routeFinderService;
 
     /**
-     * Calculates accurate fare based on actual track distance
+     * Calculates Patna Metro fare based on actual route distance
+     * Official Phase-1 Fare:
+     * Min ₹15 | Max ₹30
      */
     public int calculateFare(String sourceName, String destinationName) {
+
         List<Station> route = routeFinderService.findRoute(sourceName, destinationName);
 
-        if (route.isEmpty()) {
-            throw new IllegalArgumentException("No route found between stations");
-        }
-        if (route.size() == 1) {
-            return 10; // Base fare for same station
+        if (route == null || route.isEmpty()) {
+            throw new IllegalArgumentException("No route found between given stations");
         }
 
-        double totalDistance = calculateRouteDistance(route);
-        return getDelhiMetroStyleFare(totalDistance);
+        // Same source and destination → minimum fare
+        if (route.size() == 1) {
+            return 15;
+        }
+
+        double totalDistanceKm = calculateRouteDistance(route);
+        return getPatnaMetroFare(totalDistanceKm);
     }
 
     /**
-     * Calculates cumulative distance of entire route (station-to-station)
+     * Calculates total distance of the route using station lat/long
      */
     private double calculateRouteDistance(List<Station> route) {
-        double totalDistance = 0;
+        double totalDistance = 0.0;
 
         for (int i = 0; i < route.size() - 1; i++) {
             Station current = route.get(i);
             Station next = route.get(i + 1);
+
             totalDistance += calculateDistance(
                     current.getLatitude(), current.getLongitude(),
                     next.getLatitude(), next.getLongitude()
@@ -52,29 +54,35 @@ public class FareService {
     }
 
     /**
-     * Delhi Metro fare structure (updated 2023)
+     * Official Patna Metro Fare Logic (Phase-1)
      */
-    private int getDelhiMetroStyleFare(double distanceKm) {
-        if (distanceKm <= 2) return 10;
-        else if (distanceKm <= 5) return 20;
-        else if (distanceKm <= 12) return 30;
-        else if (distanceKm <= 21) return 40;
-        else if (distanceKm <= 32) return 50;
-        else return 60;
+    private int getPatnaMetroFare(double distanceKm) {
+
+        if (distanceKm <= 2) {
+            return 15;
+        } else if (distanceKm <= 5) {
+            return 20;
+        } else {
+            return 30;
+        }
     }
 
     /**
-     * Haversine formula (keep your existing implementation)
+     * Haversine formula to calculate distance between two geo points
      */
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-        // Your existing implementation
-        final int R = 6371;
+
+        final int R = 6371; // Earth radius in KM
+
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
+
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
                 + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
         return R * c;
     }
 }
