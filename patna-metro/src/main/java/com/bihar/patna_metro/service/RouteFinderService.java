@@ -3,6 +3,7 @@ package com.bihar.patna_metro.service;
 import com.bihar.patna_metro.model.Station;
 import com.bihar.patna_metro.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,9 +14,16 @@ public class RouteFinderService {
     @Autowired
     private StationRepository stationRepository;
 
+    @Cacheable(
+            value = "routes",
+            key = "#sourceName + '-' + #destinationName"
+    )
+
+
     public List<Station> findRoute(String sourceName, String destinationName) {
         Station source = getFirstStation(sourceName);
         Station destination = getFirstStation(destinationName);
+        System.out.println("Cache Testing");
 
         if (source == null || destination == null) {
             return Collections.emptyList();

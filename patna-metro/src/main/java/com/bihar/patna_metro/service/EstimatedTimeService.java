@@ -2,6 +2,7 @@ package com.bihar.patna_metro.service;
 
 import com.bihar.patna_metro.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public class EstimatedTimeService {
     /**
      * Calculates realistic travel time between stations
      */
+
+    @Cacheable(
+            value = "times",
+            key = "#sourceName + '-' + #destinationName"
+    )
+
     public int calculateEstimatedTime(String sourceName, String destinationName) {
         List<Station> route =  routeFinderService.findRoute(sourceName, destinationName);
 

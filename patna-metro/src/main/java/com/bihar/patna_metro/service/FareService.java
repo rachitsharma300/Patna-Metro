@@ -2,6 +2,7 @@ package com.bihar.patna_metro.service;
 
 import com.bihar.patna_metro.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,12 @@ public class FareService {
      * Official Phase-1 Fare:
      * Min ₹15 | Max ₹30
      */
+
+    @Cacheable(
+            value = "fares",
+            key = "#sourceName + '-' + #destinationName"
+    )
+
     public int calculateFare(String sourceName, String destinationName) {
 
         List<Station> route = routeFinderService.findRoute(sourceName, destinationName);
