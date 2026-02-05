@@ -10,12 +10,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for FareService
- * Focus is on fare calculation logic, not route finding
+ * Fare is calculated based on PASSING STATIONS (slab based)
  */
 @ExtendWith(MockitoExtension.class)
 class FareServiceTest {
@@ -29,79 +29,74 @@ class FareServiceTest {
     private Station stationA;
     private Station stationB;
     private Station stationC;
+    private Station stationD;
+    private Station stationE;
 
     @BeforeEach
     void setup() {
 
-        // Station A
-        stationA = new Station();
-        stationA.setName("Danapur");
-        stationA.setLatitude(25.580);
-        stationA.setLongitude(85.040);
-
-        // Station B (close distance)
-        stationB = new Station();
-        stationB.setName("Phulwari");
-        stationB.setLatitude(25.585);
-        stationB.setLongitude(85.045);
-
-        // Station C (farther distance)
-        stationC = new Station();
-        stationC.setName("PMCH");
-        stationC.setLatitude(25.610);
-        stationC.setLongitude(85.150);
+        stationA = new Station(); stationA.setName("A");
+        stationB = new Station(); stationB.setName("B");
+        stationC = new Station(); stationC.setName("C");
+        stationD = new Station(); stationD.setName("D");
+        stationE = new Station(); stationE.setName("E");
     }
 
     @Test
-    void shouldThrowExceptionWhenNoRouteFound() {
+    void shouldReturnMinimumFareWhenNoRouteFound() {
 
         when(routeFinderService.findRoute("A", "B"))
                 .thenReturn(List.of());
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> fareService.calculateFare("A", "B")
-        );
+        int fare = fareService.calculateFare("A", "B");
 
-        assertEquals(
-                "No route found between given stations",
-                exception.getMessage()
-        );
+        assertEquals(15, fare);
     }
 
     @Test
     void shouldReturnMinimumFareWhenSourceAndDestinationAreSame() {
 
-        when(routeFinderService.findRoute("Danapur", "Danapur"))
+        when(routeFinderService.findRoute("A", "A"))
                 .thenReturn(List.of(stationA));
 
-        int fare = fareService.calculateFare("Danapur", "Danapur");
+        int fare = fareService.calculateFare("A", "A");
 
-        assertEquals(15, fare,
-                "Same station travel should return minimum fare");
+        assertEquals(15, fare);
     }
 
     @Test
-    void shouldReturnMinimumFareForShortDistanceRoute() {
+    void shouldReturnMinimumFareForShortRoute() {
 
-        when(routeFinderService.findRoute("Danapur", "Phulwari"))
-                .thenReturn(List.of(stationA, stationB));
+        when(routeFinderService.findRoute("A", "B"))
+                .thenReturn(List.of(stationA, stationB)); // 1 passing
 
-        int fare = fareService.calculateFare("Danapur", "Phulwari");
+        int fare = fareService.calculateFare("A", "B");
 
-        assertEquals(15, fare,
-                "Short distance route should cost minimum fare");
+        assertEquals(15, fare);
     }
 
     @Test
-    void shouldReturnMediumFareForModerateDistanceRoute() {
+    void shouldReturnMediumFareForModerateRoute() {
 
-        when(routeFinderService.findRoute("Danapur", "PMCH"))
-                .thenReturn(List.of(stationA, stationB, stationC));
+        when(routeFinderService.findRoute("A", "D"))
+                .thenReturn(List.of(stationA, stationB, stationC, stationD)); // 3 passing
 
-        int fare = fareService.calculateFare("Danapur", "PMCH");
+        int fare = fareService.calculateFare("A", "D");
 
-        assertTrue(fare == 20 || fare == 30,
-                "Fare should be calculated based on distance slab");
+        assertEquals(20, fare);
+    }
+
+    @Test
+    void shouldReturnMaxFareForLongRoute() {
+
+        when(routeFinderService.findRoute("A", "E"))
+                .thenReturn(List.of(
+                        stationA, stationB, stationC, stationD, stationE,
+                        new Station(), new Station(), new Station(), new Station()
+                )); // 8+ passing
+
+        int fare = fareService.calculateFare("A", "E");
+
+        assertEquals(30, fare);
     }
 }
