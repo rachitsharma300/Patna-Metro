@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./i18n";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -16,6 +16,7 @@ import TermsOfService from "./pages/legal/TermsOfService";
 import Sitemap from "./pages/legal/Sitemap";
 import DisclaimerPopup from "./components/DisclaimerPopup";
 import Bot from "./components/bot/Bot";
+import { recordVisit } from "./services/api";
 
 function App() {
   //  Create a ref to access triggerSearch method from RouteFinder
@@ -24,6 +25,10 @@ function App() {
   //  States to hold source and destination selected by Bot
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+
+    useEffect(() => {
+    recordVisit();
+  }, []);
 
   //  Function that Bot will call to trigger the RouteFinder search
   const handleTriggerSearch = () => {
