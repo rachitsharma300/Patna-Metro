@@ -48,7 +48,7 @@ public class DataSeeder implements CommandLineRunner {
             saveStation("Moin-ul-Haq Stadium", "Blue Line", 25.6000, 85.1250, 6);
             saveStation("Rajendra Nagar", "Blue Line", 25.5950, 85.1150, 7);
             saveStation("Malahi Pakri", "Blue Line", 25.5850, 85.1050, 8);
-            saveStation("Khemni Chak", "Blue Line", 25.5500, 85.0900, 9); // correctly placed
+            saveStation("Khemni Chak", "Blue Line", 25.5500, 85.0900, 9);
             saveStation("Bhootnath", "Blue Line", 25.5750, 85.0950, 10);
             saveStation("Zero Mile", "Blue Line", 25.6000, 85.1000, 11);
             saveStation("New ISBT", "Blue Line", 25.5900, 85.0850, 12);
