@@ -10,12 +10,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for EstimatedTimeService
- * Focus is on time calculation logic, not route finding
+ * Time is calculated based on PASSING stations
  */
 @ExtendWith(MockitoExtension.class)
 class EstimatedTimeServiceTest {
@@ -32,76 +32,42 @@ class EstimatedTimeServiceTest {
 
     @BeforeEach
     void setup() {
-        // Station A
-        stationA = new Station();
-        stationA.setName("Danapur");
-        stationA.setLatitude(25.58);
-        stationA.setLongitude(85.04);
-        stationA.setLine("Red");
 
-        // Station B
-        stationB = new Station();
-        stationB.setName("Phulwari");
-        stationB.setLatitude(25.60);
-        stationB.setLongitude(85.10);
-        stationB.setLine("Red");
-
-        // Station C (Different line → interchange)
-        stationC = new Station();
-        stationC.setName("PMCH");
-        stationC.setLatitude(25.61);
-        stationC.setLongitude(85.15);
-        stationC.setLine("Blue");
+        stationA = new Station(); stationA.setName("A");
+        stationB = new Station(); stationB.setName("B");
+        stationC = new Station(); stationC.setName("C");
     }
 
     @Test
     void shouldReturnZeroTimeWhenSourceAndDestinationAreSame() {
 
-        when(routeFinderService.findRoute("Danapur", "Danapur"))
+        when(routeFinderService.findRoute("A", "A"))
                 .thenReturn(List.of(stationA));
 
-        int time = estimatedTimeService
-                .calculateEstimatedTime("Danapur", "Danapur");
+        int time = estimatedTimeService.calculateEstimatedTime("A", "A");
 
-        assertEquals(0, time, "Same station should return 0 minutes");
+        assertEquals(0, time);
     }
 
     @Test
-    void shouldCalculateTimeForValidRouteWithoutInterchange() {
+    void shouldCalculateTimeBasedOnPassingStations() {
 
-        when(routeFinderService.findRoute("Danapur", "Phulwari"))
-                .thenReturn(List.of(stationA, stationB));
+        when(routeFinderService.findRoute("A", "C"))
+                .thenReturn(List.of(stationA, stationB, stationC)); // 2 passing
 
-        int time = estimatedTimeService
-                .calculateEstimatedTime("Danapur", "Phulwari");
+        int time = estimatedTimeService.calculateEstimatedTime("A", "C");
 
-        assertTrue(time > 0, "Time should be greater than 0 for valid route");
+        assertEquals(5, time); // 2 × 2.5 = 5
     }
 
     @Test
-    void shouldAddInterchangePenaltyWhenRouteHasDifferentLines() {
+    void shouldReturnZeroWhenNoRouteFound() {
 
-        when(routeFinderService.findRoute("Danapur", "PMCH"))
-                .thenReturn(List.of(stationA, stationB, stationC));
-
-        int time = estimatedTimeService
-                .calculateEstimatedTime("Danapur", "PMCH");
-
-        assertTrue(time >= 7,
-                "Interchange route should include interchange penalty");
-    }
-
-    @Test
-    void shouldThrowExceptionWhenNoRouteFound() {
-
-        when(routeFinderService.findRoute("A", "B"))
+        when(routeFinderService.findRoute("X", "Y"))
                 .thenReturn(List.of());
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> estimatedTimeService.calculateEstimatedTime("A", "B")
-        );
+        int time = estimatedTimeService.calculateEstimatedTime("X", "Y");
 
-        assertEquals("No route found between stations", exception.getMessage());
+        assertEquals(0, time);
     }
 }
