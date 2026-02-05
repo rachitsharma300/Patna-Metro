@@ -11,6 +11,9 @@ import { MdEmail } from "react-icons/md";
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { getVisitCount } from "../services/api";
+
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -19,6 +22,15 @@ const Footer = () => {
     { name: "Blue Line", stations: 12, length: "16.94 km" },
     { name: "Red Line", stations: 13, length: "14.45 km" },
   ];
+  const [visitCount, setVisitCount] = useState(null);
+
+useEffect(() => {
+  getVisitCount()
+    .then((count) => setVisitCount(count))
+    .catch(() => {
+    });
+}, []);
+
 
   return (
     <motion.footer
@@ -176,7 +188,21 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <p className="mt-4 text-gray-500">{t("footer.developedBy")}</p>
+          {/* <p className="mt-4 text-gray-500">{t("footer.developedBy")}</p> */}
+          {visitCount !== null && (
+  <p className="mt-3 text-xs text-gray-500">
+    👥 Visited by{" "}
+    <span className="font-semibold text-gray-300">
+      {visitCount}
+    </span>{" "}
+    users
+  </p>
+)}
+
+<p className="mt-2 text-gray-500">
+  {t("footer.developedBy")}
+</p>
+
         </div>
       </div>
     </motion.footer>
