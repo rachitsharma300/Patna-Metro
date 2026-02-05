@@ -56,7 +56,7 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
         route: routeRes.data,
         time: Math.round(timeRes.data.estimated_time_minutes),
         fare: fareRes.data,
-        stationsCount: routeRes.data.length,
+        stationsCount: Math.max(routeRes.data.length - 1, 0),
       };
     } catch (error) {
       console.error("Error fetching journey details:", error);
