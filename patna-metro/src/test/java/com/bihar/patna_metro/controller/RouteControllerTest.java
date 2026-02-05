@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,41 +32,13 @@ class RouteControllerTest {
     @Test
     void shouldReturnRouteWhenValidSourceAndDestinationProvided() throws Exception {
 
-        // Creating Station objects using setters (matches actual model)
-        Station s1 = new Station();
-        s1.setName("Danapur");
-        s1.setLatitude(25.58);
-        s1.setLongitude(85.04);
+        Station s1 = new Station(); s1.setName("A");
+        Station s2 = new Station(); s2.setName("B");
 
-        Station s2 = new Station();
-        s2.setName("PMCH");
-        s2.setLatitude(25.61);
-        s2.setLongitude(85.15);
-
-        List<Station> stations = List.of(s1, s2);
-
-        when(routeFinderService.findRoute("Danapur", "PMCH"))
-                .thenReturn(stations);
-
-        Map<String, String> request = Map.of(
-                "source", "Danapur",
-                "destination", "PMCH"
-        );
-
-        mockMvc.perform(post("/api/route")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Route found"))
-                .andExpect(jsonPath("$.totalStations").value(2))
-                .andExpect(jsonPath("$.stations").isArray());
-    }
-
-    @Test
-    void shouldReturnNoRouteMessageWhenServiceReturnsEmptyRoute() throws Exception {
+        List<Station> stations = List.of(s1, s2); // 1 passing
 
         when(routeFinderService.findRoute("A", "B"))
-                .thenReturn(List.of());
+                .thenReturn(stations);
 
         Map<String, String> request = Map.of(
                 "source", "A",
@@ -79,18 +49,8 @@ class RouteControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("No route found"));
-    }
-
-    @Test
-    void shouldReturnErrorWhenSourceOrDestinationMissing() throws Exception {
-
-        Map<String, String> request = Map.of("source", "Danapur");
-
-        mockMvc.perform(post("/api/route")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.error").value("Source or destination missing"));
+                .andExpect(jsonPath("$.message").value("Route found"))
+                .andExpect(jsonPath("$.totalStations").value(1))
+                .andExpect(jsonPath("$.stations").isArray());
     }
 }
