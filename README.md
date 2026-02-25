@@ -286,8 +286,6 @@ eb create myapp-env
   <img src="https://github.com/user-attachments/assets/48e4e3fd-ac1e-4a05-8da4-8e2e13262eb7" alt="Your Image" />
 </p>
 
-
-<!---
 ## 🏗️ Architecture & Workflow
 
 The app follows a modern client-server architecture. Below is the workflow for a typical user journey (Route Finding):
@@ -321,4 +319,3 @@ graph TD
     I[MongoDB Atlas] <--> D
     end
 ```
---->
