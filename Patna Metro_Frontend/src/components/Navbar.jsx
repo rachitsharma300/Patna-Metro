@@ -112,7 +112,7 @@ const Navbar = () => {
               )}
 
               <a
-                href="/patna-metro.apk"
+                href="https://github.com/rachitsharma300/Patna-Metro-App/releases/download/v1.0.0-beta/Patna.Metro.apk"
                 download
                 className="hidden lg:flex items-center px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-[#0B3D91] font-bold rounded-full transition-all shadow-md gap-2"
               >

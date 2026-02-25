@@ -149,7 +149,7 @@ function Hero() {
               {i18n.language === "en" ? "हिन्दी" : "English"}
             </button>
             <a
-              href="/patna-metro.apk"
+              href="https://github.com/rachitsharma300/Patna-Metro-App/releases/download/v1.0.0-beta/Patna.Metro.apk"
               download
               className="col-span-2 md:col-span-3 flex items-center justify-center px-4 py-3 text-sm font-bold text-center text-white transition-all rounded-xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 shadow-xl hover:shadow-green-500/20 gap-3 border border-green-400/30"
             >
