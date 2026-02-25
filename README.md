@@ -288,8 +288,6 @@ eb create myapp-env
 
 
 <!---
-
-
 ## 🏗️ Architecture & Workflow
 
 The app follows a modern client-server architecture. Below is the workflow for a typical user journey (Route Finding):
@@ -323,5 +321,4 @@ graph TD
     I[MongoDB Atlas] <--> D
     end
 ```
-
 --->
