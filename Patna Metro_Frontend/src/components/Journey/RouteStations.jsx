@@ -18,8 +18,15 @@ const RouteStations = ({ route }) => {
       <div className="space-y-4">
         {route.map((station, index) => {
           const nextStation = route[index + 1];
-          const isInterchange =
-            nextStation && station.line !== nextStation.line;
+          const prevStation = route[index - 1];
+
+          // Skip if this is the second entry of a duplicated interchange station
+          if (prevStation && station.name === prevStation.name) {
+            return null;
+          }
+
+          // Check if this is an interchange (line changes between current and next station)
+          const isInterchange = nextStation && station.line !== nextStation.line;
 
           return (
             <React.Fragment key={station.id || index}>
@@ -37,15 +44,24 @@ const RouteStations = ({ route }) => {
                 />
 
                 {isInterchange && (
-                  <div className="flex flex-col items-center space-y-1 mt-2">
-                    <InterchangeIcon animated={false} />
-                    <p className="text-xs font-semibold text-yellow-600">
-                      Interchange to {nextStation.line}
+                  <div className="flex flex-col items-center space-y-1 mt-4 mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <div className="flex items-center space-x-2">
+                      <InterchangeIcon animated={true} />
+                      <p className="text-sm font-bold text-blue-700">
+                        {t("interchangeStation")}
+                      </p>
+                    </div>
+                    <p className="text-xs text-blue-500">
+                      {t("switchLines", {
+                        from: t(station.line === "Blue Line" ? "blueLine" : "redLine"),
+                        to: t(nextStation.line === "Blue Line" ? "blueLine" : "redLine")
+                      })}
                     </p>
                   </div>
                 )}
 
-                {index < route.length - 1 && <StationTrack />}
+                {index < route.length - 1 && !isInterchange && <StationTrack />}
+                {isInterchange && index < route.length - 2 && <StationTrack />}
               </motion.div>
             </React.Fragment>
           );

@@ -25,7 +25,7 @@ const RouteForm = ({
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Source Station */}
         <div className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200">
-          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+          <label htmlFor="source-station-select" className="text-sm font-medium text-gray-700 mb-2 flex items-center">
             <FaMapMarkerAlt className="mr-2 text-red-500 text-lg" />
             <span className="font-bold text-gray-800">
               {t("RouteFinder.sourceStation")}
@@ -33,6 +33,7 @@ const RouteForm = ({
           </label>
           <div className="relative">
             <select
+              id="source-station-select"
               onChange={(e) => onSelectChange("source", e.target.value)}
               value={selected.source}
               className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white font-medium"
@@ -73,7 +74,7 @@ const RouteForm = ({
 
         {/* Destination Station */}
         <div className="flex-1 w-full bg-white p-4 rounded-xl shadow-md border border-gray-200">
-          <label className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+          <label htmlFor="destination-station-select" className="text-sm font-medium text-gray-700 mb-2 flex items-center">
             <FaFlagCheckered className="mr-2 text-green-500 text-lg" />
             <span className="font-bold text-gray-800">
               {t("RouteFinder.destinationStation")}
@@ -81,6 +82,7 @@ const RouteForm = ({
           </label>
           <div className="relative">
             <select
+              id="destination-station-select"
               onChange={(e) => onSelectChange("destination", e.target.value)}
               value={selected.destination}
               className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white font-medium"
@@ -104,11 +106,10 @@ const RouteForm = ({
         <button
           onClick={onFindRoute}
           disabled={loading}
-          className={`flex items-center px-8 py-4 rounded-full text-white font-bold tracking-wide transition-all duration-300 ${
-            loading
+          className={`flex items-center px-8 py-4 rounded-full text-white font-bold tracking-wide transition-all duration-300 ${loading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
-          }`}
+            }`}
         >
           <FaSearch className="mr-3 text-lg" />
           {loading
