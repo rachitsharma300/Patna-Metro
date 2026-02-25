@@ -70,4 +70,17 @@ class EstimatedTimeServiceTest {
 
         assertEquals(0, time);
     }
+    @Test
+    void shouldIncludeTransferPenaltyForInterchangeRoute() {
+        stationA.setLine("Red Line");
+        stationB.setLine("Blue Line");
+
+        when(routeFinderService.findRoute("A", "B"))
+                .thenReturn(List.of(stationA, stationB)); // 1 passing, different lines
+
+        int time = estimatedTimeService.calculateEstimatedTime("A", "B");
+
+        // (1 passing * 2.5) + 5.0 penalty = 7.5 -> rounded to 8
+        assertEquals(8, time);
+    }
 }
