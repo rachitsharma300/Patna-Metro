@@ -27,7 +27,19 @@ public class EstimatedTimeService {
 
         int passingStations = route.size() - 1;
         double avgTimePerStation = 2.5; // minutes
+        
+        double totalTime = passingStations * avgTimePerStation;
 
-        return (int) Math.round(passingStations * avgTimePerStation);
+        // Check for line interchange (Transfer Penalty)
+        long distinctLines = route.stream()
+                .map(Station::getLine)
+                .distinct()
+                .count();
+
+        if (distinctLines > 1) {
+            totalTime += 5.0; // 5 minutes interchange penalty
+        }
+
+        return (int) Math.round(totalTime);
     }
 }

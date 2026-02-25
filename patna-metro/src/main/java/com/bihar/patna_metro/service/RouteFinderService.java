@@ -45,12 +45,13 @@ public class RouteFinderService {
             return getStationsBetween(source, destination);
         }
 
-        // Case 2: Different metro lines → find possible interchange stations
-        // (Hardcoded for now, can be DB-driven later)
-        List<String> interchangeStations = Arrays.asList(
-                "Patna Junction",
-                "Khemni Chak"
-        );
+        // Case 2: Different metro lines → find possible interchange stations dynamically
+        List<String> interchangeStations = stationRepository.findAll().stream()
+                .collect(java.util.stream.Collectors.groupingBy(Station::getName))
+                .entrySet().stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .map(java.util.Map.Entry::getKey)
+                .toList();
 
         // Try routing via each interchange station
         for (String interchangeName : interchangeStations) {
@@ -85,8 +86,10 @@ public class RouteFinderService {
                     fullRoute.add(interchangeOnDestinationLine);
                 }
 
-                // Add remaining destination route
-                fullRoute.addAll(routeFromInterchange);
+                // Add remaining destination route (skip the first station as it's the duplicate interchange)
+                if (!routeFromInterchange.isEmpty()) {
+                    fullRoute.addAll(routeFromInterchange.subList(1, routeFromInterchange.size()));
+                }
 
                 return fullRoute;
             }
@@ -122,51 +125,35 @@ public class RouteFinderService {
      * ordered correctly using sequence numbers.
      */
     private List<Station> getStationsBetween(Station source, Station destination) {
-
         String line = source.getLine();
         int start = source.getSequenceNumber();
         int end = destination.getSequenceNumber();
 
-        List<Station> stations = new ArrayList<>();
+        List<Station> stations;
 
-        // Case: Same station selected
         if (start == end) {
-            stations.add(source);
-        }
-        // Forward direction
-        else if (start < end) {
-            stations = stationRepository
-                    .findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(
-                            line, start, end);
-
-            // Fallback safety (should not normally happen)
-            if (stations.isEmpty()) {
-                stations.add(source);
-                stations.add(destination);
-            }
-        }
-        // Reverse direction
-        else {
-            stations = stationRepository
-                    .findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(
-                            line, end, start);
-
-            if (stations.isEmpty()) {
-                stations.add(destination);
-                stations.add(source);
-            } else {
-                Collections.reverse(stations);
-            }
+            return new ArrayList<>(List.of(source));
+        } 
+        
+        if (start < end) {
+            // Forward
+            stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, start, end);
+        } else {
+            // Reverse
+            stations = stationRepository.findByLineAndSequenceNumberBetweenOrderBySequenceNumberAsc(line, end, start);
+            Collections.reverse(stations);
         }
 
-        // Final safety checks: ensure source & destination are included
-        if (stations.isEmpty()
-                || !stations.get(0).getName().equals(source.getName())) {
+        // Robust cleanup: ensure source is first and destination is last, and remove intermediate duplicates
+        if (stations.isEmpty()) {
+            return new ArrayList<>(List.of(source, destination));
+        }
+
+        // Final safety: if the result list isn't exactly source->dest, fix the boundaries
+        if (!stations.get(0).getName().equals(source.getName())) {
             stations.add(0, source);
         }
-
-        if (!stations.get(stations.size() - 1)
-                .getName().equals(destination.getName())) {
+        if (!stations.get(stations.size() - 1).getName().equals(destination.getName())) {
             stations.add(destination);
         }
 

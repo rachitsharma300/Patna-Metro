@@ -92,8 +92,8 @@ class FareServiceTest {
         when(routeFinderService.findRoute("A", "E"))
                 .thenReturn(List.of(
                         stationA, stationB, stationC, stationD, stationE,
-                        new Station(), new Station(), new Station(), new Station()
-                )); // 8+ passing
+                        new Station()
+                )); // 5 passing
 
         int fare = fareService.calculateFare("A", "E");
 

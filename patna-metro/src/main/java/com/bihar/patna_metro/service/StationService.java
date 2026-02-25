@@ -18,7 +18,7 @@ public class StationService {
     }
 
     public Station saveStation(Station station) {
-        List<Station> existing = stationRepository.findByName(station.getName());
+        List<Station> existing = stationRepository.findByNameAndLine(station.getName(), station.getLine());
         if (!existing.isEmpty()) {
             return existing.get(0);
         }

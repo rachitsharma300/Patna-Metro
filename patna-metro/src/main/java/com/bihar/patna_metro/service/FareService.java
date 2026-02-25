@@ -43,7 +43,7 @@ public class FareService {
         } else if (passingStations <= 7) {
             return 25;
         } else {
-            return 30; // end-to-end max fare
+            return 30; // Max fare for 8+ stations
         }
     }
 }
