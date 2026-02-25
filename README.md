@@ -285,3 +285,38 @@ eb create myapp-env
 <p align="center">
   <img src="https://github.com/user-attachments/assets/48e4e3fd-ac1e-4a05-8da4-8e2e13262eb7" alt="Your Image" />
 </p>
+
+
+## 🏗️ Architecture & Workflow
+
+The app follows a modern client-server architecture. Below is the workflow for a typical user journey (Route Finding):
+
+```mermaid
+graph TD
+    A[User Web/Mobile Input] -->|Voice/Text| B{Bodhi AI Bot}
+    B -->|NLP Processing| C[Station Matcher Utility]
+    C -->|REST API Request| D[Spring Boot Backend]
+    D -->|BFS/Dijkstra Algorithm| E[Route & Fare Service]
+    E -->|JSON Response| D
+    D -->|Success| F[UI Navigation]
+    F -->|Auto-Trigger| G[Route Finder Display]
+    G -->|Interactive| H[Journey Summary + Station Timeline]
+    
+    subgraph "Client Side (React / Android)"
+    A
+    B
+    C
+    F
+    G
+    H
+    end
+    
+    subgraph "Server Side (Docker/Render)"
+    D
+    E
+    end
+    
+    subgraph "Cloud Data"
+    I[MongoDB Atlas] <--> D
+    end
+```
