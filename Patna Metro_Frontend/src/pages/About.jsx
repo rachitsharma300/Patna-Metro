@@ -3,13 +3,13 @@ import { Trans, useTranslation } from "react-i18next";
 import { Button } from "../components/ui/Button";
 import { MetroTimeline } from "../components/MetroTimeline";
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import myImage from "../assets/rachit.jpg"; 
+import myImage from "../assets/rachit.jpg";
 
 export const About = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4">
+    <div className="max-w-7xl mx-auto pt-24 pb-8 px-4 lg:px-8">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           {t("aboutPage.title")}
@@ -185,15 +185,6 @@ export const About = () => {
             <FaInstagram size={30} />
           </a>
         </div>
-      </div>
-      <div className="text-center mt-12">
-        <Button
-          variant="primary"
-          onClick={() => window.open("https://delhimetrorail.com/", "_blank")}
-          className="px-8 py-3 text-lg"
-        >
-          {t("aboutPage.officialWebsiteButton")}
-        </Button>
       </div>
     </div>
   );
