@@ -45,16 +45,16 @@
     "metroLinesTitle": "Metro Lines",
     "contactUsTitle": "Contact Us",
     "address": "Patna Metro Rail Corporation, Bailey Road, Patna",
-    "phone": "+91 9871 874 0XX",
-    "email": "contact@patnametro.in",
+    "phone": "+91 9871 874 041",
+    "email": "rachitsharma300.dev@gmail.com",
     "subscribeTitle": "Subscribe to Updates",
     "subscribePlaceholder": "Your email",
     "subscribeButton": "Subscribe",
-    "copyright": "© {{year}} Patna Metro Explorer. All rights reserved.",
+    "copyright": "© {{year}} Patna Metro. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "sitemap": "Sitemap",
-    "developedBy": "A Patna Metro initiative by Rachit"
+    "developedBy": "Made with ❤️ by Rachit Sharma"
   },
   "RouteFinder": {
     "sourceStation": "Source Station",
@@ -93,9 +93,15 @@
     "selectStation": "Select station",
     "calculateFare": "Calculate Fare",
     "importantNotice": "Important Notice",
-    "noticeDetails": "• Children below 90 cm height travel free\n• Senior citizens (60+ years) get 20% discount\n• Smart cards can be recharged online or at any station\n• Fares are subject to revision. Last updated: "
+    "noticeDetails": "• Children below 90 cm height travel free\n• Senior citizens (60+ years) get 20% discount\n• Smart cards can be recharged online or at any station\n• Fares are subject to revision. Last updated: ",
+    "estimatedFare": "Estimated Fare",
+    "validUntil": "Valid Until",
+    "nextNotification": "Next Notification",
+    "smartTravel": "Smart Travel",
+    "emergencyHelpline": "Emergency Helpline",
+    "childPolicy": "Child Policy",
+    "freeForKids": "Free for kids under 90cm"
   },
-
   "aboutPage": {
     "developerTitle": "About the Developer",
     "developerCredit": "This application was designed and developed by <1>Rachit Sharma</1> with the aim of providing comprehensive information about the Patna Metro.",
@@ -132,16 +138,61 @@
       "Key Stations: Patna Airport, Gandhi Maidan, Patna Sahib"
     ],
     "projectTimelineTitle": "Project Timeline",
+    "timeline": {
+      "events": [
+        {
+          "date": "2014",
+          "title": "Concept Proposed",
+          "description": "Initial proposal for Patna Metro submitted to central government"
+        },
+        {
+          "date": "2016",
+          "title": "Feasibility Study",
+          "description": "Detailed project report prepared by RITES"
+        },
+        {
+          "date": "Feb 2018",
+          "title": "Approval Granted",
+          "description": "Union Cabinet approves Patna Metro project"
+        },
+        {
+          "date": "Feb 2019",
+          "title": "Foundation Laid",
+          "description": "PM Modi lays foundation stone for the project"
+        },
+        {
+          "date": "2021",
+          "title": "Construction Begins",
+          "description": "Actual construction work starts on priority corridors"
+        },
+        {
+          "date": "2024 (Expected)",
+          "title": "First Trial Run",
+          "description": "Expected trial run on completed sections"
+        },
+        {
+          "date": "2025",
+          "title": "Priority Segment Launch",
+          "description": "Opening of Malahi Pakri to ISBT segment"
+        },
+        {
+          "date": "2027 (Expected)",
+          "title": "Full Operation",
+          "description": "Expected completion of Phase 1"
+        }
+      ]
+    },
     "implementationFundingTitle": "Implementation & Funding",
     "implementationFundingPara1": "The project is being implemented by the Patna Metro Rail Corporation (PMRC), a 50:50 joint venture between the Government of India and Government of Bihar. The funding pattern follows the standard metro rail policy with equal equity participation from both governments.",
     "implementationFundingPara2": "Japan International Cooperation Agency (JICA) is providing loan assistance for the project, covering about 60% of the total project cost.",
     "officialWebsiteButton": "Official Website"
   },
-
   "hero": {
     "title": "PATNA METRO",
-    "description": "Under the visionary leadership of Hon’ble Prime Minister Narendra Modi and Hon’ble Chief Minister Nitish Kumar, Patna Metro — Bihar’s first rapid transit system — is set to transform the city’s connectivity by seamlessly connecting North and South Patna with modern infrastructure, world-class facilities, and a smarter, faster commute.",
+    "description": "Under the visionary leadership of Hon’ble Prime Minister Narendra Modi and Hon’ble Chief Minister Nitish Kumar, Patna Metro - Bihar’s first rapid transit system - is set to transform the city’s connectivity by seamlessly connecting North and South Patna with modern infrastructure, world-class facilities, and a smarter, faster commute.",
     "cta": "Find Your Route",
+    "downloadApp": "DOWNLOAD APP",
+    "getApp": "GET APP",
     "emergencyTitle": "Emergency Contacts",
     "emergencyPolice": "Police: 100",
     "emergencyAmbulance": "Ambulance: 102",
@@ -149,7 +200,6 @@
     "emergencyMetroHelpline": "Metro Helpline: 9871-8740-XX",
     "ticker": "• PATNA METRO UPDATE: Operations on the priority corridor (Malahi Pakri to ISBT) with 5 stations are scheduled to begin by August 15, 2025. Stay safe! For emergencies, contact Police: 112 or Fire: 101. The metro will offer free WiFi at all stations. •"
   },
-
   "nav": {
     "home": "Home",
     "routeFinder": "Route Finder",
@@ -164,7 +214,6 @@
     "fare": "Fare",
     "stations": "Stations"
   },
-
   "privacyPolicy": {
     "title": "Privacy Policy",
     "intro": "This Privacy Policy explains how we collect, use, and protect your information when you use our Patna Metro Bot. We do not collect or store any personal data.",
@@ -181,7 +230,6 @@
     "section4Title": "4. Changes to This Policy",
     "section4Text": "We may update our Privacy Policy from time to time. Whenever we make a change, we will post the new policy on this page. We encourage you to review this page periodically."
   },
-
   "terms": {
     "title": "Terms of Service",
     "section1Title": "1. Acceptance of Terms",
@@ -192,6 +240,39 @@
     "section3Text": "We are not liable for any direct, indirect, incidental, or consequential damages that may result from the use or inability to use our bot. The service is provided 'as is' without any warranties.",
     "section4Title": "4. Changes to Terms",
     "section4Text": "We reserve the right to modify these Terms of Service at any time. Any changes will be effective immediately upon posting. Your continued use of the service signifies your acceptance of the updated terms."
-  }
-  
+  },
+  "serviceTimings": "Service Timings",
+  "firstTrain": "First Train",
+  "lastTrain": "Last Train",
+  "frequency": "Frequency",
+  "mins": "Mins",
+  "keyInterchanges": "Key Interchanges",
+  "blueLine": "Blue Line",
+  "redLine": "Red Line",
+  "elevated": "Elevated",
+  "underground": "Underground",
+  "totalStations": "Total Stations",
+  "totalLength": "Total Length",
+  "corridors": "Corridors",
+  "busiestStations": "Busiest & Key Stations",
+  "metroStats": {
+    "title": "🏗️ Patna Metro - At a Glance",
+    "elevated": "Elevated",
+    "underground": "Underground",
+    "stations": "Stations",
+    "totalStations": "Total Stations",
+    "totalLength": "Total Length",
+    "km": "km",
+    "corridors": "Corridors",
+    "busiestStations": "Busiest & Key Stations"
+  },
+  "stationsDesc": {
+    "PatnaJunction": "Busiest interchange • Direct connect to railway station",
+    "GandhiMaidan": "Historic landmark • Busy area",
+    "PMCH": "Medical college • Hospital area",
+    "PatnaZoo": "Tourist spot • Busy on weekends",
+    "NewISBT": "Bus terminal • Transport hub"
+  },
+  "interchangeStation": "Interchange Station",
+  "switchLines": "Switch from {{from}} to {{to}}"
 }
