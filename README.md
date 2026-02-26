@@ -1,8 +1,6 @@
-<!---
 <p align="center">
   <img src="https://github.com/user-attachments/assets/48e4e3fd-ac1e-4a05-8da4-8e2e13262eb7" alt="Your Image" width="1000" height="1000" />
 </p>
---->
 <h1 align="center">🚇 Patna Metro Route Finder</h1>
 
 <p align="center">
@@ -11,9 +9,9 @@
 <img src= "https://img.shields.io/badge/MongoDB-%2324292e.svg?logo=mongodb&logoColor=white" />
 <img src= "https://img.shields.io/badge/License-MIT-green.svg" />
 </p>
-
+<!--
 https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
-
+-->
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a high-performance system that connects a <b>React</b> frontend and <b>Android</b> app with a <b>Spring Boot</b> backend to provide real-time route finding, fare estimation, and AI-powered assistance.</p>
 
