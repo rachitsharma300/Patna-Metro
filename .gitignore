@@ -68,3 +68,6 @@ frontend/.vscode/
 
 # OS files
 Thumbs.db
+
+# Windows Defaults Files
+desktop.ini

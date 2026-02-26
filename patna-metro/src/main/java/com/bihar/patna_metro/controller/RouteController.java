@@ -11,39 +11,51 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/route")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") // Allow frontend (React) to call this API
 public class RouteController {
 
     @Autowired
     private RouteFinderService routeFinderService;
 
+    /**
+     * Finds the metro route between source and destination stations.
+     *
+     * Input  : { source, destination }
+     * Output : Ordered list of stations + passing station count
+     */
     @PostMapping
     public Map<String, Object> findRoute(@RequestBody Map<String, String> request) {
+
+        // Extract source & destination from request body
         String source = request.get("source");
         String destination = request.get("destination");
 
+        // Response map sent back to frontend
         Map<String, Object> response = new HashMap<>();
 
+        // Validation: source or destination missing
         if (source == null || destination == null) {
             response.put("error", "Source or destination missing");
             return response;
         }
 
-        //  Dummy implementation - Replace with actual logic
+        // Call service layer to compute the route (ordered stations)
         List<Station> route = routeFinderService.findRoute(source, destination);
 
+        // If no route found between given stations
         if (route.isEmpty()) {
             response.put("message", "No route found");
-        } else {
+        }
+        // Route found successfully
+        else {
             response.put("message", "Route found");
-            response.put("stations", route);
-            response.put("totalStations", route.size());
 
-            //  Include expected keys for frontend
-            response.put("lines", List.of("Red")); // Replace with real lines data
-            response.put("totalTime", "30 minutes");
-            response.put("fare", 20);
-            response.put("interchange", null); // or "XYZ Station" if any
+            // Full list of stations in travel order (used for map & station list UI)
+            response.put("stations", route);
+
+            // Number of stations PASSED (not including source station)
+            // Example: A -> B -> C  => 2 stations passed
+            response.put("totalStations", Math.max(route.size() - 1, 0));
         }
 
         return response;

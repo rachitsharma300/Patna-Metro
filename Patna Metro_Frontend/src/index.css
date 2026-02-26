@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-blue: #0B3D91;
+  --secondary-blue: #1a4ca3;
+  --accent-blue: #2b5cb5;
+  --accent-yellow: #FACC15;
+  --bg-soft: #F8FAFC;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg-soft)] text-slate-900 antialiased font-sans;
+  }
+}
+
+@layer components {
+  .app-gradient {
+    @apply bg-gradient-to-r from-[#0B3D91] via-[#1a4ca3] to-[#2b5cb5];
+  }
+  
+  .app-card {
+    @apply bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100;
+  }
+}
+
 #google_translate_element {
   display: none;
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0B3D91;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a4ca3;
 }

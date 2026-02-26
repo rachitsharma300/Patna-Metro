@@ -14,22 +14,67 @@
 https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 
 <h3> Project Overview</h3>
-<p>Patna Metro Route Finder is a Java Spring Boot based backend application that:</p>
-<ul>
-  <li>Stores metro topology (Red/Blue Lines, interchanges) in MongoDB</li>
-  <li>Estimates travel time/fares via Haversine distance + metro speed metricss</li>
-  <li>Manages station data in MongoDB</li>
-  <li> i18n support (English/Hindi)</li>
-  <li>Provides REST APIs for route finding and station listing</li>
-</ul>
+<p>Patna Metro Route Finder is a high-performance system that connects a <b>React</b> frontend and <b>Android</b> app with a <b>Spring Boot</b> backend to provide real-time route finding, fare estimation, and AI-powered assistance.</p>
+
+## 🏗️ Architecture & Workflow
+
+The app follows a modern client-server architecture. Below is the workflow for a typical user journey (Route Finding):
+
+```mermaid
+graph TD
+    A[User Web/Mobile Input] -->|Voice/Text| B{Bodhi AI Bot}
+    B -->|NLP Processing| C[Station Matcher Utility]
+    C -->|REST API Request| D[Spring Boot Backend]
+    D -->|BFS/Dijkstra Algorithm| E[Route & Fare Service]
+    E -->|JSON Response| D
+    D -->|Success| F[UI Navigation]
+    F -->|Auto-Trigger| G[Route Finder Display]
+    G -->|Interactive| H[Journey Summary + Station Timeline]
+    
+    subgraph "Client Side (React / Android)"
+    A
+    B
+    C
+    F
+    G
+    H
+    end
+    
+    subgraph "Server Side (Docker/Render)"
+    D
+    E
+    end
+    
+    subgraph "Cloud Data"
+    I[MongoDB Atlas] <--> D
+    end
+```
+
+### 📡 Full System Interaction & APIs
+
+The ecosystem consists of three main pillars: **Web**, **Mobile**, and **Cloud Backend**.
+
+| Component | Role | Interaction Channel |
+|-----------|------|---------------------|
+| **Frontend (React)** | Core Web UI | Axios $\rightarrow$ Render API |
+| **Mobile App** | On-the-go access | REST API $\rightarrow$ Render API |
+| **Backend (Spring Boot)** | Decision Engine | Docker Container on Render |
+| **Database (MongoDB)** | Persistent Storage | Spring Data MongoDB |
+
+#### **API Flow Sequence:**
+1. **Initial Sync**: When the app starts, it hits `/api/stations` to cache all available station metadata locally.
+2. **Dynamic Search**: When a user selects two stations:
+   - **Route API**: `/api/stations/route` calculates the sequence of stations.
+   - **Fare API**: `/api/fare` uses path length to determine slab (₹15, ₹20, etc.).
+   - **Time API**: `/api/estimated-time` predicts travel duration based on station count + interchange penalty.
+3. **AI Bot Processing**: The Bot hits a specialized `/api/bot/voice-route` endpoint that handles natural language queries and returns a "Hindi Speech Script".
 
 <h3>Features</h3>
 <ul>
-<li>REST APIs for CRUD operations on Stations</li>
-<li>Route finding between two stations (line-wise basic implementation)</li>
-<li>MongoDB integration for data persistence</li>
-<li>CommandLineRunner seeder for initial station data</li>  
-<li>Extensible architecture for future enhancements (graph-based routes, fares, timings, UI integration)</li>
+<li><b>Inter-line Routing</b>: Finds the shortest path between Blue and Red lines via <b>Patna Junction</b> interchange.</li>
+<li><b>Intelligent Matching</b>: Uses fuzzy search to match user voice input even with dialects.</li>
+<li><b>Scalable Deployment</b>: Backend is fully containerized with <b>Docker</b> for one-click deployment to Render/AWS.</li>
+<li><b>Persistent Visits</b>: Real-time visit counter tracked via MongoDB.</li> 
 </ul>
 
 <h3> Tech Stack</h3>
@@ -183,19 +228,14 @@ mvn spring-boot:run
 
 
 ## 📡 **API Endpoints**
-```
-| Method | Endpoint                                 | Description                     |
-|--------|------------------------------------------|---------------------------------|
-| GET    | `/stations`                              | Get all stations                |
-| GET    | `/route?source=...&destination=...`      | Find route between two stations |
-| POST   | `/stations`                              | Add a new station               |
-| PUT    | `/stations/{id}`                         | Update station info             |
-| DELETE | `/stations/{id}`                         | Delete a station                |
 
-
-Note: Current /route API supports same-line routes only.
-Graph-based route finding for inter-line connectivity is under development.
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/stations` | Get all stations for dropdowns |
+| `GET` | `/api/stations/route` | Find route between two stations |
+| `GET` | `/api/fare` | Get fare for a specific journey |
+| `GET` | `/api/estimated-time` | Get estimated travel duration |
+| `POST` | `/api/bot/voice-route` | AI Bot natural language query |
 
 
 <h3>Haversine-Powered Distance Calculation</h3>
