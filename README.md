@@ -15,40 +15,6 @@ https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a high-performance system that connects a <b>React</b> frontend and <b>Android</b> app with a <b>Spring Boot</b> backend to provide real-time route finding, fare estimation, and AI-powered assistance.</p>
 
-## 🏗️ Architecture & Workflow
-
-The app follows a modern client-server architecture. Below is the workflow for a typical user journey (Route Finding):
-
-```mermaid
-graph TD
-    A[User Web/Mobile Input] -->|Voice/Text| B{Bodhi AI Bot}
-    B -->|NLP Processing| C[Station Matcher Utility]
-    C -->|REST API Request| D[Spring Boot Backend]
-    D -->|BFS/Dijkstra Algorithm| E[Route & Fare Service]
-    E -->|JSON Response| D
-    D -->|Success| F[UI Navigation]
-    F -->|Auto-Trigger| G[Route Finder Display]
-    G -->|Interactive| H[Journey Summary + Station Timeline]
-    
-    subgraph "Client Side (React / Android)"
-    A
-    B
-    C
-    F
-    G
-    H
-    end
-    
-    subgraph "Server Side (Docker/Render)"
-    D
-    E
-    end
-    
-    subgraph "Cloud Data"
-    I[MongoDB Atlas] <--> D
-    end
-```
-
 ### 📡 Full System Interaction & APIs
 
 The ecosystem consists of three main pillars: **Web**, **Mobile**, and **Cloud Backend**.
