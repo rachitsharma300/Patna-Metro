@@ -4,7 +4,7 @@
   "metroMap": "Metro Map",
   "fareInfo": "Fare Info",
   "about": "About",
-  "welcome": "Welcome to Patna Metro",
+  "welcome": "Patna Metro Map & Bodhi AI Bot",
   "stations": {
     "Danapur Cantonment": "Danapur Cantonment",
     "Saguna Mor": "Saguna Mor",
@@ -188,7 +188,7 @@
     "officialWebsiteButton": "Official Website"
   },
   "hero": {
-    "title": "PATNA METRO",
+    "title": "Patna Metro Map & Bodhi AI Bot",
     "description": "Under the visionary leadership of Hon’ble Prime Minister Narendra Modi and Hon’ble Chief Minister Nitish Kumar, Patna Metro - Bihar’s first rapid transit system - is set to transform the city’s connectivity by seamlessly connecting North and South Patna with modern infrastructure, world-class facilities, and a smarter, faster commute.",
     "cta": "Find Your Route",
     "downloadApp": "DOWNLOAD APP",

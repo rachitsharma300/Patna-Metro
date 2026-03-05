@@ -56,7 +56,7 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed w-full z-50 transition-all duration-300 ${scrolled
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? "py-1 shadow-lg bg-gradient-to-r from-[#0B3D91] via-[#1a4ca3] to-[#2b5cb5]"
           : "py-3 bg-gradient-to-r from-[#0B3D91] to-[#1a4ca3]"
           } text-white`}
