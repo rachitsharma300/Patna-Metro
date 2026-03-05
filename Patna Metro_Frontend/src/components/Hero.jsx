@@ -33,7 +33,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="flex flex-col min-h-screen w-full overflow-hidden bg-blue-950 pt-20">
+    <section className="flex flex-col min-h-screen w-full overflow-hidden bg-blue-950">
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Left Section - Video Background */}
         <div className="lg:w-1/2 h-[45vh] lg:h-auto relative overflow-hidden group">
@@ -53,7 +53,7 @@ function Hero() {
         </div>
 
         {/* Right Section - Content */}
-        <div className="lg:w-1/2 p-4 md:p-10 flex flex-col justify-center">
+        <div className="lg:w-1/2 p-4 md:p-10 pt-20 lg:pt-0 flex flex-col justify-center">
           {/* Title with CM and PM photos */}
           <div className="flex items-center justify-between mb-6 scale-90 md:scale-100">
             <img
@@ -74,9 +74,9 @@ function Hero() {
                   {t("hero.title")}
                 </span>
               </h1>
-              <div className="mt-2 md:mt-4 flex justify-center w-full">
+              {/* <div className="mt-2 md:mt-4 flex justify-center w-full">
                 <AnimatedMetro />
-              </div>
+              </div> */}
             </motion.div>
             <img
               src={cmImage}
