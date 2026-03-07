@@ -13,16 +13,39 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getVisitCount } from "../services/api";
+import { subscribeNewsletter } from "../services/newsletterService";
 import PatnaLogo from "../assets/PatnaLogo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const metroLines = [
-    { name: "Blue Line", stations: 12, length: "16.94 km" },
-    { name: "Red Line", stations: 13, length: "14.45 km" },
+    { name: t("blueLine"), stations: 12, length: "16.94 km", color: "bg-blue-500" },
+    { name: t("redLine"), stations: 12, length: "14.45 km", color: "bg-red-500" },
   ];
   const [visitCount, setVisitCount] = useState(null);
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState("idle"); // idle, loading, success, error
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setSubscribeStatus("error");
+      return;
+    }
+    
+    setSubscribeStatus("loading");
+    const result = await subscribeNewsletter(email);
+    
+    if (result.success) {
+      setSubscribeStatus("success");
+      setEmail("");
+      setTimeout(() => setSubscribeStatus("idle"), 3000);
+    } else {
+      setSubscribeStatus("error");
+      setTimeout(() => setSubscribeStatus("idle"), 3000);
+    }
+  };
 
   useEffect(() => {
     getVisitCount()
@@ -46,8 +69,8 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <img src={PatnaLogo} alt="Patna Metro" className="w-12 h-12 object-contain" />
               <div>
-                <h3 className="text-2xl font-bold text-white leading-tight">Patna Metro</h3>
-                <p className="text-[10px] text-blue-400 font-medium uppercase tracking-widest italic">Bihar's capital on the move</p>
+                <h3 className="text-2xl font-bold text-white leading-tight">{t("footer.aboutTitle")}</h3>
+                <p className="text-[10px] text-blue-400 font-medium uppercase tracking-widest italic">{t("footer.tagline")}</p>
               </div>
             </div>
 
@@ -126,11 +149,11 @@ const Footer = () => {
               {metroLines.map((line, index) => (
                 <div key={index} className="bg-gray-800/50 p-4 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all group">
                   <div className="flex items-center mb-2">
-                    <div className={`w-3 h-3 rounded-full mr-3 shadow-[0_0_10px_rgba(255,255,255,0.2)] ${line.name.includes("Blue") ? "bg-blue-500" : "bg-red-500"}`}></div>
+                    <div className={`w-3 h-3 rounded-full mr-3 shadow-[0_0_10px_rgba(255,255,255,0.2)] ${line.color}`}></div>
                     <span className="font-bold text-gray-200">{line.name}</span>
                   </div>
                   <div className="text-xs text-gray-500 font-medium ml-6">
-                    {line.stations} stations • {line.length}
+                    {t("footer.metroLinesSubtext", { stations: line.stations, length: line.length })}
                   </div>
                 </div>
               ))}
@@ -141,21 +164,34 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold text-white mb-6 flex items-center">
               <span className="w-8 h-1 bg-blue-600 rounded-full mr-3"></span>
-              Stay Updated
+              {t("footer.subscribeTitle")}
             </h4>
             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-              Subscribe to get the latest updates on station openings and metro timings.
+              {t("footer.subscribeDesc")}
             </p>
-            <div className="relative group">
+            <form onSubmit={handleSubscribe} className="relative group">
               <input
                 type="email"
-                placeholder={t("footer.subscribePlaceholder")}
-                className="w-full px-4 py-4 bg-gray-800/50 text-white rounded-2xl border border-gray-800 focus:border-blue-500 outline-none transition-all pr-12 text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("footer.subscribePlaceholder") || "Enter your email"}
+                className={`w-full px-4 py-4 bg-gray-800/50 text-white rounded-2xl border ${subscribeStatus === "error" ? "border-red-500" : subscribeStatus === "success" ? "border-green-500" : "border-gray-800 focus:border-blue-500"} outline-none transition-all pr-12 text-sm`}
+                disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
               />
-              <button className="absolute right-2 top-2 bottom-2 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all shadow-lg active:scale-95">
-                Go
+              <button 
+                type="submit"
+                disabled={subscribeStatus === "loading" || subscribeStatus === "success"}
+                className={`absolute right-2 top-2 bottom-2 px-4 text-white rounded-xl transition-all shadow-lg active:scale-95 ${subscribeStatus === "success" ? "bg-green-600" : "bg-blue-600 hover:bg-blue-500"} ${subscribeStatus === "loading" ? "opacity-75 cursor-wait" : ""}`}
+              >
+                {subscribeStatus === "loading" ? "..." : subscribeStatus === "success" ? "✓" : "Go"}
               </button>
-            </div>
+            </form>
+            {subscribeStatus === "success" && (
+              <p className="text-green-400 text-xs mt-2 ml-1">{t("footer.subSuccess")}</p>
+            )}
+            {subscribeStatus === "error" && (
+              <p className="text-red-400 text-xs mt-2 ml-1">{t("footer.subError")}</p>
+            )}
           </div>
         </div>
 
@@ -164,13 +200,13 @@ const Footer = () => {
             <p>{t("footer.copyright", { year: currentYear })}</p>
             <div className="flex space-x-4 mt-2 md:mt-0">
               <Link to="/privacy-policy" className="hover:text-yellow-400">
-                Privacy Policy
+                {t("footer.privacyPolicy")}
               </Link>
               <Link to="/terms-of-service" className="hover:text-yellow-400">
-                Terms of Service
+                {t("footer.termsOfService")}
               </Link>
               <Link to="/sitemap" className="hover:text-yellow-400">
-                Sitemap
+                {t("footer.sitemap")}
               </Link>
             </div>
           </div>

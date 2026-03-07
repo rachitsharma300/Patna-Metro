@@ -10,6 +10,7 @@ import {
   FaRupeeSign,
   FaBars,
   FaAndroid,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 // eslint-disable-next-line no-unused-vars
@@ -21,19 +22,41 @@ import cmImage from "../assets/CM.webp";
 import pmImage from "../assets/PM.jpg";
 import patnaMetro1 from "../assets/patnaMetro1.webp";
 
-function Hero() {
+function Hero({ siteData }) {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === "en" ? "hi" : "en");
   };
-  // Cleaned up slider logic as we are now using Video Banner
+  
+  // Determine Alert Banner Colors based on type
+  const getAlertClasses = (type) => {
+    switch(type) {
+      case "danger": return "bg-red-600 text-white";
+      case "warning": return "bg-yellow-500 text-black";
+      case "info":
+      default: return "bg-blue-600 text-white";
+    }
+  };
+
   useEffect(() => {
     // Analytics or other side effects can go here
   }, []);
 
   return (
-    <section className="flex flex-col min-h-screen w-full overflow-hidden bg-blue-950">
+    <section className="flex flex-col min-h-screen w-full overflow-hidden bg-blue-950 pt-16 md:pt-[72px] cursor-default">
+      {/* Global Alert Banner (Rendered only if active in Firebase Admin) */}
+      {siteData?.alertActive === true && siteData?.alertMessage && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`w-full relative z-[40] py-3 px-4 text-center font-bold text-xs md:text-sm shadow-lg flex justify-center items-center gap-3 ${getAlertClasses(siteData.alertType)}`}
+        >
+          {siteData.alertType === "danger" && <FaExclamationTriangle className="text-xl" />}
+          {siteData.alertType === "warning" && <FaInfoCircle className="text-xl" />}
+          <span dangerouslySetInnerHTML={{ __html: siteData.alertMessage }} />
+        </motion.div>
+      )}
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Left Section - Video Background */}
         <div className="lg:w-1/2 h-[45vh] lg:h-auto relative overflow-hidden group">
@@ -171,7 +194,7 @@ function Hero() {
             ease: "linear",
           }}
         >
-          {t("hero.ticker")}
+          {siteData?.tickerText || t("hero.ticker")}
         </motion.div>
       </div>
     </section>
