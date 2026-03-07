@@ -14,9 +14,11 @@ import RouteFinder from "./components/RouteFinder";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import TermsOfService from "./pages/legal/TermsOfService";
 import Sitemap from "./pages/legal/Sitemap";
+import AdminWrapper from "./pages/admin/AdminWrapper";
 import DisclaimerPopup from "./components/DisclaimerPopup";
 import Bot from "./components/bot/Bot";
 import { recordVisit } from "./services/api";
+import { subscribeToSiteData } from "./services/adminService";
 
 function App() {
   //  Create a ref to access triggerSearch method from RouteFinder
@@ -26,8 +28,18 @@ function App() {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
 
+  // Global Site Data from Firebase
+  const [siteData, setSiteData] = useState(null);
+
   useEffect(() => {
     recordVisit();
+
+    // Subscribe to live Firebase updates for Admin Panel
+    const unsubscribe = subscribeToSiteData((data) => {
+      setSiteData(data);
+    });
+
+    return () => unsubscribe(); // Cleanup listener on unmount
   }, []);
 
   //  Function that Bot will call to trigger the RouteFinder search
@@ -60,7 +72,7 @@ function App() {
           className="flex-grow bg-gray-100"
         >
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home siteData={siteData} />} />
 
             {/* RouteFinder receives source, destination, and ref */}
             <Route
@@ -80,6 +92,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/admin" element={<AdminWrapper />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
@@ -92,7 +105,7 @@ function App() {
         />
         {/* Feedback Sidebar - Fixed Left Button */}
         <a
-          href="https://forms.gle/kVNBywtBtG131zmcA"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScKLBpUHN46opaXUmvz7p2LakzMZjo2YldFkHisH5mSsRqC9A/viewform?usp=publish-editor"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed right-0 top-1/2 -translate-y-1/2

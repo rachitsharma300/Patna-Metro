@@ -21,8 +21,13 @@ import {
   FaCheckCircle,
   FaSubway,
   FaStar,
-  FaRoute
+  FaRoute,
+  FaCloudSun,
+  FaWind,
+  FaTint,
+  FaLeaf
 } from "react-icons/fa";
+import { fetchPatnaWeather } from "../services/weatherService";
 import { MdTransitEnterexit } from "react-icons/md";
 
 const RouteFinder = forwardRef(({ source, destination }, ref) => {
@@ -36,6 +41,8 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
   const [loading, setLoading] = useState(false);
   const [journeyDetails, setJourneyDetails] = useState(null); // Time, fare, station count etc.
   const [error, setError] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const [aqi, setAqi] = useState(null);
 
   // Expose the triggerSearch method via ref
   useImperativeHandle(ref, () => ({
@@ -131,7 +138,17 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
         setLoading(false);
       }
     };
+    
+    const fetchWeather = async () => {
+      const { success, weather: wData, aqi: aqiData } = await fetchPatnaWeather();
+      if (success) {
+        setWeather(wData);
+        setAqi(aqiData);
+      }
+    };
+
     fetchStations();
+    fetchWeather();
   }, []);
 
   return (
@@ -230,66 +247,85 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
               </div>
             </motion.div>
 
-            {/* Key Interchanges */}
+            {/* Live Patna Weather & AQI Card */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
               className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition-all"
             >
-              <div className="flex items-center mb-6 border-b border-gray-50 pb-4">
-                <div className="bg-blue-50 p-2.5 rounded-xl mr-3">
-                  <FaExchangeAlt className="text-blue-600 text-xl" />
+              <div className="flex justify-between items-center mb-6 border-b border-gray-50 pb-4">
+                <div className="flex items-center">
+                  <div className="bg-sky-50 p-2.5 rounded-xl mr-3">
+                    <FaCloudSun className="text-sky-500 text-xl" />
+                  </div>
+                  <h3 className="text-[#0B3D91] text-xl font-bold">
+                    {t("weather.title")}
+                  </h3>
                 </div>
-                <h3 className="text-[#0B3D91] text-xl font-bold">
-                  {t("keyInterchanges")}
-                </h3>
+                {weather && (
+                  <div className="text-3xl font-black text-gray-800 tracking-tighter">
+                    {Math.round(weather.temperature_2m)}°<span className="text-lg text-gray-400 font-medium">C</span>
+                  </div>
+                )}
               </div>
 
-              <div className="space-y-5">
-                {/* Patna Junction */}
-                <div className="flex items-start group">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
-                    <FaSubway className="text-blue-600 group-hover:text-white transition-colors" size={16} />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-gray-900 font-bold mb-1">{t("stations.Patna Junction")}</h4>
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2 shadow-sm"></div>
-                        <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{t("blueLine")}</span>
-                      </div>
-                      <div className="text-gray-300">|</div>
-                      <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500 mr-2 shadow-sm"></div>
-                        <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{t("redLine")}</span>
-                      </div>
+              {!weather ? (
+                <div className="animate-pulse flex space-x-4">
+                  <div className="flex-1 space-y-4 py-1">
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="space-y-2">
+                      <div className="h-4 bg-gray-200 rounded"></div>
+                      <div className="h-4 bg-gray-200 rounded w-5/6"></div>
                     </div>
                   </div>
                 </div>
-
-                {/* Khemnichak */}
-                <div className="flex items-start group border-t border-gray-50 pt-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
-                    <FaTrain className="text-blue-600 group-hover:text-white transition-colors" size={16} />
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-sky-50/50 rounded-2xl p-4 flex items-center border border-sky-100/50">
+                    <div className="bg-white text-sky-500 w-10 h-10 rounded-full flex items-center justify-center mr-3 shadow-sm border border-sky-100">
+                      <FaTint />
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-0.5">{t("weather.humidity")}</div>
+                      <div className="text-gray-900 font-black text-lg">{weather.relative_humidity_2m}%</div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h4 className="text-gray-900 font-bold mb-1">{t("stations.Khemni Chak")}</h4>
-                    <div className="flex items-center space-x-3">
-                      <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-2 shadow-sm"></div>
-                        <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{t("blueLine")}</span>
+                  
+                  <div className="bg-teal-50/50 rounded-2xl p-4 flex items-center border border-teal-100/50">
+                    <div className="bg-white text-teal-500 w-10 h-10 rounded-full flex items-center justify-center mr-3 shadow-sm border border-teal-100">
+                      <FaWind />
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-0.5">{t("weather.wind")}</div>
+                      <div className="text-gray-900 font-black text-lg">{weather.wind_speed_10m} <span className="text-xs font-semibold text-gray-500">{t("weather.kmh")}</span></div>
+                    </div>
+                  </div>
+
+                  <div className="col-span-2 bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl p-4 flex items-center justify-between border border-emerald-100/50 mt-2">
+                    <div className="flex items-center">
+                      <div className="bg-white text-emerald-500 w-10 h-10 rounded-full flex items-center justify-center mr-3 shadow-sm border border-emerald-100">
+                        <FaLeaf />
                       </div>
-                      <div className="text-gray-300">|</div>
-                      <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500 mr-2 shadow-sm"></div>
-                        <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">{t("redLine")}</span>
+                      <div>
+                        <div className="text-[10px] text-emerald-800/60 font-black uppercase tracking-widest mb-0.5">{t("weather.aqi")}</div>
+                        <div className="flex items-baseline space-x-2">
+                          <span className="text-gray-900 font-black text-xl">{aqi?.us_aqi || "--"}</span>
+                          <span className="font-semibold text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">{t("weather.moderate")}</span>
+                        </div>
                       </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-[10px] text-gray-500 font-bold uppercase mb-1">{t("weather.pm25")}</div>
+                      <div className="text-gray-800 font-bold text-sm bg-white px-2 py-1 rounded-md shadow-sm border border-gray-100">{aqi?.pm2_5 || "--"} µg/m³</div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           </div>
+
+
 
           {/* Key Stats Section */}
           <div className="mb-12">
@@ -307,7 +343,7 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
                     <span className="text-amber-900 font-black tracking-tight">{t("metroStats.elevated")}</span>
                   </div>
                   <div className="flex items-baseline">
-                    <span className="text-4xl font-black text-gray-900 mr-2">13</span>
+                    <span className="text-4xl font-black text-gray-900 mr-2">22</span>
                     <span className="text-amber-800/60 font-bold text-sm uppercase tracking-widest">{t("metroStats.stations")}</span>
                   </div>
                 </div>
@@ -318,7 +354,7 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
                     <span className="text-blue-900 font-black tracking-tight">{t("metroStats.underground")}</span>
                   </div>
                   <div className="flex items-baseline">
-                    <span className="text-4xl font-black text-gray-900 mr-2">13</span>
+                    <span className="text-4xl font-black text-gray-900 mr-2">2</span>
                     <span className="text-blue-800/60 font-bold text-sm uppercase tracking-widest">{t("metroStats.stations")}</span>
                   </div>
                 </div>
@@ -331,7 +367,7 @@ const RouteFinder = forwardRef(({ source, destination }, ref) => {
                   <div className="h-12 w-[1px] bg-white/10 hidden md:block"></div>
                   <div className="text-center md:text-left mb-6 md:mb-0">
                     <div className="text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-2">{t("metroStats.totalStations")}</div>
-                    <div className="text-4xl font-black">26</div>
+                    <div className="text-4xl font-black">24</div>
                   </div>
                   <div className="h-12 w-[1px] bg-white/10 hidden md:block"></div>
                   <div className="text-center md:text-left">

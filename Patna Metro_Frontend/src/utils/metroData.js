@@ -1,4 +1,3 @@
-// src/utils/metroData.js
 export const metroData = {
   lines: [
     {
@@ -73,7 +72,7 @@ export const metroData = {
     },
     {
       name: "Daily Pass",
-      price: "₹120",
+      price: "₹100",
       description: "Unlimited travel for one day",
     },
     {

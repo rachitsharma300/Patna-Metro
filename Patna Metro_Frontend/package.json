@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.10.0",
+    "firebase": "^12.10.0",
     "framer-motion": "^12.23.6",
     "fuse.js": "^7.1.0",
     "i18next": "^25.3.2",
