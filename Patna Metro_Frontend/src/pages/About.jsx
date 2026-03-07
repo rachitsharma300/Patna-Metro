@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "../components/ui/Button";
 import { MetroTimeline } from "../components/MetroTimeline";
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import myImage from "../assets/rachit.jpg";
+import myImage from "../assets/Rachit.jpg";
 
 export const About = () => {
   const { t } = useTranslation();
