@@ -34,6 +34,7 @@
   },
   "footer": {
     "aboutTitle": "Patna Metro",
+    "tagline": "Bihar's capital on the move",
     "aboutDescription": "The future of urban transportation in Bihar's capital city.",
     "quickLinksTitle": "Quick Links",
     "quickLinks": {
@@ -43,6 +44,7 @@
       "metroMap": "Metro Map"
     },
     "metroLinesTitle": "Metro Lines",
+    "metroLinesSubtext": "{{stations}} stations • {{length}}",
     "contactUsTitle": "Contact Us",
     "address": "Patna Metro Rail Corporation, Bailey Road, Patna",
     "phone": "+91 9871 874 041",
@@ -50,6 +52,9 @@
     "subscribeTitle": "Subscribe to Updates",
     "subscribePlaceholder": "Your email",
     "subscribeButton": "Subscribe",
+    "subscribeDesc": "Subscribe to get the latest updates on station openings and metro timings.",
+    "subSuccess": "Successfully subscribed!",
+    "subError": "Please enter a valid email.",
     "copyright": "© {{year}} Patna Metro. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
@@ -104,8 +109,8 @@
   },
   "aboutPage": {
     "developerTitle": "About the Developer",
-    "developerCredit": "This application was designed and developed by <1>Rachit Sharma</1> with the aim of providing comprehensive information about the Patna Metro.",
-    "developerContribution": "This project is a labor of love, developed over 1.5 months to empower the people of Patna with a 100% free and user-friendly metro navigation tool. My goal is to anticipate the future needs of commuters, ensuring a smooth and effortless travel experience once all stations are live.",
+    "developerCredit": "Crafting the digital experience for Patna Metro with passion and precision.",
+    "developerContribution": "Bringing Bihar's first metro to your fingertips.",
     "title": "About Patna Metro",
     "subtitle": "Transforming Patna's Urban Mobility with Modern Rapid Transit",
     "overviewTitle": "Overview",
@@ -188,9 +193,9 @@
     "officialWebsiteButton": "Official Website"
   },
   "hero": {
-    "title": "Patna Metro Map & Bodhi AI Bot",
+    "title": "Patna Metro",
     "description": "Under the visionary leadership of Hon’ble Prime Minister Narendra Modi and Hon’ble Chief Minister Nitish Kumar, Patna Metro - Bihar’s first rapid transit system - is set to transform the city’s connectivity by seamlessly connecting North and South Patna with modern infrastructure, world-class facilities, and a smarter, faster commute.",
-    "cta": "Find Your Route",
+    "cta": "Route Finder",
     "downloadApp": "DOWNLOAD APP",
     "getApp": "GET APP",
     "emergencyTitle": "Emergency Contacts",
@@ -256,7 +261,7 @@
   "corridors": "Corridors",
   "busiestStations": "Busiest & Key Stations",
   "metroStats": {
-    "title": "🏗️ Patna Metro - At a Glance",
+    "title": "Patna Metro - At a Glance",
     "elevated": "Elevated",
     "underground": "Underground",
     "stations": "Stations",
@@ -274,5 +279,14 @@
     "NewISBT": "Bus terminal • Transport hub"
   },
   "interchangeStation": "Interchange Station",
-  "switchLines": "Switch from {{from}} to {{to}}"
+  "switchLines": "Switch from {{from}} to {{to}}",
+  "weather": {
+    "title": "Patna Weather",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "kmh": "km/h",
+    "aqi": "Air Quality Index (AQI)",
+    "moderate": "Moderate",
+    "pm25": "PM 2.5"
+  }
 }
