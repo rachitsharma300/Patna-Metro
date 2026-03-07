@@ -12,6 +12,7 @@
 <!--
 https://github.com/user-attachments/assets/a815c282-29fa-4318-af81-52f6d5ec7c73
 -->
+[![Netlify Status](https://api.netlify.com/api/v1/badges/769a63c5-86ab-4441-a80e-da27d537dc5e/deploy-status)](https://app.netlify.com/projects/patna-metro/deploys)
 <h3> Project Overview</h3>
 <p>Patna Metro Route Finder is a high-performance system that connects a <b>React</b> frontend and <b>Android</b> app with a <b>Spring Boot</b> backend to provide real-time route finding, fare estimation, and AI-powered assistance.</p>
 
